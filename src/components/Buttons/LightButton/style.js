@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     // alignContent: "center",
     alignItems: "center",
+    marginBottom: 20,
     borderRadius: 40, // <-- Outer Border Radius
   },
   innerContainer: {
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 5, // <-- Border Width
     backgroundColor: "#fff",
+
     justifyContent: "center",
   },
   buttonText: {

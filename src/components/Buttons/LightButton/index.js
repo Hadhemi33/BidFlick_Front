@@ -3,7 +3,7 @@ import React from "react";
 import { Text, SafeAreaView, TouchableOpacity } from "react-native";
 import styles from "./style";
 import { LinearGradient } from "expo-linear-gradient";
-function LightButton({ children, T, onPress }) {
+function LightButton({ children, T, F, onPress, I }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <LinearGradient
@@ -12,8 +12,9 @@ function LightButton({ children, T, onPress }) {
         end={{ x: 1, y: 0 }}
         style={styles.linearGradient}
       >
+        {I && <Image style={styles.img} source={I} />}
         {/* <View style={styles.innerContainer}> */}
-        <Text style={{ fontSize: parseInt(T) }}>{children}</Text>
+        <Text style={{ fontSize: parseInt(T), fontFamily: F }}>{children}</Text>
         {/* </View> */}
       </LinearGradient>
     </TouchableOpacity>

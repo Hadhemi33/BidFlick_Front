@@ -5,12 +5,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 10,
+    borderRadius: 20,
     borderWidth: 1,
     // borderColor: colors.lightGrey,
     borderColor: "#BCBBBB",
     padding: 10,
-    marginVertical: 16,
   },
   input: {
     // color: "black",

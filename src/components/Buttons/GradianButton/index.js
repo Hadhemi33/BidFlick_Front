@@ -1,11 +1,11 @@
 // Button.js
 import React from "react";
-import { Text, SafeAreaView, View } from "react-native";
+import { Text, View, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 import { LinearGradient } from "expo-linear-gradient";
-function GradianButton({ children, T }) {
+function GradianButton({ children, T, F, I, onPress, style }) {
   return (
-    <>
+    <TouchableOpacity style={[{ marginBottom: "0" }, style]} onPress={onPress}>
       <LinearGradient
         colors={[
           "#2EBC7C",
@@ -22,12 +22,18 @@ function GradianButton({ children, T }) {
         style={styles.linearGradient}
       >
         <View style={styles.innerContainer}>
-          <Text style={[{ fontSize: parseInt(T) }, styles.buttonText]}>
+          {I && <Image style={styles.img} source={I} />}
+          <Text
+            style={[
+              { fontSize: parseInt(T), fontFamily: F },
+              styles.buttonText,
+            ]}
+          >
             {children}
           </Text>
         </View>
       </LinearGradient>
-    </>
+    </TouchableOpacity>
   );
 }
 

@@ -1,11 +1,44 @@
 import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import styles from "./style";
+import TText from "../../../components/TText";
+import GradianButton from "../../../components/Buttons/GradianButton";
 
-const Splash = () => {
+const Splash = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>index</Text>
+      <View style={styles.Header}>
+        <TText T="40" F="semiBold" C="black">
+          Welcome !
+        </TText>
+        <TText T="30" F="regular" C="black">
+          we're glad that
+        </TText>
+        <TText T="30" F="regular" C="black">
+          you are here
+        </TText>
+      </View>
+      <View style={styles.Logo}>
+        <Image
+          style={styles.LogoImg}
+          source={require("../../../../assets/LogoDark.png")}
+        />
+      </View>
+      <GradianButton
+        style={styles.Btn}
+        onPress={() => navigation.navigate("SignIn")}
+        T="18"
+        F="semiBold"
+        // I={require("../../../../assets/google.png")}
+      >
+        Let’s get started
+      </GradianButton>
+      <View style={styles.Footer}>
+        <Image
+          style={styles.FooterImg}
+          source={require("../../../../assets/FooterSplash.png")}
+        />
+      </View>
     </SafeAreaView>
   );
 };
