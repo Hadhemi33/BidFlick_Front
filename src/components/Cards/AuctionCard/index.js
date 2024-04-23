@@ -33,7 +33,8 @@ const AuctionCard = () => {
       discount: 10,
       SellerName: "John Doe",
       expiration: "12:05:33",
-      ProductImage: "https://img.icons8.com/color/70/000000/mastercard.png",
+      ProductImage:
+        "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3BmLXMxMDgtcG0tNDExMy1tb2NrdXAuanBn.jpg",
     },
     {
       id: 3,
@@ -44,7 +45,8 @@ const AuctionCard = () => {
       discount: 10,
       SellerName: "John Doe",
       expiration: "12:05:33",
-      ProductImage: "https://img.icons8.com/color/70/000000/apple-pay.png",
+      ProductImage:
+        "https://www.datocms-assets.com/101859/1707248470-montage_bottle_pinkpurple_producttile_2680x3344.png?auto=format&fit=max&w=3840",
     },
   ]);
 
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
     borderColor: colors.blueBorder,
   },
   backgroundImage: {
-    opacity: 0.6,
+    opacity: 0.7,
     alignSelf: "center",
 
     width: 362,
