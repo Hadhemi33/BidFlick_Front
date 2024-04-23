@@ -10,4 +10,5 @@ export const colors = {
   green: "#005B49",
   lightGreen: "#2EBC7C",
   rotana: "#00864B",
+  blueBorder: "#BDF0E7",
 };

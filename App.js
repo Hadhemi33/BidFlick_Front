@@ -9,6 +9,8 @@ import client from "./src/apollo";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { fontMap } from "./src/constants/fonts";
+import Home from "./src/screens/Admin/Home";
+
 const Stack = createNativeStackNavigator();
 const theme = {
   ...DefaultTheme,
@@ -39,6 +41,11 @@ export default function App() {
             <Stack.Screen
               name="SignUp"
               component={SignUp}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={Home}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

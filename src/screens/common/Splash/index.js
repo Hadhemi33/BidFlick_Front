@@ -29,7 +29,6 @@ const Splash = ({ navigation }) => {
         onPress={() => navigation.navigate("SignIn")}
         T="18"
         F="semiBold"
-        // I={require("../../../../assets/google.png")}
       >
         Let’s get started
       </GradianButton>

@@ -1,0 +1,147 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  ScrollView,
+} from "react-native";
+import { colors } from "../../../constants/colors";
+
+const AuctionCard = () => {
+  const [cards, setCards] = useState([
+    {
+      id: 1,
+      title: "iPhone 12",
+      Price: "1200",
+      description:
+        "This is a brand new iPhone 12 with 128GB storage. It comes with a charger and a case.",
+      discount: 10,
+      SellerName: "John Doe",
+      expiration: "12:05:33",
+      ProductImage:
+        "https://media.gqmagazine.fr/photos/655c823373c3872342ffcc8e/16:9/w_2560%2Cc_limit/iPhone16-Batterie.jpg",
+    },
+    {
+      id: 2,
+      title: "iPhone 12",
+      Price: "1200",
+      description:
+        "This is a brand new iPhone 12 with 128GB storage. It comes with a charger and a case.",
+      discount: 10,
+      SellerName: "John Doe",
+      expiration: "12:05:33",
+      ProductImage: "https://img.icons8.com/color/70/000000/mastercard.png",
+    },
+    {
+      id: 3,
+      title: "iPhone 12",
+      Price: "1200",
+      description:
+        "This is a brand new iPhone 12 with 128GB storage. It comes with a charger and a case.",
+      discount: 10,
+      SellerName: "John Doe",
+      expiration: "12:05:33",
+      ProductImage: "https://img.icons8.com/color/70/000000/apple-pay.png",
+    },
+  ]);
+
+  return (
+    <View style={styles.container}>
+      <ScrollView
+        horizontal
+        contentContainerStyle={styles.carouselContainer}
+        showsHorizontalScrollIndicator={false}
+      >
+        {cards.map((card) => (
+          <ImageBackground
+            key={card.id}
+            source={{ uri: card.ProductImage }}
+            style={styles.cardContainer}
+            imageStyle={styles.backgroundImage}
+          >
+            <View style={styles.Infos}>
+              {/* <View style={styles.SellerInfos}>
+                <Image
+                  source={require("../../../../assets/people19.png")}
+                  style={styles.SellerImage}
+                />
+                <Text style={styles.SellerName}>{card.SellerName}</Text>
+              </View> */}
+              <View style={styles.cardInfoContainer}>
+                <Text style={styles.cardInfoValue}>{card.expiration}</Text>
+                <Text style={styles.cardInfoLabel}>Special offer</Text>
+                <Text style={styles.cardInfoValue}>{card.Price}</Text>
+              </View>
+            </View>
+          </ImageBackground>
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 60,
+  },
+  SellerInfos: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    alignContent: "flex-end",
+  },
+  Infos: {
+    flexDirection: "column",
+    // width: "30%",
+    height: "100%",
+    // backgroundColor: "rgba(0, 0, 0, 0.5)", // Adding a semi-transparent background for text readability
+  },
+  cardInfoContainer: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignContent: "center",
+    alignItems: "center",
+  },
+  cardContainer: {
+    // flexDirection: "row",
+    marginHorizontal: 10,
+    width: 365,
+    height: 176,
+    padding: 10,
+    borderRadius: 10,
+    // justifyContent: "space-between",
+    borderWidth: 2,
+    borderColor: colors.blueBorder,
+  },
+  backgroundImage: {
+    opacity: 0.6,
+    alignSelf: "center",
+
+    width: 362,
+    height: 173,
+    borderRadius: 10,
+  },
+  SellerName: {
+    fontSize: 14,
+  },
+  SellerImage: {
+    width: 30,
+    height: 30,
+    marginRight: 5,
+  },
+  cardInfoLabel: {
+    fontWeight: "bold",
+    fontSize: 40,
+    // color: "gray",
+  },
+  cardInfoValue: {
+    fontWeight: "bold",
+    fontSize: 20,
+    // color: "gray",
+  },
+});
+
+export default AuctionCard;

@@ -156,6 +156,7 @@ const SignIn = ({ navigation }) => {
             />
           </View>
           <GradianButton
+            onPress={() => navigation.navigate("Home")}
             T="18"
             F="semiBold"
             I={require("../../../../assets/google.png")}
