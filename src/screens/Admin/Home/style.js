@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   Btn: {
-    marginTop:40,
+    marginTop: 40,
     height: "8%",
   },
 });

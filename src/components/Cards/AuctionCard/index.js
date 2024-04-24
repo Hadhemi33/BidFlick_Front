@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
   Image,
   ImageBackground,
@@ -73,9 +72,9 @@ const AuctionCard = () => {
                 <Text style={styles.SellerName}>{card.SellerName}</Text>
               </View> */}
               <View style={styles.cardInfoContainer}>
+                {/* <Text style={styles.cardInfoLabel}>Special offer</Text> */}
                 <Text style={styles.cardInfoValue}>{card.expiration}</Text>
-                <Text style={styles.cardInfoLabel}>Special offer</Text>
-                <Text style={styles.cardInfoValue}>{card.Price}</Text>
+                <Text style={styles.cardInfoValuePrice}>{card.Price}$</Text>
               </View>
             </View>
           </ImageBackground>
@@ -98,12 +97,16 @@ const styles = StyleSheet.create({
   Infos: {
     flexDirection: "column",
     // width: "30%",
-    height: "100%",
+    // height: "100%",
+    // alignSelf: "center",
+
+    marginTop: 30,
     // backgroundColor: "rgba(0, 0, 0, 0.5)", // Adding a semi-transparent background for text readability
   },
   cardInfoContainer: {
+    // backgroundColor: "rgba(0, 0, 0, 0.5)",
     flexDirection: "column",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
   },
@@ -119,9 +122,8 @@ const styles = StyleSheet.create({
     borderColor: colors.blueBorder,
   },
   backgroundImage: {
-    opacity: 0.7,
+    opacity: 0.6,
     alignSelf: "center",
-
     width: 362,
     height: 173,
     borderRadius: 10,
@@ -134,15 +136,25 @@ const styles = StyleSheet.create({
     height: 30,
     marginRight: 5,
   },
-  cardInfoLabel: {
-    fontWeight: "bold",
-    fontSize: 40,
-    // color: "gray",
-  },
   cardInfoValue: {
+    fontWeight: "400",
+    fontSize: 40,
+    color: colors.black,
+  },
+  cardInfoLabel: {
+    marginTop: 5,
+
+    fontWeight: "600",
+    marginBottom: 20,
+    fontSize: 30,
+    color: colors.black,
+  },
+  cardInfoValuePrice: {
     fontWeight: "bold",
     fontSize: 20,
-    // color: "gray",
+    alignSelf: "flex-end",
+    color: colors.black,
+    marginTop: 20,
   },
 });
 
