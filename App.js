@@ -10,6 +10,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { fontMap } from "./src/constants/fonts";
 import Home from "./src/screens/Admin/Home";
+import DetailsAuctionCard from "./src/screens/Admin/DetailsAuctionCard";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -28,6 +29,11 @@ export default function App() {
       <NavigationContainer theme={theme}>
         <ApolloProvider client={client}>
           <Stack.Navigator>
+            <Stack.Screen
+              name="DetailsAuctionCard"
+              component={DetailsAuctionCard}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="Splash"
               component={Splash}
