@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, Image, ImageBackground, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  ScrollView,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from "react-native";
 import { colors } from "../../../constants/colors";
 import TText from "../../TText";
 import styles from "./style";
@@ -76,43 +84,77 @@ const AuctionCard = () => {
         "https://www.datocms-assets.com/101859/1707248470-montage_bottle_pinkpurple_producttile_2680x3344.png?auto=format&fit=max&w=3840",
     },
   ]);
-
+  const [activeIndex, setActiveIndex] = useState(0);
+  const handleScroll = (event) => {
+    const scrollX = event.nativeEvent.contentOffset.x;
+    const width = 367 + 20; // Card width + margin
+    const currentIndex = Math.round(scrollX / width);
+    setActiveIndex(currentIndex);
+  };
   return (
     <View style={styles.container}>
+      <View style={styles.indicatorsContainer}>
+        {cards.slice(0, 3).map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.indicator,
+              {
+                backgroundColor:
+                  activeIndex === index ? colors.greyGreen : colors.white2,
+              },
+            ]}
+          />
+        ))}
+      </View>
       <ScrollView
         horizontal
         contentContainerStyle={styles.carouselContainer}
         showsHorizontalScrollIndicator={false}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
       >
-        {cards.map((card) => (
-          <ImageBackground
-            key={card.id}
-            source={{ uri: card.ProductImage }}
-            style={styles.cardContainer}
-            imageStyle={styles.backgroundImage}
-          >
-            <View style={styles.Infos}>
-              <View style={styles.cardInfoContainer}>
-                <TText
-                  T="25"
-                  F="bold"
-                  C="darkGrey"
-                  style={styles.cardInfoValue}
-                >
-                  {card.expiration}
-                </TText>
+        {cards.map((card, index) => (
+          <View key={card.id}>
+            {index < 3 ? (
+              <ImageBackground
+                key={card.id}
+                source={{ uri: card.ProductImage }}
+                style={styles.cardContainer}
+                imageStyle={styles.backgroundImage}
+              >
+                <View style={styles.Infos}>
+                  <View style={styles.cardInfoContainer}>
+                    <TText
+                      T="25"
+                      F="bold"
+                      C="darkGrey"
+                      style={styles.cardInfoValue}
+                    >
+                      {card.expiration}
+                    </TText>
 
-                <TText
-                  T="18"
-                  F="semiBold"
-                  C="darkGrey"
-                  style={styles.cardInfoValuePrice}
-                >
-                  {card.Price}$
-                </TText>
-              </View>
-            </View>
-          </ImageBackground>
+                    <TText
+                      T="18"
+                      F="semiBold"
+                      C="darkGrey"
+                      style={styles.cardInfoValuePrice}
+                    >
+                      {card.Price}$
+                    </TText>
+                  </View>
+                </View>
+              </ImageBackground>
+            ) : (
+              index === 3 && (
+                <View style={styles.cardMore}>
+                  <TText  T="18"
+                      F="semiBold"
+                      C="darkGrey" style={styles.More}>See More</TText>
+                </View>
+              )
+            )}
+          </View>
         ))}
       </ScrollView>
     </View>

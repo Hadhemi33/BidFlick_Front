@@ -4,7 +4,7 @@ import { colors } from "../../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 60,
+    paddingTop: 30,
   },
   SellerInfos: {
     flexDirection: "row",
@@ -67,6 +67,29 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     color: colors.black,
     marginTop: 20,
+  },
+  indicatorsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingBottom: 10,
+  },
+  indicator: {
+    width: 35, // Width of each line
+    height: 2, // Height of each line
+    backgroundColor: "gray",
+    margin: 5, // Spacing between lines
+  },
+  cardMore: {
+    marginHorizontal: 10,
+    width: 367,
+    height: 176,
+    padding: 10,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: colors.blueBorder,
   },
 });
 

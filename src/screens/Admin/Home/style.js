@@ -5,47 +5,28 @@ import { Header } from "react-native-elements";
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-
+    position: "absolute",
     height: "100%",
     display: "flex",
     width: "100%",
-    // justifyContent: "space-between",
   },
   Header: {
-    paddingHorizontal: 24,
-
-    marginTop: 80,
-    height: "25%",
+    marginTop: 0,
+    height: "19%",
+    justifyContent: "center",
+    alignContent: "center",
+    padding: 20,
     display: "flex",
     flexDirection: "column",
+    backgroundColor: colors.blueLight,
   },
-  Footer: {
-    height: "29%",
-    alignSelf: "flex-end",
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
-  },
-  FooterImg: {
-    width: 217,
-    height: 169,
-  },
-  Logo: {
-    marginRight: 30,
-    marginBottom: 45,
-    display: "flex",
-    alignSelf: "center",
-    height: "20%",
-  },
-  LogoImg: {
-    // backgroundColor: colors.sea,
+  SearchInput: {
+    borderRadius: 20,
+    borderWidth: 1,
+    top: 13,
 
-    width: 292,
-    height: 182,
-    alignSelf: "center",
-  },
-  Btn: {
-    marginTop: 40,
-    height: "8%",
+    borderColor: colors.rotana,
+    padding: 10,
   },
 });
 

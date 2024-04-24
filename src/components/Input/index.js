@@ -1,17 +1,15 @@
 import React from "react";
-import { View, Image, TextInput,  } from "react-native";
+import { View, TextInput } from "react-native";
 import styles from "./style";
-// import styles from "./styles";
-// import colors from "../../constants/colors";
 
-const Input = ({ showSearchIcon, style, text, F, onPress, ...props }) => {
-  const renderInput = () => (
+const Input = ({ placeholder, style, ...props }) => {
+  return (
     <View style={[styles.container, style]}>
       <TextInput
-        // {...props}
-        placeholder={text}
+        placeholder={placeholder || "Search..."}
         placeholderTextColor="#BCBBBB"
-        style={[styles.input]}
+        style={styles.input}
+        {...props}
       />
     </View>
   );
