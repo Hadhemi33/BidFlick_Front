@@ -96,7 +96,7 @@ const ProductDetails = ({ route }) => {
               T="18"
               F="semiBold"
               C="green"
-              onPress={() => navigation.navigate("Home")}
+              onPress={() => navigation.navigate("CategoriesScreen")}
             >
               Delete
             </TText>
