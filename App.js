@@ -11,6 +11,7 @@ import { useFonts } from "expo-font";
 import { fontMap } from "./src/constants/fonts";
 import Home from "./src/screens/Admin/Home";
 import DetailsAuctionCard from "./src/screens/Admin/DetailsAuctionCard";
+import AuctionDetails from "./src/screens/Admin/AuctionDetails";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -29,6 +30,11 @@ export default function App() {
       <NavigationContainer theme={theme}>
         <ApolloProvider client={client}>
           <Stack.Navigator>
+            <Stack.Screen
+              name="AuctionDetails"
+              component={AuctionDetails}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="DetailsAuctionCard"
               component={DetailsAuctionCard}

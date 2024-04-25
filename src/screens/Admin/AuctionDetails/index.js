@@ -13,7 +13,7 @@ import { colors } from "../../../constants/colors";
 import styles from "./style";
 import TText from "../../../components/TText";
 
-const DetailsAuctionCard = ({ onPress }) => {
+const AuctionDetails = ({ onPress }) => {
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -135,4 +135,4 @@ const DetailsAuctionCard = ({ onPress }) => {
   );
 };
 
-export default DetailsAuctionCard;
+export default AuctionDetails;
