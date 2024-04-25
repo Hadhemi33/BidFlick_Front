@@ -33,27 +33,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     // backgroundColor: "#121212",
   },
-  backgroundImage: {
-    // opacity: 0.8,
-
-    // alignSelf: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    alignSelf: "center",
-    resizeMode: "cover",
-    // marginLeft: 5,
-    // width: 362,
-    top: 70,
-    width: "100%",
-    height: "70%",
-
-    // resizeMode: "contain",
-    // height: 173,
-    borderRadius: 10,
-  },
 
   image: {
-    top: 60,
+    top: 80,
     alignSelf: "center",
 
     alignSelf: "center",
@@ -64,6 +46,21 @@ const styles = StyleSheet.create({
     height: 400,
     borderRadius: 100,
     alignSelf: "center",
+  },
+  cont3: {
+    marginTop: 60,
+    // flex: 1,
+    backgroundColor: colors.white,
+    width: "100%",
+    height: 300,
+    padding: 20,
+    flexDirection: "column",
+    alignSelf: "center",
+    // marginLeft: 5,
+    borderWidth: 2,
+    borderColor: colors.blueBorder,
+    borderRadius: 50,
+    paddingHorizontal: 20,
   },
   header: {
     display: "flex",
@@ -134,34 +131,49 @@ const styles = StyleSheet.create({
     height: 25,
   },
 
-  cont3: {
-    marginTop: 40,
-    // flex: 1,
-    backgroundColor: colors.white,
-    width: "100%",
-    height: 320,
-    padding: 20,
-
-    // top: "-5%",
-    // position: "relative",
-    flexDirection: "column",
-    alignSelf: "center",
-    // marginLeft: 5,
-    borderWidth: 2,
-    borderColor: colors.blueBorder,
+  SellerImg: {
+    width: 30,
+    height: 30,
     borderRadius: 20,
-    paddingHorizontal: 20,
+    alignSelf: "center",
+  },
+  linearGradient: {
+    marginVertical: 20,
+    width: 360,
+    height: 0.5,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  linearGradientName: {
+    width: 167,
+    height: 1.5,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  linearGradientSeller: {
+    width: 64,
+    height: 1.5,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
   },
   InfosTime: {
     flexDirection: "column",
     justifyContent: "space-between",
-    marginTop: 10,
+    // marginTop: 10,
   },
 
   InfosSeller: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10,
+    alignContent: "center",
+    alignItems: "center",
+    // marginTop: 10,
   },
   BtnDelete: {
     backgroundColor: "rgba(255, 255, 255, 0.8)",
@@ -173,10 +185,13 @@ const styles = StyleSheet.create({
     width: "50%",
     height: 36,
     borderRadius: 20,
-    top: 40,
+    marginTop: 80,
   },
   Infos: {
     flexDirection: "row",
+    alignContent: "center",
+    alignItems: "flex-start",
+
     justifyContent: "space-between",
   },
 });

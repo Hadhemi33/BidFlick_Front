@@ -36,11 +36,6 @@ export default function App() {
               component={DetailsAuctionCard}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="ProductDetails"
-              component={ProductDetails}
-              options={{ headerShown: false }}
-            />
 
             <Stack.Screen
               name="Splash"
@@ -65,6 +60,11 @@ export default function App() {
             <Stack.Screen
               name="AuctionDetails"
               component={AuctionDetails}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ProductDetails"
+              component={ProductDetails}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

@@ -5,8 +5,9 @@ import { Text, SafeAreaView, View, TouchableOpacity } from "react-native";
 import { colors } from "../../constants/colors";
 function TText({ children, T, F, C, onPress }) {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity>
       <Text
+        onPress={onPress}
         style={[
           {
             fontSize: parseInt(T),
