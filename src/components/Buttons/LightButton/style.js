@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   linearGradient: {
     height: 48,
-    width: 342,
+
     alignSelf: "center",
     justifyContent: "center",
     // alignContent: "center",

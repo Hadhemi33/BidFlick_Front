@@ -14,6 +14,7 @@ import DetailsAuctionCard from "./src/screens/Admin/DetailsAuctionCard";
 import AuctionDetails from "./src/screens/Admin/AuctionDetails";
 import ProductDetails from "./src/screens/Admin/ProductDetails";
 import CategoriesScreen from "./src/screens/Admin/Categories";
+import ProfileEdit from "./src/screens/Admin/ProfileEdit";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -71,6 +72,11 @@ export default function App() {
             <Stack.Screen
               name="CategoriesScreen"
               component={CategoriesScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ProfileEdit"
+              component={ProfileEdit}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

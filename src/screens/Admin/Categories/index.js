@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import styles from "./style";
 import { AntDesign, Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 const CategoriesScreen = () => {
   const [data, setData] = useState([
     { category: "Clothing", value: 1000 },
@@ -21,7 +22,7 @@ const CategoriesScreen = () => {
     { category: "Books", value: 3300 },
     { category: "Food", value: 1000 },
   ]);
-
+  const navigation = useNavigation(); // Accessing navigation
   const CardCat = ({ item }) => (
     <View style={styles.statItem}>
       <Text style={styles.statValue}>{item.category}</Text>
@@ -62,7 +63,12 @@ const CategoriesScreen = () => {
         />
       </View>
       <TouchableOpacity style={styles.addButton}>
-        <Text style={styles.addButtonText}>+</Text>
+        <Text
+          onPress={() => navigation.navigate("ProfileEdit")}
+          style={styles.addButtonText}
+        >
+          +
+        </Text>
       </TouchableOpacity>
     </View>
   );
