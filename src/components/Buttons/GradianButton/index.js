@@ -3,7 +3,8 @@ import React from "react";
 import { Text, View, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 import { LinearGradient } from "expo-linear-gradient";
-function GradianButton({ children, T, F, I, onPress, style }) {
+import { colors } from "../../../constants/colors";
+function GradianButton({ children, T, F, I, C, onPress, style }) {
   return (
     <TouchableOpacity style={[{ marginBottom: "0" }, style]} onPress={onPress}>
       <LinearGradient
@@ -25,7 +26,7 @@ function GradianButton({ children, T, F, I, onPress, style }) {
           {I && <Image style={styles.img} source={I} />}
           <Text
             style={[
-              { fontSize: parseInt(T), fontFamily: F },
+              { fontSize: parseInt(T), fontFamily: F, color: colors[C] },
               styles.buttonText,
             ]}
           >

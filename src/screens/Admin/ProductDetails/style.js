@@ -3,38 +3,78 @@ import { colors } from "../../../constants/colors";
 // import colors from "../../constants/colors";
 
 const styles = StyleSheet.create({
-  // container: {
-  //   paddingHorizontal: 24,
-  //   height: "100%",
-  //   display: "flex",
-  //   width: "100%",
-  //   // padding: 60,
-  //   backgroundColor: "#121212",
-
-  //   position: "absolute",
-  // },
-  container: {
-    flex: 1,
+  conttainer: {
+    // paddingHorizontal: 24,
+    height: "100%",
+    display: "flex",
+    width: "98%",
+    // padding: 60,
+    // backgroundColor: "#121212",
     alignItems: "center",
-    padding: 20,
-    // justifyContent: "center",
-    // backgroundColor: "#fff",
+    justifyContent: "center",
+    alignContent: "center",
+    alignSelf: "center",
+
+    flex: 1,
+    paddingVertical: 5,
+
+    // position: "absolute",
   },
 
+  coontainer: {
+    height: "70%",
+    display: "flex",
+    alignItems: "center",
+    alignContent: "center",
+    // backgroundColor: "#121212",
+    alignSelf: "center",
+    width: "100%",
+
+    justifyContent: "center",
+    // backgroundColor: "#121212",
+  },
+  backgroundImage: {
+    // opacity: 0.8,
+
+    // alignSelf: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignSelf: "center",
+    resizeMode: "cover",
+    // marginLeft: 5,
+    // width: 362,
+    top: 70,
+    width: "100%",
+    height: "70%",
+
+    // resizeMode: "contain",
+    // height: 173,
+    borderRadius: 10,
+  },
+
+  image: {
+    top: 60,
+    alignSelf: "center",
+
+    alignSelf: "center",
+    // backgroundColor: colors.sea,
+  },
+  iimg: {
+    width: 400,
+    height: 400,
+    borderRadius: 100,
+    alignSelf: "center",
+  },
   header: {
     display: "flex",
     flexDirection: "row",
-    // alignItems: "flex-start",
-    // alignContent: "flex-start",
+
     justifyContent: "space-between",
 
-    // height: "40%",
     width: "100%",
-    // backgroundColor: "rgba(255, 255, 255, 0.5)",
-    top: 50,
+    top: 70,
     paddingHorizontal: 20,
     position: "absolute",
-    // paddingTop: 70,
   },
   img: {
     height: "65%",
@@ -43,34 +83,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     marginBottom: 10,
   },
-  cardContainer: {
-    display: "flex",
-    marginHorizontal: 10,
-    alignItems: "flex-end",
-    alignSelf: "flex-end",
-    justifyContent: "flex-end",
-    width: 367,
-    height: 176,
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 30,
-    // alignContent: "flex-end",
-    // alignItems: "flex-end",
-    borderWidth: 1,
-    borderColor: colors.greyGreen,
-  },
-  backgroundImage: {
-    opacity: 0.8,
-    alignSelf: "center",
-    // flex: 1,
-    // resizeMode: "cover",
 
-    // width: 362,
-    // width: "100%",
-    // resizeMode: "contain",
-    // height: 173,
-    borderRadius: 10,
-  },
   Likess: {
     // top: -23,
     // position: "absolute",
@@ -122,27 +135,31 @@ const styles = StyleSheet.create({
   },
 
   cont3: {
+    marginTop: 40,
     // flex: 1,
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
-    width: 354,
-    height: 140,
+    backgroundColor: colors.white,
+    width: "100%",
+    height: 320,
     padding: 20,
 
-    alignSelf: "center",
-
-    // justifyContent: "center",
-
-    top: "75%",
+    // top: "-5%",
     // position: "relative",
     flexDirection: "column",
+    alignSelf: "center",
+    // marginLeft: 5,
     borderWidth: 2,
     borderColor: colors.blueBorder,
-
     borderRadius: 20,
     paddingHorizontal: 20,
   },
   InfosTime: {
     flexDirection: "column",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+
+  InfosSeller: {
+    flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
   },

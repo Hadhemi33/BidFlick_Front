@@ -14,18 +14,11 @@ import { useNavigation } from "@react-navigation/native";
 import TText from "../../../components/TText";
 import LightButton from "../../../components/Buttons/LightButton";
 import GradianButton from "../../../components/Buttons/GradianButton";
-const AuctionDetails = ({ route }) => {
+const ProductDetails = ({ route }) => {
   const { item } = route.params; // Getting the passed data
   const navigation = useNavigation(); // Accessing navigation
   return (
-    // <SafeAreaView style={styles.container}>
-
-    <ImageBackground
-      key={item.id}
-      source={{ uri: item.ProductImage }}
-      style={styles.container}
-      imageStyle={styles.backgroundImage}
-    >
+    <SafeAreaView style={styles.conttainer}>
       <View style={styles.header}>
         <View style={styles.Likess}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -47,7 +40,10 @@ const AuctionDetails = ({ route }) => {
           </TouchableOpacity>
         </View>
       </View>
-      {/* <Image source={{ uri: item.ProductImage }} style={styles.img} /> */}
+      <View style={styles.image}>
+        <Image source={{ uri: item.ProductImage }} style={styles.iimg} />
+      </View>
+
       <View style={styles.cont3}>
         <View style={styles.Infos}>
           <View style={styles.InfosTime}>
@@ -73,19 +69,10 @@ const AuctionDetails = ({ route }) => {
               Delete
             </TText>
           </TouchableOpacity>
-          {/* <GradianButton
-            onPress={() => navigation.navigate("Home")}
-            T="18"
-            F="semiBold"
-            C="green"
-          >
-            Delete
-          </GradianButton> */}
         </View>
       </View>
-    </ImageBackground>
-    // </SafeAreaView>
+    </SafeAreaView>
   );
 };
 
-export default AuctionDetails;
+export default ProductDetails;

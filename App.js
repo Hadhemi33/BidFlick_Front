@@ -12,6 +12,7 @@ import { fontMap } from "./src/constants/fonts";
 import Home from "./src/screens/Admin/Home";
 import DetailsAuctionCard from "./src/screens/Admin/DetailsAuctionCard";
 import AuctionDetails from "./src/screens/Admin/AuctionDetails";
+import ProductDetails from "./src/screens/Admin/ProductDetails";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -31,15 +32,16 @@ export default function App() {
         <ApolloProvider client={client}>
           <Stack.Navigator>
             <Stack.Screen
-              name="AuctionDetails"
-              component={AuctionDetails}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
               name="DetailsAuctionCard"
               component={DetailsAuctionCard}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="ProductDetails"
+              component={ProductDetails}
+              options={{ headerShown: false }}
+            />
+
             <Stack.Screen
               name="Splash"
               component={Splash}
@@ -58,6 +60,11 @@ export default function App() {
             <Stack.Screen
               name="Home"
               component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="AuctionDetails"
+              component={AuctionDetails}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

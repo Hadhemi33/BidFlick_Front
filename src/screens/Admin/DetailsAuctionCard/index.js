@@ -1,19 +1,13 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  ScrollView,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-} from "react-native";
+import { View, Text, Image, ImageBackground, ScrollView } from "react-native";
 import { colors } from "../../../constants/colors";
 
 import styles from "./style";
 import TText from "../../../components/TText";
+import { useNavigation } from "@react-navigation/native";
 
 const DetailsAuctionCard = ({ onPress }) => {
+  const navigation = useNavigation(); // Accessing navigation
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -100,7 +94,7 @@ const DetailsAuctionCard = ({ onPress }) => {
         scrollEventThrottle={16}
       >
         {cards.map((card, index) => (
-          <View key={card.id} onPress={() => {}}>
+          <View key={card.id}>
             <ImageBackground
               key={card.id}
               source={{ uri: card.ProductImage }}
@@ -114,8 +108,15 @@ const DetailsAuctionCard = ({ onPress }) => {
                   </TText>
                 </View>
               </View>
-              <View onPress={onPress} style={styles.Infos}>
-                <TText T="12" F="bold" style={styles.TitleText}>
+              <View style={styles.Infos}>
+                <TText
+                  T="12"
+                  F="bold"
+                  style={styles.TitleText}
+                  onPress={() =>
+                    navigation.navigate("ProductDetails", { item: card })
+                  }
+                >
                   {card.title}
                 </TText>
                 <View style={styles.DateRow}>
