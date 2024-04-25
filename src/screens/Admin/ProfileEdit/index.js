@@ -188,8 +188,8 @@ const ProfileEdit = ({ navigation }) => {
           onPress={() => navigation.navigate("Home")}
           T="18"
           F="semiBold"
-          C="green"
           W="180"
+          I={require("../../../../assets/addAdmin.png")}
         >
           Add Admin
         </GradianButton>
