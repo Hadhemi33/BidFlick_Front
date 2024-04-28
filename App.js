@@ -15,6 +15,7 @@ import AuctionDetails from "./src/screens/Admin/AuctionDetails";
 import ProductDetails from "./src/screens/Admin/ProductDetails";
 import CategoriesScreen from "./src/screens/Admin/Categories";
 import ProfileEdit from "./src/screens/Admin/ProfileEdit";
+import FileUploadComponent from "./src/screens/Admin/File/FileUploadComponent";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -32,18 +33,28 @@ export default function App() {
     return (
       <NavigationContainer theme={theme}>
         <ApolloProvider client={client}>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="DetailsAuctionCard"
-              component={DetailsAuctionCard}
-              options={{ headerShown: false }}
-            />
+          {/* <FileUploadComponent /> */}
 
+          <Stack.Navigator>
             <Stack.Screen
               name="Splash"
               component={Splash}
               options={{ headerShown: false }}
             />
+
+            <Stack.Screen
+              name="DetailsAuctionCard"
+              component={DetailsAuctionCard}
+              options={{
+                title: "Auctions Available",
+              }}
+            />
+            <Stack.Screen
+              name="AuctionDetails"
+              component={AuctionDetails}
+              options={{ headerShown: false }}
+            />
+
             <Stack.Screen
               name="SignIn"
               component={SignIn}
@@ -57,11 +68,6 @@ export default function App() {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="AuctionDetails"
-              component={AuctionDetails}
               options={{ headerShown: false }}
             />
             <Stack.Screen

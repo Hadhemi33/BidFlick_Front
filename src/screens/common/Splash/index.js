@@ -3,6 +3,7 @@ import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import styles from "./style";
 import TText from "../../../components/TText";
 import GradianButton from "../../../components/Buttons/GradianButton";
+import FileUploadComponent from "../../Admin/File/FileUploadComponent";
 
 const Splash = ({ navigation }) => {
   return (
@@ -32,6 +33,7 @@ const Splash = ({ navigation }) => {
       >
         Let’s get started
       </GradianButton>
+      <FileUploadComponent />
       <View style={styles.Footer}>
         <Image
           style={styles.FooterImg}

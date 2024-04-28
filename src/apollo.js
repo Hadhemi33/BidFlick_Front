@@ -1,8 +1,7 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-// const BASE_URL = "https://swapi-graphql.netlify.app/.netlify/functions/index";
-const BASE_URL = "http:/ 192.168.0.104:3001/graphql";
+import { GRAPHQL_URL } from "@env";
 const client = new ApolloClient({
-  uri: BASE_URL,
+  uri: GRAPHQL_URL,
   cache: new InMemoryCache(),
 });
 

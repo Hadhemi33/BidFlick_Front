@@ -28,8 +28,19 @@ const Home = ({ navigation }) => {
           placeholder="Search ..."
         ></TextInput>
       </LinearGradient>
-      <AuctionCard></AuctionCard>
-      <ProductCard />
+      <AuctionCard
+        onPress={(card) =>
+          navigation.navigate("AuctionDetails", { item: card })
+        }
+        onPressMore={() => {
+          navigation.navigate("DetailsAuctionCard");
+        }}
+      ></AuctionCard>
+      <ProductCard
+        onPress={(item) =>
+          navigation.navigate("ProductDetails", { item: item })
+        }
+      />
     </SafeAreaView>
   );
 };

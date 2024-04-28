@@ -26,9 +26,8 @@ export const Users_QUERY = gql`
 const SIGN_IN_MUTATION = gql`
   mutation Signin($loginUserInput: SigninUserInput!) {
     signin(loginUserInput: $loginUserInput) {
-      # id
       username
-      # access_token
+
       roles
     }
   }
@@ -72,17 +71,17 @@ const SignIn = ({ navigation }) => {
     );
   }
 
-  if (error || signinError) {
-    return (
-      <View style={styles.container}>
-        <Text style={[styles.infoText, styles.errorText]}>
-          Error: {error ? error.message : signinError.message}
-        </Text>
-      </View>
-    );
-  } else {
-    // console.log(JSON.stringify(data.getAllUsers[3]));
-  }
+  // if (error || signinError) {
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={[styles.infoText, styles.errorText]}>
+  //         Error: {error ? error.message : signinError.message}
+  //       </Text>
+  //     </View>
+  //   );
+  // } else {
+  //   // console.log(JSON.stringify(data.getAllUsers[3]));
+  // }
 
   return (
     <SafeAreaView style={styles.container}>

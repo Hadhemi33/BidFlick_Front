@@ -96,6 +96,7 @@ const ProductCard = ({ navigation, onPress }) => {
         data={cards}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
+       
         renderItem={({ item, index }) => (
           <ImageBackground
             key={item.id}
@@ -117,8 +118,13 @@ const ProductCard = ({ navigation, onPress }) => {
               </TouchableOpacity>
             </View>
 
-            <View onPress={onPress} style={styles.Infos}>
-              <TText T="12" F="bold" style={styles.TitleText}>
+            <View style={styles.Infos}>
+              <TText
+                T="12"
+                F="bold"
+                style={styles.TitleText}
+                onPress={() => onPress(item)}
+              >
                 {item.title}
               </TText>
               <TText T="12" F="regular" style={styles.TitleText}>

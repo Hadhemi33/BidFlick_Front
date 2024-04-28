@@ -12,7 +12,7 @@ import { colors } from "../../../constants/colors";
 import TText from "../../TText";
 import styles from "./style";
 
-const AuctionCard = () => {
+const AuctionCard = ({ onPressMore, onPress }) => {
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -126,6 +126,7 @@ const AuctionCard = () => {
                 <View style={styles.Infos}>
                   <View style={styles.cardInfoContainer}>
                     <TText
+                      onPress={() => onPress(card)}
                       T="25"
                       F="bold"
                       C="darkGrey"
@@ -135,6 +136,7 @@ const AuctionCard = () => {
                     </TText>
 
                     <TText
+                      onPress={() => onPress(card)}
                       T="18"
                       F="semiBold"
                       C="darkGrey"
@@ -148,9 +150,15 @@ const AuctionCard = () => {
             ) : (
               index === 3 && (
                 <View style={styles.cardMore}>
-                  <TText  T="18"
-                      F="semiBold"
-                      C="darkGrey" style={styles.More}>See More</TText>
+                  <TText
+                    onPress={onPressMore}
+                    T="18"
+                    F="semiBold"
+                    C="darkGrey"
+                    style={styles.More}
+                  >
+                    See More
+                  </TText>
                 </View>
               )
             )}
