@@ -5,7 +5,7 @@ import Splash from "./src/screens/common/Splash";
 import SignIn from "./src/screens/common/SignIn";
 import SignUp from "./src/screens/common/SignUp";
 import { ApolloProvider } from "@apollo/client";
-import client from "./src/apollo";
+import client from "./src/Graphql/apollo";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { fontMap } from "./src/constants/fonts";
@@ -15,7 +15,7 @@ import AuctionDetails from "./src/screens/Admin/AuctionDetails";
 import ProductDetails from "./src/screens/Admin/ProductDetails";
 import CategoriesScreen from "./src/screens/Admin/Categories";
 import ProfileEdit from "./src/screens/Admin/ProfileEdit";
-import FileUploadComponent from "./src/screens/Admin/File/FileUploadComponent";
+import ProductAdd from "./src/screens/Client/ProductAdd";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -37,11 +37,15 @@ export default function App() {
 
           <Stack.Navigator>
             <Stack.Screen
+              name="ProductAdd"
+              component={ProductAdd}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="Splash"
               component={Splash}
               options={{ headerShown: false }}
             />
-
             <Stack.Screen
               name="DetailsAuctionCard"
               component={DetailsAuctionCard}
