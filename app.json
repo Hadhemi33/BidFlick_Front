@@ -30,6 +30,7 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
+        ["MEDIA_LIBRARY"],
         "READ_EXTERNAL_STORAGE",  
         "WRITE_EXTERNAL_STORAGE", 
         "CAMERA"                  
@@ -41,5 +42,6 @@
     "plugins": [
       "expo-font"
     ]
+    
   }
 }

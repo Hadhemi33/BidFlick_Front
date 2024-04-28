@@ -1,31 +1,22 @@
-import React, { useState } from "react";
-import { Button, View, Text } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
+import { Button, View } from "react-native";
 
 const FilePickerComponent = ({ onFileSelected }) => {
-  const [file, setFile] = useState(null);
-
   const pickFile = async () => {
-    try {
-      const result = await DocumentPicker.getDocumentAsync({
-        type: "image/*", // Accepts all image types
-      });
-
-      if (result.type === "success") {
-        setFile(result);
-        if (onFileSelected) {
-          onFileSelected(result);
-        }
-      }
-    } catch (error) {
-      console.error("Error selecting file:", error);
+    const result = await DocumentPicker.getDocumentAsync({
+      type: "image/*", // Allow only image files
+    });
+    console.log("File picker result:", result); // Debug log
+    if (result.type === "success") {
+      onFileSelected(result); // Send the file data back to the parent
+    } else {
+      console.error("File selection failed");
     }
   };
 
   return (
     <View>
-      <Button title="Select Image" onPress={pickFile} />
-      {file && <Text>Selected: {file.name}</Text>}
+      <Button title="Select File" onPress={pickFile} />
     </View>
   );
 };

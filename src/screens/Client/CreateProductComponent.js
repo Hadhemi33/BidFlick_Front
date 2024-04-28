@@ -1,24 +1,16 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button } from "react-native";
 import { useMutation } from "@apollo/client";
-import { CREATE_PRODUCT_MUTATION } from "../../Graphql/mutations";
-import CategorySelector from "./CategorySelector"; // The category selector component
-import { uploadFile } from "../../components/uploadFile";
+import { View, Text, TextInput, Button } from "react-native";
+import { CREATE_PRODUCT_MUTATION } from "../../Graphql/mutations"; // Your mutation query
 import FilePickerComponent from "../../components/FilePickerComponent";
-
-// Predefined categories for demonstration
-const predefinedCategories = [
-  { id: "1", name: "Electronics" },
-  { id: "2", name: "Clothing" },
-  { id: "3", name: "Books" },
-];
+import { uploadFile } from "../../components/uploadFile";
 
 const CreateProduct = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [categories, setCategories] = useState([]); // Selected categories
-  const [imageUrl, setImageUrl] = useState(null); // Store image URL after upload
+  const [categories, setCategories] = useState([]);
+  const [imageUrl, setImageUrl] = useState(null);
 
   const [createProduct, { loading, error, data }] = useMutation(
     CREATE_PRODUCT_MUTATION
@@ -26,26 +18,35 @@ const CreateProduct = () => {
 
   const handleFileSelected = async (file) => {
     try {
-      const uploadedImageUrl = await uploadFile(file); // Upload the image
-      setImageUrl(uploadedImageUrl);
-      console.log("File selected:", file); // Log file information
-    } catch (uploadError) {
-      console.error("Error uploading image:", uploadError);
+      const uploadedImageUrl = await uploadFile(file); // Get the uploaded image URL
+      setImageUrl(uploadedImageUrl); // Set the URL for use in creating the product
+    } catch (error) {
+      console.error("Error uploading file:", error);
     }
   };
 
-  const handleSubmit = () => {
-    createProduct({
-      variables: {
-        createProductInput: {
-          title,
-          description,
-          price: parseFloat(price).toFixed(2),
-          categories, // Include selected category IDs
-          imageUrl, // Image URL after upload
+  const handleSubmit = async () => {
+    if (!imageUrl) {
+      console.warn("Please upload an image first.");
+      return;
+    }
+
+    try {
+      await createProduct({
+        variables: {
+          createProductInput: {
+            title,
+            description,
+            price,
+            categories,
+            imageUrl, // Ensure the image URL is valid
+          },
         },
-      },
-    });
+      });
+      console.log("Product created successfully.");
+    } catch (mutationError) {
+      console.error("Error creating product:", mutationError);
+    }
   };
 
   return (
@@ -57,26 +58,21 @@ const CreateProduct = () => {
         value={description}
         onChangeText={setDescription}
       />
-      <TextInput placeholder="Price" value={price} onChangeText={setPrice} />
-
-      {/* File picker for image selection */}
-      <FilePickerComponent onFileSelected={handleFileSelected} />
-
-      {/* Category selector */}
-      <CategorySelector
-        categories={predefinedCategories}
-        selectedCategories={categories}
-        onChange={setCategories}
+      <TextInput
+        placeholder="Price"
+        keyboardType="numeric"
+        value={price}
+        onChangeText={setPrice}
       />
-
+      <FilePickerComponent onFileSelected={handleFileSelected} />
+      {/* File picker to select an image */}
       <Button title="Create Product" onPress={handleSubmit} />
-
-      {loading && <Text>Creating product...</Text>}
+      {loading && <Text>Loading...</Text>}
       {error && <Text>Error: {error.message}</Text>}
       {data && (
         <Text>
-          Product Created: {data.createProduct.title} (Created At:{" "}
-          {data.createProduct.createdAt})
+          Product Created: {data.createProduct.title}, Image URL:{" "}
+          {data.createProduct.imageUrl}
         </Text>
       )}
     </View>
