@@ -16,6 +16,7 @@ import ProductDetails from "./src/screens/Admin/ProductDetails";
 import CategoriesScreen from "./src/screens/Admin/Categories";
 import ProfileEdit from "./src/screens/Admin/ProfileEdit";
 import ProductAdd from "./src/screens/Client/ProductAdd";
+import CategoryAdd from "./src/screens/Client/CategoryAdd";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -36,6 +37,16 @@ export default function App() {
           {/* <FileUploadComponent /> */}
 
           <Stack.Navigator>
+            <Stack.Screen
+              name="CategoriesScreen"
+              component={CategoriesScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="CategoryAdd"
+              component={CategoryAdd}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="ProductAdd"
               component={ProductAdd}
@@ -58,7 +69,6 @@ export default function App() {
               component={AuctionDetails}
               options={{ headerShown: false }}
             />
-
             <Stack.Screen
               name="SignIn"
               component={SignIn}
@@ -77,11 +87,6 @@ export default function App() {
             <Stack.Screen
               name="ProductDetails"
               component={ProductDetails}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="CategoriesScreen"
-              component={CategoriesScreen}
               options={{ headerShown: false }}
             />
             <Stack.Screen

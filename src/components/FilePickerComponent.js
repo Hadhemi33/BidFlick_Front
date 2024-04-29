@@ -1,5 +1,6 @@
 import * as DocumentPicker from "expo-document-picker";
 import { Button, View } from "react-native";
+import GradianButton from "./Buttons/GradianButton";
 
 const FilePickerComponent = ({ onFileSelected }) => {
   const pickFile = async () => {
@@ -16,7 +17,15 @@ const FilePickerComponent = ({ onFileSelected }) => {
 
   return (
     <View>
-      <Button title="Select File" onPress={pickFile} />
+      <GradianButton
+        onPress={pickFile}
+        T="18"
+        F="semiBold"
+        I={require("../../assets/importFile.png")}
+      >
+        Select File
+      </GradianButton>
+      {/* <Button title="Select File" onPress={pickFile} /> */}
     </View>
   );
 };

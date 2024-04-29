@@ -1,8 +1,21 @@
-import React, { useState } from "react";
-import { View, Text } from "react-native";
+import React from "react";
+import { View, Text, ActivityIndicator } from "react-native";
 import Checkbox from "expo-checkbox";
+import { gql, useQuery } from "@apollo/client";
+import { Categories_QUERY } from "../../Graphql/querys";
 
-const CategorySelector = ({ categories, selectedCategories, onChange }) => {
+// const Categories_QUERY = gql`
+//   query GetAllCategories {
+//     getAllCategories {
+//       id
+//       name
+//     }
+//   }
+// `;
+
+const CategorySelector = ({ selectedCategories, onChange }) => {
+  const { data, loading, error } = useQuery(Categories_QUERY);
+
   const handleCategoryChange = (categoryId) => {
     const updatedSelected = selectedCategories.includes(categoryId)
       ? selectedCategories.filter((id) => id !== categoryId)
@@ -10,9 +23,21 @@ const CategorySelector = ({ categories, selectedCategories, onChange }) => {
     onChange(updatedSelected);
   };
 
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
+  if (error) {
+    return <Text>Error loading categories: {error.message}</Text>;
+  }
+
+  if (!data || !data.getAllCategories) {
+    return <Text>No categories found</Text>;
+  }
+
   return (
     <View>
-      {categories.map((category) => (
+      {data.getAllCategories.map((category) => (
         <View
           key={category.id}
           style={{ flexDirection: "row", alignItems: "center" }}

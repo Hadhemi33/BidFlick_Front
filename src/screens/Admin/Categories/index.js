@@ -6,27 +6,28 @@ import {
   TouchableOpacity,
   FlatList,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
 import styles from "./style";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { Categories_QUERY } from "../../../Graphql/querys";
+import { useQuery } from "@apollo/client";
 const CategoriesScreen = () => {
-  const [data, setData] = useState([
-    { category: "Clothing", value: 1000 },
-    { category: "Games", value: 500 },
-    { category: "Shoes", value: 2000 },
-    { category: "Followers", value: 1000 },
+  const { data, loading, error } = useQuery(Categories_QUERY);
 
-    { category: "Electronics", value: 7500 },
-    { category: "Beauty and Care", value: 66000 },
-    { category: "Books", value: 3300 },
-    { category: "Food", value: 1000 },
-  ]);
   const navigation = useNavigation(); // Accessing navigation
+
+  // Handle add button press
+  const handleAddButtonPress = () => {
+    navigation.navigate("ProfileEdit");
+  };
+
+  // Component for rendering each category
   const CardCat = ({ item }) => (
     <View style={styles.statItem}>
-      <Text style={styles.statValue}>{item.category}</Text>
-      <Text style={styles.statsCategory}>{item.value}</Text>
+      <Text style={styles.statValue}>{item.name}</Text>
+      {/* <Text style={styles.statsCategory}>{item.value}</Text> */}
 
       <TouchableOpacity>
         <AntDesign
@@ -39,8 +40,28 @@ const CategoriesScreen = () => {
     </View>
   );
 
+  // Render loading state
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  // Render error state
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error loading categories: {error.message}</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
+      {/* Header Section */}
       <View style={styles.header}>
         <View style={styles.headerIcon}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -54,21 +75,19 @@ const CategoriesScreen = () => {
           ></TextInput>
         </View>
       </View>
+
       <View style={styles.statsCard}>
         <FlatList
-          data={data}
-          renderItem={CardCat}
+          data={data.getAllCategories}
           keyExtractor={(item, index) => index.toString()}
+          renderItem={CardCat}
           numColumns={2}
         />
       </View>
-      <TouchableOpacity style={styles.addButton}>
-        <Text
-          onPress={() => navigation.navigate("ProfileEdit")}
-          style={styles.addButtonText}
-        >
-          +
-        </Text>
+
+      {/* Add Button */}
+      <TouchableOpacity style={styles.addButton} onPress={handleAddButtonPress}>
+        <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
     </View>
   );
