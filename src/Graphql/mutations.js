@@ -32,7 +32,6 @@ export const CREATE_CATEGORY_MUTATION = gql`
 `;
 export const DELETE_CATEGORY_MUTATION = gql`
   mutation DeleteCategory($name: String!) {
-    deleteCategory(name: $name) 
-      
+    deleteCategory(name: $name)
   }
 `;

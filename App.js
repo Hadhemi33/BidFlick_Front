@@ -36,6 +36,11 @@ export default function App() {
         <ApolloProvider client={client}>
           <Stack.Navigator>
             <Stack.Screen
+              name="Splash"
+              component={Splash}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="CategoriesScreen"
               component={CategoriesScreen}
               options={{ headerShown: false }}
@@ -49,13 +54,9 @@ export default function App() {
             <Stack.Screen
               name="ProductAdd"
               component={ProductAdd}
-              options={{ headerShown: false }} 
-            />
-            <Stack.Screen
-              name="Splash"
-              component={Splash}
               options={{ headerShown: false }}
             />
+
             <Stack.Screen
               name="DetailsAuctionCard"
               component={DetailsAuctionCard}

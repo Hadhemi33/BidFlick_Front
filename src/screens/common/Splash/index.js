@@ -28,7 +28,7 @@ const Splash = ({ navigation }) => {
       </View>
       <GradianButton
         style={styles.Btn}
-        onPress={() => navigation.navigate("SignIn")}
+        onPress={() => navigation.navigate("Home")}
         T="18"
         F="semiBold"
       >
