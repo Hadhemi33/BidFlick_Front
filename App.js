@@ -34,14 +34,13 @@ export default function App() {
     return (
       <NavigationContainer theme={theme}>
         <ApolloProvider client={client}>
-          {/* <FileUploadComponent /> */}
-
           <Stack.Navigator>
             <Stack.Screen
               name="CategoriesScreen"
               component={CategoriesScreen}
               options={{ headerShown: false }}
             />
+
             <Stack.Screen
               name="CategoryAdd"
               component={CategoryAdd}
@@ -50,7 +49,7 @@ export default function App() {
             <Stack.Screen
               name="ProductAdd"
               component={ProductAdd}
-              options={{ headerShown: false }}
+              options={{ headerShown: false }} 
             />
             <Stack.Screen
               name="Splash"

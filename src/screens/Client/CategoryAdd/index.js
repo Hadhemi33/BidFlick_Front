@@ -11,7 +11,7 @@ import { CREATE_CATEGORY_MUTATION } from "../../../Graphql/mutations";
 import LightButton from "../../../components/Buttons/LightButton";
 import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
-
+import { Categories_QUERY } from "../../../Graphql/querys";
 function CategoryAdd() {
   const [name, setName] = useState("");
   const [id, setId] = useState(""); // This can be left empty if the backend generates the ID
@@ -19,7 +19,10 @@ function CategoryAdd() {
   const navigation = useNavigation(); // For navigation upon success
 
   const [createCategory, { loading, error, data }] = useMutation(
-    CREATE_CATEGORY_MUTATION
+    CREATE_CATEGORY_MUTATION,
+    {
+      refetchQueries: [{ query: Categories_QUERY }],
+    }
   );
 
   const handleSubmit = async () => {
@@ -28,7 +31,7 @@ function CategoryAdd() {
       return;
     }
 
-    setValidationError(""); // Clear validation errors when inputs are valid
+    setValidationError(""); 
 
     try {
       const response = await createCategory({
@@ -36,16 +39,18 @@ function CategoryAdd() {
           createCategoryInput: {
             name,
           },
-          id, // Only provide this if it's required by the backend
+          id, 
         },
       });
 
       console.log("Category created successfully.");
-      setName(""); // Clear the input fields after successful submission
-      setId(""); // If `id` was provided, clear it too
+      setName(""); 
+      setId(""); 
 
-      // Optional navigation or additional user feedback
-      navigation.navigate("CategoriesScreen"); // Return to previous screen or navigate elsewhere
+      
+      navigation.navigate("CategoriesScreen", {
+        refetchQueries: [{ query: Categories_QUERY }],
+      }); 
     } catch (mutationError) {
       console.error("Error creating category:", mutationError);
     }

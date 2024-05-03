@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 60,
     padding: 20,
+    marginBottom: 40,
   },
   userCard: {
     flexDirection: "row",

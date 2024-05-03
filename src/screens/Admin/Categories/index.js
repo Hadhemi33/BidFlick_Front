@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Text,
   View,
@@ -7,29 +7,83 @@ import {
   FlatList,
   TextInput,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import styles from "./style";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Categories_QUERY } from "../../../Graphql/querys";
-import { useQuery } from "@apollo/client";
+
+import { useFocusEffect } from "@react-navigation/native";
+import { useMutation, useQuery } from "@apollo/client";
+import { DELETE_CATEGORY_MUTATION } from "../../../Graphql/mutations";
 const CategoriesScreen = () => {
-  const { data, loading, error } = useQuery(Categories_QUERY);
+  const { data, loading, error, refetch } = useQuery(Categories_QUERY, {
+    pollInterval: 5000,
+  });
 
-  const navigation = useNavigation(); // Accessing navigation
+  const [deleteCategory] = useMutation(DELETE_CATEGORY_MUTATION, {
+    refetchQueries: [{ query: Categories_QUERY }],
+  });
 
-  // Handle add button press
+  const navigation = useNavigation();
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
   const handleAddButtonPress = () => {
-    navigation.navigate("ProfileEdit");
+    navigation.navigate("CategoryAdd");
   };
 
-  // Component for rendering each category
+  // const handleDeleteCat = async (name) => {
+  //   try {
+  //     await deleteCategory({ variables: { name } }); // Ensure 'name' is passed correctly
+  //   } catch (mutationError) {
+  //     console.error("Error deleting category:", mutationError);
+  //   }
+  // };
+  // const handleDeleteCat = async (name) => {
+  //   console.log("Deleting category:", name);
+  //   try {
+  //      await deleteCategory({
+  //       variables: { name: name },
+  //     });
+  //   }
+  //     catch {
+  //     console.error("Error deleting category:", mutationError);
+  //     Alert.alert("Error", `An error occurred while deleting the category.`);
+  //   }
+  const handleDeleteCat = async (name) => {
+    console.log("Attempting to delete category:", name); // Log the action
+
+    try {
+      await deleteCategory({
+        variables: { name }, // Correct way to pass variable
+      });
+
+      console.log("Category deleted successfully:", name); // Additional logging if needed
+
+      // Optionally, refetch data or update the UI to reflect deletion
+    } catch (mutationError) {
+      // Properly handle errors
+      console.error("Error deleting category:", mutationError); // Log the detailed error
+      Alert.alert(
+        "Error",
+        `An error occurred while deleting the category "${name}". Please try again later.` // Provide meaningful user feedback
+      );
+    }
+  };
+
   const CardCat = ({ item }) => (
     <View style={styles.statItem}>
       <Text style={styles.statValue}>{item.name}</Text>
-      {/* <Text style={styles.statsCategory}>{item.value}</Text> */}
 
-      <TouchableOpacity>
+      <Text style={styles.productCount}>
+        {item.products.length} product{item.products.length > 1 ? "s" : ""}
+      </Text>
+
+      <TouchableOpacity onPress={() => handleDeleteCat(item.name)}>
         <AntDesign
           name="delete"
           size={16}
@@ -40,7 +94,6 @@ const CategoriesScreen = () => {
     </View>
   );
 
-  // Render loading state
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
@@ -50,7 +103,6 @@ const CategoriesScreen = () => {
     );
   }
 
-  // Render error state
   if (error) {
     return (
       <View style={styles.errorContainer}>
@@ -61,7 +113,6 @@ const CategoriesScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Header Section */}
       <View style={styles.header}>
         <View style={styles.headerIcon}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -85,7 +136,6 @@ const CategoriesScreen = () => {
         />
       </View>
 
-      {/* Add Button */}
       <TouchableOpacity style={styles.addButton} onPress={handleAddButtonPress}>
         <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
