@@ -13,11 +13,23 @@ import TText from "../../TText";
 import { CREATE_CATEGORY_MUTATION } from "../../../Graphql/mutations";
 import { useMutation, useQuery } from "@apollo/client";
 import { Categories_QUERY, Products_QUERY } from "../../../Graphql/querys";
-const ProductCard = ({ navigation, onPress }) => {
-  const { data, loading, error, refetch } = useQuery(Products_QUERY, {
+const ProductCard = ({ navigation, onPress, searchQuery }) => {
+  const {
+    data = { getAllProducts: [] },
+    loading,
+    error,
+    refetch,
+  } = useQuery(Products_QUERY, {
     pollInterval: 5000,
   });
+  const search = searchQuery.toLowerCase();
   const [products, setProducts] = useState(data?.getAllProducts || []);
+  const filteredProducts = data
+    ? data.getAllProducts.filter(
+        (product) =>
+          product.title && product.title.toLowerCase().includes(search)
+      )
+    : [];
   const toggleLike = (id) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
@@ -28,7 +40,7 @@ const ProductCard = ({ navigation, onPress }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={products}
+        data={filteredProducts}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
         renderItem={({ item, index }) => (
@@ -45,8 +57,8 @@ const ProductCard = ({ navigation, onPress }) => {
                   style={styles.LikesImage}
                   source={
                     item.liked
-                      ? require("../../../../assets/heart_8812101.png") 
-                      : require("../../../../assets/heart.png") 
+                      ? require("../../../../assets/heart_8812101.png")
+                      : require("../../../../assets/heart.png")
                   }
                 />
               </TouchableOpacity>

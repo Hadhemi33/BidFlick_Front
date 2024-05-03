@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   SafeAreaView,
@@ -11,10 +11,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
 import AuctionCard from "../../../components/Cards/AuctionCard";
 import ProductCard from "../../../components/Cards/ProductCard";
-import Input from "../../../components/Input";
+
 import { colors } from "../../../constants/colors";
 
 const Home = ({ navigation }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearchInput = (searchQuery) => {
+    setSearchQuery(searchQuery || " ");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
@@ -26,7 +30,9 @@ const Home = ({ navigation }) => {
         <TextInput
           style={styles.SearchInput}
           placeholder="Search ..."
-        ></TextInput>
+          value={searchQuery}
+          onChangeText={handleSearchInput}
+        />
       </LinearGradient>
       <AuctionCard
         onPress={(card) =>
@@ -37,6 +43,7 @@ const Home = ({ navigation }) => {
         }}
       ></AuctionCard>
       <ProductCard
+      searchQuery={searchQuery}
         onPress={(item) =>
           navigation.navigate("ProductDetails", { item: item })
         }
