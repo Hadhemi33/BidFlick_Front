@@ -14,9 +14,9 @@ import { useNavigation } from "@react-navigation/native";
 import { Categories_QUERY } from "../../../Graphql/querys";
 function CategoryAdd() {
   const [name, setName] = useState("");
-  const [id, setId] = useState(""); // This can be left empty if the backend generates the ID
+  const [id, setId] = useState("");
   const [validationError, setValidationError] = useState("");
-  const navigation = useNavigation(); // For navigation upon success
+  const navigation = useNavigation();
 
   const [createCategory, { loading, error, data }] = useMutation(
     CREATE_CATEGORY_MUTATION,
@@ -31,7 +31,7 @@ function CategoryAdd() {
       return;
     }
 
-    setValidationError(""); 
+    setValidationError("");
 
     try {
       const response = await createCategory({
@@ -39,18 +39,17 @@ function CategoryAdd() {
           createCategoryInput: {
             name,
           },
-          id, 
+          id,
         },
       });
 
       console.log("Category created successfully.");
-      setName(""); 
-      setId(""); 
+      setName("");
+      setId("");
 
-      
       navigation.navigate("CategoriesScreen", {
         refetchQueries: [{ query: Categories_QUERY }],
-      }); 
+      });
     } catch (mutationError) {
       console.error("Error creating category:", mutationError);
     }
