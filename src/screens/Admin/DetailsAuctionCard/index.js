@@ -1,84 +1,41 @@
 import React, { useState } from "react";
-import { View, Text, Image, ImageBackground, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { colors } from "../../../constants/colors";
 
 import styles from "./style";
 import TText from "../../../components/TText";
 import { useNavigation } from "@react-navigation/native";
+import { SpecialProducts_QUERY } from "../../../Graphql/querys";
+import { useQuery } from "@apollo/client";
 
 const DetailsAuctionCard = ({ onPress }) => {
   const navigation = useNavigation(); // Accessing navigation
-  const [cards, setCards] = useState([
-    {
-      id: 1,
-      title: "iPhone 12",
-      Price: "1200",
-      liked: false,
+  const { data, loading, error } = useQuery(SpecialProducts_QUERY, {
+    pollInterval: 30000,
+  });
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error loading special Products: {error.message}</Text>
+      </View>
+    );
+  }
 
-      description:
-        "This is a brand new iPhone 12 with 128GB storage. It comes with a charger and a case.",
-      discount: 10,
-      SellerName: "John Doe",
-      expiration: "12:05:33",
-      ProductImage:
-        "https://media.gqmagazine.fr/photos/655c823373c3872342ffcc8e/16:9/w_2560%2Cc_limit/iPhone16-Batterie.jpg",
-    },
-    {
-      id: 2,
-      title: "iPhone 12",
-      Price: "1200",
-      description:
-        "This is a brand new iPhone 12 with 128GB storage. It comes with a charger and a case.",
-      discount: 10,
-      liked: true,
-      SellerName: "John Doe",
-      expiration: "12:05:33",
-      ProductImage:
-        "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3BmLXMxMDgtcG0tNDExMy1tb2NrdXAuanBn.jpg",
-    },
-    {
-      id: 3,
-      title: "iPhone 12",
-      Price: "1200",
-      liked: false,
-
-      description:
-        "This is a brand new iPhone 12 with 128GB storage. It comes with a charger and a case.",
-      discount: 10,
-      SellerName: "John Doe",
-      expiration: "12:05:33",
-      ProductImage:
-        "https://www.datocms-assets.com/101859/1707248470-montage_bottle_pinkpurple_producttile_2680x3344.png?auto=format&fit=max&w=3840",
-    },
-    {
-      id: 4,
-      title: "iPhone 12",
-      liked: false,
-
-      Price: "1200",
-      description:
-        "This is a brand new iPhone 12 with 128GB storage. It comes with a charger and a case.",
-      discount: 10,
-      SellerName: "John Doe",
-      expiration: "12:05:33",
-      ProductImage:
-        "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3BmLXMxMDgtcG0tNDExMy1tb2NrdXAuanBn.jpg",
-    },
-    {
-      id: 5,
-      title: "iPhone 12",
-      Price: "1200",
-      liked: false,
-
-      description:
-        "This is a brand new iPhone 12 with 128GB storage. It comes with a charger and a case.",
-      discount: 10,
-      SellerName: "John Doe",
-      expiration: "12:05:33",
-      ProductImage:
-        "https://www.datocms-assets.com/101859/1707248470-montage_bottle_pinkpurple_producttile_2680x3344.png?auto=format&fit=max&w=3840",
-    },
-  ]);
   const [activeIndex, setActiveIndex] = useState(0);
   const handleScroll = (event) => {
     const scrollX = event.nativeEvent.contentOffset.x;
@@ -93,18 +50,18 @@ const DetailsAuctionCard = ({ onPress }) => {
         onScroll={handleScroll}
         scrollEventThrottle={16}
       >
-        {cards.map((card, index) => (
+        {data?.getAllSpecialProducts.map((card, index) => (
           <View key={card.id}>
             <ImageBackground
               key={card.id}
-              source={{ uri: card.ProductImage }}
+              source={{ uri: card.imageUrl }}
               style={styles.cardContainer}
               imageStyle={styles.backgroundImage}
             >
               <View style={styles.CardPrice}>
                 <View style={styles.PriceContainer}>
                   <TText T="14" F="bold" style={styles.PriceText}>
-                    {card.Price}$
+                    {card.price}$
                   </TText>
                 </View>
               </View>
@@ -114,7 +71,7 @@ const DetailsAuctionCard = ({ onPress }) => {
                   F="bold"
                   style={styles.TitleText}
                   onPress={() =>
-                    navigation.navigate("ProductDetails", { item: card })
+                    navigation.navigate("AuctionDetails", { item: card })
                   }
                 >
                   {card.title}
@@ -124,7 +81,7 @@ const DetailsAuctionCard = ({ onPress }) => {
                     Auction ends in :
                   </TText>
                   <TText T="12" F="bold" style={styles.TitleText}>
-                    {card.expiration}
+                    {card.endingIn}
                   </TText>
                 </View>
               </View>

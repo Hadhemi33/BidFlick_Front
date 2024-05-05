@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     borderColor: colors.greyGreen,
   },
   backgroundImage: {
+    objectFit: "scale-down",
     opacity: 0.8,
     alignSelf: "center",
     // flex: 1,

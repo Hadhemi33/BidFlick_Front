@@ -13,6 +13,7 @@ export const CREATE_PRODUCT_MUTATION = gql`
     }
   }
 `;
+
 export const CREATE_CATEGORY_MUTATION = gql`
   mutation CreateCategory(
     $createCategoryInput: CreateCategoryInput!

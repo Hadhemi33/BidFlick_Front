@@ -208,6 +208,9 @@ const CategoriesScreen = () => {
       <Text style={styles.productCount}>
         {item.products.length} product{item.products.length > 1 ? "s" : ""}
       </Text>
+      <Text style={styles.productCount}>
+        {item.specialProducts.length} auction{item.specialProducts.length > 1 ? "s" : ""}
+      </Text>
       <TouchableOpacity onPress={() => handleDeleteCat(item.name)}>
         <AntDesign name="delete" size={16} color="red" />
       </TouchableOpacity>

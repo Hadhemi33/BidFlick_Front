@@ -12,7 +12,11 @@ import styles from "./style";
 import TText from "../../TText";
 import { CREATE_CATEGORY_MUTATION } from "../../../Graphql/mutations";
 import { useMutation, useQuery } from "@apollo/client";
-import { Categories_QUERY, Products_QUERY } from "../../../Graphql/querys";
+import {
+  Categories_QUERY,
+  Products_QUERY,
+  SpecialProducts_QUERY,
+} from "../../../Graphql/querys";
 const ProductCard = ({ navigation, onPress, searchQuery }) => {
   const {
     data = { getAllProducts: [] },
@@ -30,13 +34,13 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
           product.title && product.title.toLowerCase().includes(search)
       )
     : [];
-  const toggleLike = (id) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === id ? { ...product, liked: !product.liked } : product
-      )
-    );
-  };
+  // const toggleLike = (id) => {
+  //   setProducts((prevProducts) =>
+  //     prevProducts.map((product) =>
+  //       product.id === id ? { ...product, liked: !product.liked } : product
+  //     )
+  //   );
+  // };
   return (
     <View style={styles.container}>
       <FlatList

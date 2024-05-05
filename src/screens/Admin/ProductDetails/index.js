@@ -1,24 +1,16 @@
 import React from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  Image,
-  ImageBackground,
-} from "react-native";
+import { View, SafeAreaView, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 import Feather from "@expo/vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 import TText from "../../../components/TText";
-import LightButton from "../../../components/Buttons/LightButton";
-import GradianButton from "../../../components/Buttons/GradianButton";
+
 import { LinearGradient } from "expo-linear-gradient";
 
 const ProductDetails = ({ route }) => {
-  const { item } = route.params; // Getting the passed data
-  const navigation = useNavigation(); // Accessing navigation
+  const { item } = route.params;
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.conttainer}>
       <View style={styles.header}>
@@ -29,7 +21,7 @@ const ProductDetails = ({ route }) => {
         </View>
         <View style={styles.Likes}>
           <TText T="17" F="regular" style={styles.LikesText}>
-            100
+            {item.nbrLike}
           </TText>
           <TouchableOpacity onPress={() => toggleLike(item.id)}>
             <Image
@@ -40,7 +32,7 @@ const ProductDetails = ({ route }) => {
         </View>
       </View>
       <View style={styles.image}>
-        <Image source={{ uri: item.ProductImage }} style={styles.iimg} />
+        <Image source={{ uri: item.imageUrl }} style={styles.iimg} />
       </View>
 
       <View style={styles.cont3}>
@@ -55,8 +47,8 @@ const ProductDetails = ({ route }) => {
               end={{ x: 1, y: 0 }}
               style={styles.linearGradientName}
             ></LinearGradient>
-            <TText T="24" F="regular">
-              {item.Price}$
+            <TText T="20" F="regular">
+              {item.price}$
             </TText>
           </View>
           <View style={styles.InfosTime}>
@@ -66,8 +58,8 @@ const ProductDetails = ({ route }) => {
                 style={styles.SellerImg}
               />
 
-              <TText T="20" F="regular" style={styles.LikesText}>
-                {item.SellerName}
+              <TText T="18" F="regular" style={styles.LikesText}>
+                {item.user.fullName}
               </TText>
             </View>
             <LinearGradient
@@ -87,7 +79,7 @@ const ProductDetails = ({ route }) => {
         <TText T="20" F="semiBold">
           Description
         </TText>
-        <TText T="13" F="regular" style={styles.LikesText}>
+        <TText T="14" F="regular" style={styles.LikesText}>
           {item.description}
         </TText>
         <View style={styles.BtnDelete}>

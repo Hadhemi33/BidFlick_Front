@@ -4,11 +4,11 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
     flex: 1,
-    alignSelf:'center',
+    alignSelf: "center",
   },
   Likes: {
     top: -23,
-    // width: "40%",
+
     padding: 4,
     display: "flex",
     flexDirection: "row",
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   LikesText: {
     fontSize: 14,
 
-    // fontWeight: "bold",
     color: colors.blue,
   },
   LikesImage: {
@@ -42,19 +41,28 @@ const styles = StyleSheet.create({
   cardContainer: {
     display: "flex",
     flexDirection: "column",
-    marinTop: 10,
+
     margin: 10,
-    width: 172,
+    width: 174,
+
     height: 240,
     backgroundColor: "white",
     borderRadius: 10,
-    // padding: 15,
+    alignContent: "center",
+    alignItems: "center",
+
     justifyContent: "space-between",
     marginTop: 25,
     borderWidth: 1,
     borderColor: colors.blueBorder,
   },
   backgroundImage: {
+    alignSelf: "center",
+    alignContent: "center",
+
+    maxWidth: "98%",
+    padding: 4,
+    objectFit: "scale-down", //as2el amine
     borderRadius: 10,
   },
   Infos: {
@@ -65,11 +73,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     top: 2,
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    backgroundColor: "rgba(192,192,192, 0.5)",
   },
-  TitleText:{
-
-  },
+  TitleText: {},
 });
 
 export default styles;

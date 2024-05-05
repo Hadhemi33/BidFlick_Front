@@ -22,7 +22,7 @@ const AuctionDetails = ({ route }) => {
 
     <ImageBackground
       key={item.id}
-      source={{ uri: item.ProductImage }}
+      source={{ uri: item.imageUrl }}
       style={styles.container}
       imageStyle={styles.backgroundImage}
     >
@@ -32,12 +32,12 @@ const AuctionDetails = ({ route }) => {
             <Feather name="chevron-left" color="#000" size={25} />
           </TouchableOpacity>
           <TText T="17" F="regular" style={styles.LikesText}>
-            {item.SellerName}
+            {item.user.fullName}
           </TText>
         </View>
         <View style={styles.Likes}>
           <TText T="17" F="regular" style={styles.LikesText}>
-            100
+            {item.nbrLike}
           </TText>
           <TouchableOpacity onPress={() => toggleLike(item.id)}>
             <Image
@@ -55,7 +55,7 @@ const AuctionDetails = ({ route }) => {
               Ending in :
             </TText>
             <TText T="15" F="bold">
-              {item.expiration}
+              {item.endingIn}
             </TText>
           </View>
           <View style={styles.InfosTime}>
@@ -63,7 +63,7 @@ const AuctionDetails = ({ route }) => {
               Highest Price :
             </TText>
             <TText T="15" F="bold">
-              {item.Price}$
+              {item.price}$
             </TText>
           </View>
         </View>

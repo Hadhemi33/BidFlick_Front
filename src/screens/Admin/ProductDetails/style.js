@@ -4,12 +4,10 @@ import { colors } from "../../../constants/colors";
 
 const styles = StyleSheet.create({
   conttainer: {
-    // paddingHorizontal: 24,
     height: "100%",
     display: "flex",
     width: "98%",
-    // padding: 60,
-    // backgroundColor: "#121212",
+
     alignItems: "center",
     justifyContent: "center",
     alignContent: "center",
@@ -17,8 +15,6 @@ const styles = StyleSheet.create({
 
     flex: 1,
     paddingVertical: 5,
-
-    // position: "absolute",
   },
 
   coontainer: {
@@ -26,30 +22,28 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     alignContent: "center",
-    // backgroundColor: "#121212",
     alignSelf: "center",
     width: "100%",
 
     justifyContent: "center",
-    // backgroundColor: "#121212",
+    
   },
 
   image: {
     top: 80,
     alignSelf: "center",
-
-    alignSelf: "center",
-    // backgroundColor: colors.sea,
+  
   },
   iimg: {
     width: 400,
-    height: 400,
-    borderRadius: 100,
+    height: 450,
+    borderRadius: 70,
     alignSelf: "center",
+    objectFit: "scale-down",
   },
   cont3: {
     marginTop: 60,
-    // flex: 1,
+
     backgroundColor: colors.white,
     width: "100%",
     height: 300,
@@ -82,43 +76,23 @@ const styles = StyleSheet.create({
   },
 
   Likess: {
-    // top: -23,
-    // position: "absolute",
-    // width: "40%",
+
     padding: 4,
     display: "flex",
     flexDirection: "row",
-    // alignItems: "center",
-    // alignSelf: "center",
-    // justifyContent: "center",
-    // alignContent: "center",
-    // backgroundColor: colors.white,
-    // // borderWidth: 2,
-    // // borderColor: colors.blueBorder,
-
-    // // borderRadius: 10,
+  
   },
   Likes: {
-    // top: -23,
-    // position: "absolute",
-    // width: "40%",
+  
     padding: 4,
     display: "flex",
     flexDirection: "row",
-    // alignItems: "center",
-    // alignSelf: "center",
-    // justifyContent: "center",
-    // alignContent: "center",
-    // backgroundColor: colors.white,
-    // // borderWidth: 2,
-    // // borderColor: colors.blueBorder,
-
-    // // borderRadius: 10,
+    
   },
   LikesText: {
     fontSize: 14,
 
-    // fontWeight: "bold",
+    
     color: colors.blue,
   },
   LikesImage: {
@@ -165,7 +139,7 @@ const styles = StyleSheet.create({
   InfosTime: {
     flexDirection: "column",
     justifyContent: "space-between",
-    // marginTop: 10,
+   
   },
 
   InfosSeller: {
@@ -173,10 +147,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
-    // marginTop: 10,
+    
   },
   BtnDelete: {
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: colors.white,
     borderWidth: 2,
     borderColor: colors.blueBorder,
     alignContent: "center",
@@ -185,7 +159,7 @@ const styles = StyleSheet.create({
     width: "50%",
     height: 36,
     borderRadius: 20,
-    marginTop: 80,
+    marginTop: 40,
   },
   Infos: {
     flexDirection: "row",

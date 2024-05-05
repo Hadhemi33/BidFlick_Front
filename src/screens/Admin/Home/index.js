@@ -19,6 +19,7 @@ const Home = ({ navigation }) => {
   const handleSearchInput = (searchQuery) => {
     setSearchQuery(searchQuery || " ");
   };
+  const searchQueryy = searchQuery;
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
@@ -35,6 +36,7 @@ const Home = ({ navigation }) => {
         />
       </LinearGradient>
       <AuctionCard
+        searchQueryy={searchQueryy}
         onPress={(card) =>
           navigation.navigate("AuctionDetails", { item: card })
         }
@@ -43,7 +45,7 @@ const Home = ({ navigation }) => {
         }}
       ></AuctionCard>
       <ProductCard
-      searchQuery={searchQuery}
+        searchQuery={searchQuery}
         onPress={(item) =>
           navigation.navigate("ProductDetails", { item: item })
         }

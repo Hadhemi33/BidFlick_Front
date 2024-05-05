@@ -8,6 +8,9 @@ export const Categories_QUERY = gql`
       products {
         id
       }
+      specialProducts {
+        id
+      }
     }
   }
 `;
@@ -22,6 +25,40 @@ export const Products_QUERY = gql`
       status
       nbrLike
       createdAt
+      imageUrl
+      category {
+        id
+        name
+      }
+      user {
+        id
+        fullName
+      }
+    }
+  }
+`;
+
+export const SpecialProducts_QUERY = gql`
+  query GetAllSpecialProducts {
+    getAllSpecialProducts {
+      id
+      createdAt
+      nbrLike
+      endingIn
+      user {
+        id
+        fullName
+      }
+      likedBy {
+        id
+      }
+      title
+      price
+      description
+      discount
+      category {
+        id
+      }
       imageUrl
     }
   }
