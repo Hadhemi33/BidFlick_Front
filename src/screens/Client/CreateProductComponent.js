@@ -3,7 +3,6 @@ import { useMutation } from "@apollo/client";
 import { View, Text, TextInput, Button } from "react-native";
 import { CREATE_PRODUCT_MUTATION } from "../../Graphql/mutations"; // Your mutation query
 import FilePickerComponent from "../../components/FilePickerComponent";
-import { uploadFile } from "../../components/uploadFile";
 
 const CreateProduct = () => {
   const [title, setTitle] = useState("");
@@ -16,14 +15,14 @@ const CreateProduct = () => {
     CREATE_PRODUCT_MUTATION
   );
 
-  const handleFileSelected = async (file) => {
-    try {
-      const uploadedImageUrl = await uploadFile(file); // Get the uploaded image URL
-      setImageUrl(uploadedImageUrl); // Set the URL for use in creating the product
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-  };
+  // const handleFileSelected = async (file) => {
+  //   try {
+  //     const uploadedImageUrl = await uploadImage(file); // Get the uploaded image URL
+  //     setImageUrl(uploadedImageUrl); // Set the URL for use in creating the product
+  //   } catch (error) {
+  //     console.error("Error uploading file:", error);
+  //   }
+  // };
 
   const handleSubmit = async () => {
     if (!imageUrl) {

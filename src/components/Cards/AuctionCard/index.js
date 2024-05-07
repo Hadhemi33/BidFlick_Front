@@ -46,15 +46,6 @@ const AuctionCard = ({ onPressMore, onPress, searchQueryy }) => {
     const width = 367 + 20;
     const currentIndex = Math.round(scrollX / width);
     setActiveIndex(currentIndex);
-    if (currentIndex === 2) {
-      return (
-        <View style={styles.seeMoreContainer}>
-          <Text style={styles.seeMoreText} onPress={onPressMore}>
-            See More
-          </Text>
-        </View>
-      );
-    }
   };
 
   return (

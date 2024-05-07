@@ -185,7 +185,7 @@ const ProfileEdit = ({ navigation }) => {
       <View style={styles.Botns}>
         <GradianButton
           style={styles.BtnAdd}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("AllUsers")}
           T="18"
           F="semiBold"
           W="180"

@@ -3,10 +3,10 @@ import {
   View,
   Text,
   Image,
-  ScrollView,
   TouchableOpacity,
   ImageBackground,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import styles from "./style";
 import TText from "../../TText";
@@ -34,6 +34,22 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
           product.title && product.title.toLowerCase().includes(search)
       )
     : [];
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error loading special Products: {error.message}</Text>
+      </View>
+    );
+  }
   // const toggleLike = (id) => {
   //   setProducts((prevProducts) =>
   //     prevProducts.map((product) =>

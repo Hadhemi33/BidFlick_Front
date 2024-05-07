@@ -36,3 +36,18 @@ export const DELETE_CATEGORY_MUTATION = gql`
     deleteCategory(name: $name)
   }
 `;
+
+export const UPLOAD_FILE_MUTATION = gql`
+  mutation UploadFile($file: Upload!) {
+    uploadFile(file: $file)
+  }
+`;
+export const CHANGE_ROLE_MUTATION = gql`
+  mutation UpdateUserRole($updateUserInput: UpdateUserInput) {
+    updateUserRole(updateUserInput: $updateUserInput) {
+      username
+      fullName
+      roles
+    }
+  }
+`;

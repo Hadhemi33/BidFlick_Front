@@ -17,6 +17,7 @@ import CategoriesScreen from "./src/screens/Admin/Categories";
 import ProfileEdit from "./src/screens/Admin/ProfileEdit";
 import ProductAdd from "./src/screens/Client/ProductAdd";
 import CategoryAdd from "./src/screens/Client/CategoryAdd";
+import AllUsers from "./src/screens/Admin/AllUsers";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -36,13 +37,23 @@ export default function App() {
         <ApolloProvider client={client}>
           <Stack.Navigator>
             <Stack.Screen
-              name="Splash"
-              component={Splash}
+              name="ProfileEdit"
+              component={ProfileEdit}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="CategoriesScreen"
               component={CategoriesScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Splash"
+              component={Splash}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="AllUsers"
+              component={AllUsers}
               options={{ headerShown: false }}
             />
 
@@ -56,7 +67,6 @@ export default function App() {
               component={ProductAdd}
               options={{ headerShown: false }}
             />
-
             <Stack.Screen
               name="DetailsAuctionCard"
               component={DetailsAuctionCard}
@@ -87,11 +97,6 @@ export default function App() {
             <Stack.Screen
               name="ProductDetails"
               component={ProductDetails}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ProfileEdit"
-              component={ProfileEdit}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

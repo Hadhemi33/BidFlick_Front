@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { SafeAreaView, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
 import AuctionCard from "../../../components/Cards/AuctionCard";

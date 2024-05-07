@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text, TextInput } from "react-native";
 import { useMutation } from "@apollo/client";
 import { CREATE_PRODUCT_MUTATION } from "../../../Graphql/mutations";
 import FilePickerComponent from "../../../components/FilePickerComponent";
-import { uploadFile } from "../../../components/uploadFile";
+import { uploadFile } from "../../../components/uploadImage";
 import GradianButton from "../../../components/Buttons/GradianButton";
 import LightButton from "../../../components/Buttons/LightButton";
 import styles from "./style";
