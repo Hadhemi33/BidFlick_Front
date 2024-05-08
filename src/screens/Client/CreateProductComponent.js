@@ -15,14 +15,7 @@ const CreateProduct = () => {
     CREATE_PRODUCT_MUTATION
   );
 
-  // const handleFileSelected = async (file) => {
-  //   try {
-  //     const uploadedImageUrl = await uploadImage(file); // Get the uploaded image URL
-  //     setImageUrl(uploadedImageUrl); // Set the URL for use in creating the product
-  //   } catch (error) {
-  //     console.error("Error uploading file:", error);
-  //   }
-  // };
+ 
 
   const handleSubmit = async () => {
     if (!imageUrl) {
@@ -38,7 +31,7 @@ const CreateProduct = () => {
             description,
             price,
             categories,
-            imageUrl, // Ensure the image URL is valid
+            imageUrl, 
           },
         },
       });
@@ -64,7 +57,7 @@ const CreateProduct = () => {
         onChangeText={setPrice}
       />
       <FilePickerComponent onFileSelected={handleFileSelected} />
-      {/* File picker to select an image */}
+     
       <Button title="Create Product" onPress={handleSubmit} />
       {loading && <Text>Loading...</Text>}
       {error && <Text>Error: {error.message}</Text>}

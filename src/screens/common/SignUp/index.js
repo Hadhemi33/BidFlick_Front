@@ -85,26 +85,26 @@ const SignUp = ({ navigation }) => {
       refetchQueries: [{ query: Users_QUERY }],
     }
   );
-  // if (loading || signupLoading) {
-  //   console.log(JSON.stringify(data));
+  if (loading || signupLoading) {
+    console.log(JSON.stringify(data));
 
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={styles.infoText}>Loading...</Text>
-  //     </View>
-  //   );
-  // }
-  // if (error || signupError) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={[styles.infoText, styles.errorText]}>
-  //         Error: {error ? error.message : signupError.message}
-  //       </Text>
-  //     </View>
-  //   );
-  // } else {
-  //   // console.log(JSON.stringify(data.getAllUsers[3]));
-  // }
+    return (
+      <View style={styles.container}>
+        <Text style={styles.infoText}>Loading...</Text>
+      </View>
+    );
+  }
+  if (error || signupError) {
+    return (
+      <View style={styles.container}>
+        <Text style={[styles.infoText, styles.errorText]}>
+          Error: {error ? error.message : signupError.message}
+        </Text>
+      </View>
+    );
+  } else {
+    // console.log(JSON.stringify(data.getAllUsers[3]));
+  }
   return (
     <SafeAreaView style={styles.container}>
       <TText T="30" F="semiBold" C="black">

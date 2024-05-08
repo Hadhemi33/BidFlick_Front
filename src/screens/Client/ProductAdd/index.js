@@ -2,57 +2,48 @@ import React, { useState } from "react";
 import { SafeAreaView, View, Text, TextInput } from "react-native";
 import { useMutation } from "@apollo/client";
 import { CREATE_PRODUCT_MUTATION } from "../../../Graphql/mutations";
-import FilePickerComponent from "../../../components/FilePickerComponent";
-import { uploadFile } from "../../../components/uploadImage";
+
 import GradianButton from "../../../components/Buttons/GradianButton";
 import LightButton from "../../../components/Buttons/LightButton";
 import styles from "./style";
 import CategorySelector from "../CategorySelector";
-
+import FilePickerComponent from "../../../components/FilePickerComponent";
+import { Alert } from "react-native";
 function ProductAdd() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [imageUrl, setImageUrl] = useState(null);
-
   const [createProduct, { loading, error, data }] = useMutation(
     CREATE_PRODUCT_MUTATION
   );
-
-  const handleFileSelected = async (file) => {
-    try {
-      const uploadedImageUrl = await uploadFile(file); // Upload image
-      setImageUrl(uploadedImageUrl); // Set image URL
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
+  const handleFileSelected = (url) => {
+    setImageUrl(url);
+    console.log("Image URL received:", url);
   };
-
   const handleSubmit = async () => {
     if (!imageUrl) {
-      console.warn("Please upload an image first.");
+      Alert.alert("Warning", "Please upload an image first.");
       return;
     }
-
     try {
-      await createProduct({
+      const result = await createProduct({
         variables: {
           createProductInput: {
             title,
             description,
             price,
-            categories: selectedCategories, // Include selected categories
+            categories: selectedCategories,
             imageUrl,
           },
         },
       });
-      console.log("Product created successfully.");
+      console.log("Product created successfully", result);
     } catch (mutationError) {
       console.error("Error creating product:", mutationError);
     }
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.Header}>
@@ -68,7 +59,6 @@ function ProductAdd() {
           }}
         />
       </View>
-
       <View style={styles.Forms}>
         <TextInput
           style={styles.InputStyle}
@@ -90,13 +80,10 @@ function ProductAdd() {
           onChangeText={setPrice}
         />
 
-        {/* Include CategorySelector component */}
         <CategorySelector
-          // categories={categories}
           selectedCategories={selectedCategories}
           onChange={setSelectedCategories}
         />
-
         <FilePickerComponent onFileSelected={handleFileSelected} />
         <LightButton
           style={styles.ButtonsPic}
@@ -106,7 +93,6 @@ function ProductAdd() {
         >
           Create Product
         </LightButton>
-
         {loading && <Text>Loading...</Text>}
         {error && <Text>Error: {error.message}</Text>}
         {data && <Text>Product Created: {data.createProduct.title}</Text>}

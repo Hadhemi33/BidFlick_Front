@@ -37,8 +37,8 @@ export default function App() {
         <ApolloProvider client={client}>
           <Stack.Navigator>
             <Stack.Screen
-              name="ProfileEdit"
-              component={ProfileEdit}
+              name="ProductAdd"
+              component={ProductAdd}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -46,11 +46,28 @@ export default function App() {
               component={CategoriesScreen}
               options={{ headerShown: false }}
             />
+
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="Splash"
               component={Splash}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="SignUp"
+              component={SignUp}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ProfileEdit"
+              component={ProfileEdit}
+              options={{ headerShown: false }}
+            />
+
             <Stack.Screen
               name="AllUsers"
               component={AllUsers}
@@ -62,11 +79,7 @@ export default function App() {
               component={CategoryAdd}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="ProductAdd"
-              component={ProductAdd}
-              options={{ headerShown: false }}
-            />
+
             <Stack.Screen
               name="DetailsAuctionCard"
               component={DetailsAuctionCard}
@@ -84,16 +97,7 @@ export default function App() {
               component={SignIn}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="SignUp"
-              component={SignUp}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ headerShown: false }}
-            />
+
             <Stack.Screen
               name="ProductDetails"
               component={ProductDetails}

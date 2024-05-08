@@ -34,13 +34,13 @@ const AllUsers = () => {
     }, [refetch])
   );
   const changeUserRole = async (id, currentRole) => {
-    const newRole = currentRole === "user" ? "admin" : "user";
+    const newRole = currentRole === "user" ? "admin" : "user"; // Toggle between roles
 
     try {
       await updateUserRole({
         variables: { id, roles: newRole },
       });
-      refetch();
+      refetch(); // Refresh after role update
       Alert.alert("Success", `Role updated to "${newRole}".`);
     } catch (error) {
       console.error("Error updating role:", error);
@@ -54,7 +54,7 @@ const AllUsers = () => {
 
   const CardCat = ({ item }) => {
     const { id, fullName, roles } = item;
-    const isUser = roles === "user";
+    const isAdmin = roles === "user";
     return (
       <View style={styles.userItem}>
         <View style={styles.infos}>
@@ -98,7 +98,7 @@ const AllUsers = () => {
               </TText>
               <View style={styles.column}>
                 <TText T="11" F="light" C="black" style={styles.productCount}>
-                  {item.specialProducts.length}
+                  {item.products.length}
                 </TText>
                 <TouchableOpacity style={styles.delUser}>
                   <AntDesign name="arrowdown" size={14} color="grey" />
@@ -109,10 +109,10 @@ const AllUsers = () => {
         </View>
         <View style={styles.delAdd}>
           <TouchableOpacity
-            onPress={() => changeUserRole(id, roles)}
             style={styles.delUser}
+            onPress={() => changeUserRole(id, roles)}
           >
-            {isUser ? (
+            {isAdmin ? (
               <AntDesign name="adduser" size={22} color="green" />
             ) : (
               <AntDesign name="deleteuser" size={24} color="black" />

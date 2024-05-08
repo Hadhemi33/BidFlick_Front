@@ -15,10 +15,6 @@ import { useQuery, useMutation } from "@apollo/client";
 import { Categories_QUERY } from "../../../Graphql/querys";
 import { DELETE_CATEGORY_MUTATION } from "../../../Graphql/mutations";
 import styles from "./style";
-import ProductCard from "../../../components/Cards/ProductCard";
-import AuctionCard from "../../../components/Cards/AuctionCard";
-import FileUploadComponent from "../../../components/FileUploadComponent ";
-import FilePickerComponent from "../../../components/FilePickerComponent";
 
 const CategoriesScreen = () => {
   const [searchQuery, setSearchQuery] = useState(""); // State for the search query
@@ -142,9 +138,6 @@ const CategoriesScreen = () => {
           numColumns={2}
         />
       </View>
-      <FileUploadComponent />
-      <FilePickerComponent />
-
       <TouchableOpacity style={styles.addButton} onPress={handleAddButtonPress}>
         <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>

@@ -1,38 +1,47 @@
 import React, { useState } from "react";
-import { Button, Image, View, Alert, Platform } from "react-native";
+import { Button, Image, View, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import uploadImage from "./uploadImage";
-import * as FileSystem from "expo-file-system";
-// Import the upload function
-const uploadBlobToServer = async (blob) => {
-  const formData = new FormData();
-  formData.append("file", blob, "image.jpg"); // You can change the filename or use the actual filename
 
-  const response = await fetch("YOUR_SERVER_ENDPOINT", {
-    method: "POST",
-    body: formData,
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to upload image");
-  }
-
-  return response.json(); // or response.text() based on server response
-};
-
-
-const FilePickerComponent = () => {
+const FilePickerComponent = ({ onFileSelected }) => {
   const [image, setImage] = useState(null);
-  
-  const [uploading, setUploading] = useState(false);
 
- 
+  const uploadImageToCloudinary = async (photo) => {
+    const formData = new FormData();
+    formData.append("file", {
+      uri: photo.uri,
+      type: photo.type,
+      name: photo.name || "image.jpg",
+    });
+    formData.append("upload_preset", "_BidFlick");
+    formData.append("cloud_name", "dy5gov7fj");
+
+    try {
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dy5gov7fj/image/upload",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const responseData = await response.json();
+      if (responseData.url) {
+        onFileSelected(responseData.url); // Pass the URL back to the parent component
+      }
+
+      Alert.alert("Success", "Image uploaded successfully!");
+    } catch (error) {
+      console.error("Image upload failed:", error);
+      Alert.alert("Error", "Failed to upload image. Please try again.");
+    }
+  };
 
   const handleImagePick = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
@@ -40,18 +49,18 @@ const FilePickerComponent = () => {
     });
 
     if (!result.canceled) {
-      const imageUri = result.assets[0].uri;
-      setImage(imageUri);
+      const uri = result.assets[0].uri;
+      const type = "image/*";
+      const name = "image.jpg";
+      const source = { uri, type, name };
 
-      console.log("Image selected:", imageUri);
+      console.log("Selected image:", source);
+      setImage(uri);
 
       try {
-        const response = await uploadImage(imageUri); // Call the upload function
-        console.log("Image upload response:", response);
-        Alert.alert("Success", "Image uploaded successfully!");
+        await uploadImageToCloudinary(source);
       } catch (error) {
-        console.error("Image upload failed:", error);
-        Alert.alert("Error", "Failed to upload image. Please try again.");
+        console.error("Upload failed:", error);
       }
     }
   };
