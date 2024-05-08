@@ -17,10 +17,9 @@ const CategorySelector = ({ selectedCategories, onChange }) => {
   const { data, loading, error } = useQuery(Categories_QUERY);
 
   const handleCategoryChange = (categoryId) => {
-    const updatedSelected = selectedCategories.includes(categoryId)
-      ? selectedCategories.filter((id) => id !== categoryId)
-      : [...selectedCategories, categoryId];
-    onChange(updatedSelected);
+    const newSelectedCategory =
+      selectedCategories === categoryId ? null : categoryId;
+    onChange(newSelectedCategory);
   };
 
   if (loading) {
@@ -43,7 +42,7 @@ const CategorySelector = ({ selectedCategories, onChange }) => {
           style={{ flexDirection: "row", alignItems: "center" }}
         >
           <Checkbox
-            value={selectedCategories.includes(category.id)}
+            value={selectedCategories === category.id}
             onValueChange={() => handleCategoryChange(category.id)}
           />
           <Text>{category.name}</Text>

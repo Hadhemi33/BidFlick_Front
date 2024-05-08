@@ -16,6 +16,9 @@ import Input from "../../../components/Input";
 import text from "../../../components/TText";
 import { useMutation, gql, useQuery } from "@apollo/client";
 import TText from "../../../components/TText";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { useAuth } from "../../../../App";
 export const Users_QUERY = gql`
   query GetAllUsers {
     getAllUsers {
@@ -27,8 +30,8 @@ const SIGN_IN_MUTATION = gql`
   mutation Signin($loginUserInput: SigninUserInput!) {
     signin(loginUserInput: $loginUserInput) {
       username
-
       roles
+      access_token
     }
   }
 `;
@@ -36,29 +39,34 @@ const SIGN_IN_MUTATION = gql`
 const SignIn = ({ navigation }) => {
   const [isChecked, setChecked] = useState(false);
   const { data, loading, error } = useQuery(Users_QUERY);
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const handleFormSubmit = async () => {
     try {
       const { data } = await signin({
         variables: {
           loginUserInput: {
-            username: "bengh99@gmail.com",
-            password: "Hadhemi.hassib2008",
+            username,
+            password,
           },
         },
       });
       console.log("User created:", data.signin);
+      const token = data.signin.access_token;
+      await AsyncStorage.setItem("accessToken", token);
+      const retrievedToken = await AsyncStorage.getItem("accessToken");
+      console.log("Retrieved token:", retrievedToken);
+      // navigation.navigate("Home");
     } catch (error) {
       console.error("Error creating user:", error);
     }
   };
 
   const [signin, { loading: signinLoading, error: signinError }] = useMutation(
-    SIGN_IN_MUTATION
-    // {
-    //   refetchQueries: [{ query: Users_QUERY }],
-    // }
+    SIGN_IN_MUTATION,
+    {
+      refetchQueries: [{ query: Users_QUERY }],
+    }
   );
 
   if (loading || signinLoading) {
@@ -71,17 +79,16 @@ const SignIn = ({ navigation }) => {
     );
   }
 
-  // if (error || signinError) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={[styles.infoText, styles.errorText]}>
-  //         Error: {error ? error.message : signinError.message}
-  //       </Text>
-  //     </View>
-  //   );
-  // } else {
-  //   // console.log(JSON.stringify(data.getAllUsers[3]));
-  // }
+  if (error || signinError) {
+    return (
+      <View style={styles.container}>
+        <Text style={[styles.infoText, styles.errorText]}>
+          Error: {error ? error.message : signinError.message}
+        </Text>
+      </View>
+    );
+  } else {
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -109,7 +116,8 @@ const SignIn = ({ navigation }) => {
 
         <TextInput
           style={styles.InputStyle}
-          // value={username} onChangeText={setUsername}
+          value={username}
+          onChangeText={setUsername}
           placeholder="Enter your email address"
         />
 
@@ -119,8 +127,8 @@ const SignIn = ({ navigation }) => {
 
         <TextInput
           style={styles.InputStyle}
-          // value={password}
-          // onChangeText={setPassword}
+          value={password}
+          onChangeText={setPassword}
           placeholder="*********"
           secureTextEntry
           // style={styles.input}

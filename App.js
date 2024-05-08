@@ -1,10 +1,10 @@
-import * as React from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Splash from "./src/screens/common/Splash";
 import SignIn from "./src/screens/common/SignIn";
 import SignUp from "./src/screens/common/SignUp";
-import { ApolloProvider } from "@apollo/client";
+import { ApolloProvider, from } from "@apollo/client";
 import client from "./src/Graphql/apollo";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
@@ -18,6 +18,7 @@ import ProfileEdit from "./src/screens/Admin/ProfileEdit";
 import ProductAdd from "./src/screens/Client/ProductAdd";
 import CategoryAdd from "./src/screens/Client/CategoryAdd";
 import AllUsers from "./src/screens/Admin/AllUsers";
+import { getAccessToken, storeAccessToken } from "./src/Graphql/apollo";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -27,6 +28,7 @@ const theme = {
     background: "#ffffff",
   },
 };
+
 export default function App() {
   const [fontsLoaded] = useFonts(fontMap);
   if (!fontsLoaded) {
@@ -36,6 +38,12 @@ export default function App() {
       <NavigationContainer theme={theme}>
         <ApolloProvider client={client}>
           <Stack.Navigator>
+            <Stack.Screen
+              name="SignIn"
+              component={SignIn}
+              options={{ headerShown: false }}
+            />
+
             <Stack.Screen
               name="ProductAdd"
               component={ProductAdd}
@@ -92,12 +100,6 @@ export default function App() {
               component={AuctionDetails}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="SignIn"
-              component={SignIn}
-              options={{ headerShown: false }}
-            />
-
             <Stack.Screen
               name="ProductDetails"
               component={ProductDetails}

@@ -9,8 +9,8 @@ const FilePickerComponent = ({ onFileSelected }) => {
     const formData = new FormData();
     formData.append("file", {
       uri: photo.uri,
-      type: photo.type,
-      name: photo.name || "image.jpg",
+      type: "image/jpeg",
+      name: "image.jpg",
     });
     formData.append("upload_preset", "_BidFlick");
     formData.append("cloud_name", "dy5gov7fj");
@@ -29,11 +29,14 @@ const FilePickerComponent = ({ onFileSelected }) => {
       );
 
       const responseData = await response.json();
-      if (responseData.url) {
-        onFileSelected(responseData.url); // Pass the URL back to the parent component
+      if (responseData.secure_url) {
+        // Important: ensure you get the correct URL field
+        setImage(responseData.secure_url); // Save URL locally
+        onFileSelected(responseData.secure_url); // Pass the URL to the parent component
+        Alert.alert("Success", "Image uploaded successfully!");
+      } else {
+        throw new Error("URL not received");
       }
-
-      Alert.alert("Success", "Image uploaded successfully!");
     } catch (error) {
       console.error("Image upload failed:", error);
       Alert.alert("Error", "Failed to upload image. Please try again.");
@@ -50,12 +53,7 @@ const FilePickerComponent = ({ onFileSelected }) => {
 
     if (!result.canceled) {
       const uri = result.assets[0].uri;
-      const type = "image/*";
-      const name = "image.jpg";
-      const source = { uri, type, name };
-
-      console.log("Selected image:", source);
-      setImage(uri);
+      const source = { uri };
 
       try {
         await uploadImageToCloudinary(source);

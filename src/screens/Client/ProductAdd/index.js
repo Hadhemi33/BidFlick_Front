@@ -34,7 +34,7 @@ function ProductAdd() {
             title,
             description,
             price,
-            categories: selectedCategories,
+            categoryId: selectedCategories,
             imageUrl,
           },
         },
