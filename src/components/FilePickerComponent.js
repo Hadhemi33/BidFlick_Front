@@ -4,7 +4,6 @@ import * as ImagePicker from "expo-image-picker";
 
 const FilePickerComponent = ({ onFileSelected }) => {
   const [image, setImage] = useState(null);
-
   const uploadImageToCloudinary = async (photo) => {
     const formData = new FormData();
     formData.append("file", {

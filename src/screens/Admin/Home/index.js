@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, TextInput } from "react-native";
+import { SafeAreaView, Text, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
 import AuctionCard from "../../../components/Cards/AuctionCard";
@@ -7,7 +7,13 @@ import ProductCard from "../../../components/Cards/ProductCard";
 
 import { colors } from "../../../constants/colors";
 
+import { useUser } from "../../../Graphql/userContext";
+
+
 const Home = ({ navigation }) => {
+
+  const user = useUser();
+  
   const [searchQuery, setSearchQuery] = useState("");
   const handleSearchInput = (searchQuery) => {
     setSearchQuery(searchQuery || " ");
@@ -33,10 +39,11 @@ const Home = ({ navigation }) => {
         onPress={(card) =>
           navigation.navigate("AuctionDetails", { item: card })
         }
-        onPressMore={() => {
-          navigation.navigate("DetailsAuctionCard");
-        }}
+      
       ></AuctionCard>
+    
+      <Text>{user.roles}</Text>
+
       <ProductCard
         searchQuery={searchQuery}
         onPress={(item) =>

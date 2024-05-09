@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../../../constants/colors";
+import { fontMap } from "../../../constants/fonts";
 
 const styles = StyleSheet.create({
   container: {
@@ -50,21 +51,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 15,
     borderWidth: 1,
-
+    fontFamily: "light",
     borderColor: "#BCBBBB",
     padding: 13,
   },
-
-  checkbox: {
-    margin: 8,
-    borderColor: colors.lightGrey,
-    borderRadius: 20,
+  ScrollView: {
+    // borderColor: colors.lightGrey,
+    // backgroundColor: colors.sea,
+    height: 100,
+    marginBottom: 10,
   },
+
   Remember: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
+  },
+  checkbox: {
+    margin: 8,
+    borderColor: colors.lightGreen,
+    borderRadius: 20,
   },
   Biometric: {
     width: "40%",
@@ -73,7 +80,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     alignSelf: "center",
-    // marginBottom: 20,
   },
 });
 

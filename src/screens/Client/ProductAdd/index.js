@@ -9,6 +9,7 @@ import styles from "./style";
 import CategorySelector from "../CategorySelector";
 import FilePickerComponent from "../../../components/FilePickerComponent";
 import { Alert } from "react-native";
+import TText from "../../../components/TText";
 function ProductAdd() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -47,9 +48,9 @@ function ProductAdd() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.Header}>
-        <Text style={{ fontSize: 30, fontWeight: "600" }}>
-          Create a New Product
-        </Text>
+        <TText T="30" F="semiBold" C="black">
+          Create a new product
+        </TText>
         <View
           style={{
             borderBottomColor: "black",

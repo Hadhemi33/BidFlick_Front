@@ -18,6 +18,25 @@ export const USERS_QUERY = gql`
     }
   }
 `;
+export const AuthUser_QUERY = gql`
+  query GetAuthUser {
+    getAuthUser {
+      id
+      username
+      fullName
+      roles
+      likedProducts {
+        id
+      }
+      products {
+        id
+      }
+      specialProducts {
+        id
+      }
+    }
+  }
+`;
 export const Categories_QUERY = gql`
   query GetAllCategories {
     getAllCategories {

@@ -1,8 +1,10 @@
 import React from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator, ScrollView } from "react-native";
 import Checkbox from "expo-checkbox";
 import { gql, useQuery } from "@apollo/client";
 import { Categories_QUERY } from "../../Graphql/querys";
+import styles from "./ProductAdd/style";
+import { getDefaultValues } from "@apollo/client/utilities";
 
 // const Categories_QUERY = gql`
 //   query GetAllCategories {
@@ -35,20 +37,22 @@ const CategorySelector = ({ selectedCategories, onChange }) => {
   }
 
   return (
-    <View>
+    <ScrollView showsVerticalScrollIndicator={true} style={styles.ScrollView}>
       {data.getAllCategories.map((category) => (
         <View
           key={category.id}
           style={{ flexDirection: "row", alignItems: "center" }}
         >
           <Checkbox
+          
+            style={styles.checkbox}
             value={selectedCategories === category.id}
             onValueChange={() => handleCategoryChange(category.id)}
           />
           <Text>{category.name}</Text>
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 

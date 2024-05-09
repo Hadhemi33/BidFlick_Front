@@ -56,7 +56,7 @@ const SignIn = ({ navigation }) => {
       await AsyncStorage.setItem("accessToken", token);
       const retrievedToken = await AsyncStorage.getItem("accessToken");
       console.log("Retrieved token:", retrievedToken);
-      // navigation.navigate("Home");
+      navigation.navigate("Home");
     } catch (error) {
       console.error("Error creating user:", error);
     }

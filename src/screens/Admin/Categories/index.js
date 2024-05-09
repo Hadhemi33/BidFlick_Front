@@ -9,15 +9,15 @@ import {
   Alert,
 } from "react-native";
 import { AntDesign, Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { useFocusEffect } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
+
 import { useQuery, useMutation } from "@apollo/client";
 import { Categories_QUERY } from "../../../Graphql/querys";
 import { DELETE_CATEGORY_MUTATION } from "../../../Graphql/mutations";
 import styles from "./style";
 
 const CategoriesScreen = () => {
-  const [searchQuery, setSearchQuery] = useState(""); // State for the search query
+  const [searchQuery, setSearchQuery] = useState("");
   const { data, loading, error, refetch } = useQuery(Categories_QUERY, {
     pollInterval: 5000,
   });

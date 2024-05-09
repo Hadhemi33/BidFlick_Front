@@ -2,26 +2,24 @@ import { useAuth } from "./AuthContext";
 import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text } from "react-native";
+import { useUser } from "./Graphql/userContext";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
   const navigation = useNavigation();
-
+  const user = useUser();
+  const role = user.roles;
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigation.navigate("SignIn");
+    if (role==="admin") {
+     
     }
-  }, [isAuthenticated, navigation]);
+  }, []);
 
-  if (!isAuthenticated) {
-    return (
-      <View>
-        <Text>Redirecting to sign-in...</Text>
-      </View>
-    );
+  if (role==="user") {
+    
   }
 
-  return children;
+  return ;
 };
 
 export default ProtectedRoute;

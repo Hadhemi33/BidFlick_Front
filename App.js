@@ -18,9 +18,12 @@ import ProfileEdit from "./src/screens/Admin/ProfileEdit";
 import ProductAdd from "./src/screens/Client/ProductAdd";
 import CategoryAdd from "./src/screens/Client/CategoryAdd";
 import AllUsers from "./src/screens/Admin/AllUsers";
-import { getAccessToken, storeAccessToken } from "./src/Graphql/apollo";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import UserProvider from "./src/Graphql/userProvider";
+import { useUser } from "./src/Graphql/userContext";
 const Stack = createNativeStackNavigator();
+
 const theme = {
   ...DefaultTheme,
   colors: {
@@ -30,84 +33,101 @@ const theme = {
 };
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = await AsyncStorage.getItem("accessToken");
+      setIsLoggedIn(!!token);
+    };
+
+    checkToken();
+  }, []);
+  // const user = useUser(); // Get user information from context
+  // const isAdmin = user.roles.includes("admin"); 
   const [fontsLoaded] = useFonts(fontMap);
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
-      <NavigationContainer theme={theme}>
-        <ApolloProvider client={client}>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="SignIn"
-              component={SignIn}
-              options={{ headerShown: false }}
-            />
+      <ApolloProvider client={client}>
+        <UserProvider>
+          <NavigationContainer theme={theme}>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Splash"
+                component={Splash}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="SignIn"
+                component={SignIn}
+                options={{ headerShown: false }}
+              />
+              {isLoggedIn ? (
+                <>
+                  <Stack.Screen
+                    name="ProductAdd"
+                    component={ProductAdd}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="CategoriesScreen"
+                    component={CategoriesScreen}
+                    options={{ headerShown: false }}
+                  />
 
-            <Stack.Screen
-              name="ProductAdd"
-              component={ProductAdd}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="CategoriesScreen"
-              component={CategoriesScreen}
-              options={{ headerShown: false }}
-            />
+                  <Stack.Screen
+                    name="Home"
+                    component={Home}
+                    options={{ headerShown: false }}
+                  />
 
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Splash"
-              component={Splash}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SignUp"
-              component={SignUp}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ProfileEdit"
-              component={ProfileEdit}
-              options={{ headerShown: false }}
-            />
+                  <Stack.Screen
+                    name="SignUp"
+                    component={SignUp}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="ProfileEdit"
+                    component={ProfileEdit}
+                    options={{ headerShown: false }}
+                  />
 
-            <Stack.Screen
-              name="AllUsers"
-              component={AllUsers}
-              options={{ headerShown: false }}
-            />
+                  <Stack.Screen
+                    name="CategoryAdd"
+                    component={CategoryAdd}
+                    options={{ headerShown: false }}
+                  />
 
-            <Stack.Screen
-              name="CategoryAdd"
-              component={CategoryAdd}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="DetailsAuctionCard"
-              component={DetailsAuctionCard}
-              options={{
-                title: "Auctions Available",
-              }}
-            />
-            <Stack.Screen
-              name="AuctionDetails"
-              component={AuctionDetails}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ProductDetails"
-              component={ProductDetails}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        </ApolloProvider>
-      </NavigationContainer>
+                  <Stack.Screen
+                    name="DetailsAuctionCard"
+                    component={DetailsAuctionCard}
+                    options={{
+                      title: "Auctions Available",
+                    }}
+                  />
+                  <Stack.Screen
+                    name="AuctionDetails"
+                    component={AuctionDetails}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="ProductDetails"
+                    component={ProductDetails}
+                    options={{ headerShown: false }}
+                  />
+                </>
+              ) : (
+                <Stack.Screen
+                  name="AllUsers"
+                  component={AllUsers}
+                  options={{ headerShown: false }}
+                />
+              )}
+            </Stack.Navigator>
+          </NavigationContainer>
+        </UserProvider>
+      </ApolloProvider>
     );
   }
 }

@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
   },
   cardInfoContainer: {
     flexDirection: "column",
-
     alignContent: "center",
     alignItems: "center",
   },
