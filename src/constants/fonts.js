@@ -1,4 +1,4 @@
-// src/constants/fonts.js
+
 import {
   Fraunces_100Thin,
   Fraunces_200ExtraLight,

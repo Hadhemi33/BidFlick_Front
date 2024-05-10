@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     borderRadius: 20,
-    // alignSelf: "center",
   },
 });
 

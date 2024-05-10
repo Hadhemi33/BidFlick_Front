@@ -46,7 +46,7 @@ const AuctionCard = ({ searchQueryy, onPress }) => {
 
   const handleScroll = (event) => {
     const scrollX = event.nativeEvent.contentOffset.x;
-    const width = 367 + 20; // Ensure this width is accurate
+    const width = 367 + 20;  
     const currentIndex = Math.round(scrollX / width);
     setActiveIndex(currentIndex);
   };

@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    // backgroundColor: colors.sea,
     width: "50%",
     marginLeft: 60,
     alignSelf: "center",
@@ -27,9 +26,7 @@ const styles = StyleSheet.create({
   },
 
   statsCard: {
-    // marginHorizontal: 20,
     marginVertical: 10,
-    // padding: 20,
     borderRadius: 10,
   },
   card: {
@@ -39,10 +36,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 10,
     marginVertical: 5,
-    // alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
-    // padding: 10,
     borderRadius: 10,
     marginBottom: 10,
     width: 173,
@@ -54,7 +49,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     bottom: 0,
     right: -50,
-    // backgroundColor: "#000",
     width: "100%",
     display: "flex",
     flexDirection: "column",
@@ -81,14 +75,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
-    // alignSelf:'center',
     width: "20%",
   },
-  infos:{ flexDirection: "column",
-  width: "70%",
-  height: "100%",
+  infos: {
+    flexDirection: "column",
+    width: "70%",
+    height: "100%",
 
-  justifyContent: "space-between",},
+    justifyContent: "space-between",
+  },
   userItem: {
     marginTop: 20,
     flex: 1,
@@ -102,7 +97,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: "99%",
     height: 80,
-    // borderWidth: 0.3,
+   
     borderBottomWidth: 0.1,
     borderRightWidth: 0.3,
     borderLeftWidth: 0.3,
@@ -111,7 +106,6 @@ const styles = StyleSheet.create({
     padding: 8,
     display: "flex",
     flexDirection: "row",
-    // alignItems: "center",
     justifyContent: "center",
   },
 
@@ -138,15 +132,10 @@ const styles = StyleSheet.create({
     borderLeftColor: colors.lightGreen,
     padding: 8,
   },
-  productCount: {
-    // textAlign:'center',
-  },
+  productCount: {},
   statValue: {
     fontSize: 18,
     fontWeight: "bold",
-    //center
-
-    // marginBottom: 5,
   },
   statsCategory: {
     color: "#999",

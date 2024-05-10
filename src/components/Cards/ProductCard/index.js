@@ -50,13 +50,7 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
       </View>
     );
   }
-  // const toggleLike = (id) => {
-  //   setProducts((prevProducts) =>
-  //     prevProducts.map((product) =>
-  //       product.id === id ? { ...product, liked: !product.liked } : product
-  //     )
-  //   );
-  // };
+
   return (
     <View style={styles.container}>
       <FlatList

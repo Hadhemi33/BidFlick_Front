@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     alignSelf: "center",
-    // marginBottom: 20,
+    
   },
 });
 

@@ -6,14 +6,6 @@ import { Categories_QUERY } from "../../Graphql/querys";
 import styles from "./ProductAdd/style";
 import { getDefaultValues } from "@apollo/client/utilities";
 
-// const Categories_QUERY = gql`
-//   query GetAllCategories {
-//     getAllCategories {
-//       id
-//       name
-//     }
-//   }
-// `;
 
 const CategorySelector = ({ selectedCategories, onChange }) => {
   const { data, loading, error } = useQuery(Categories_QUERY);

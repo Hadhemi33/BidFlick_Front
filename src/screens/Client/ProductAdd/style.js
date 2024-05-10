@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../../../constants/colors";
-import { fontMap } from "../../../constants/fonts";
+
 
 const styles = StyleSheet.create({
   container: {
@@ -56,8 +56,7 @@ const styles = StyleSheet.create({
     padding: 13,
   },
   ScrollView: {
-    // borderColor: colors.lightGrey,
-    // backgroundColor: colors.sea,
+    
     height: 100,
     marginBottom: 10,
   },

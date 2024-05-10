@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-// import colors from "../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,12 +6,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 20,
     borderWidth: 1,
-    // borderColor: colors.lightGrey,
     borderColor: "#BCBBBB",
     padding: 10,
   },
   input: {
-    // color: "black",
     fontSize: 14,
     flex: 1,
   },

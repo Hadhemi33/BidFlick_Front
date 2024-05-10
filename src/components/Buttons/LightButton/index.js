@@ -1,4 +1,4 @@
-// Button.js
+
 import React from "react";
 import { Text, SafeAreaView, TouchableOpacity } from "react-native";
 import styles from "./style";
@@ -13,9 +13,9 @@ function LightButton({ children, T, F, onPress, W, I, style }) {
         style={[styles.linearGradient, { width: parseInt(W) || 342 }, style]}
       >
         {I && <Image style={styles.img} source={I} />}
-        {/* <View style={styles.innerContainer}> */}
+       
         <Text style={{ fontSize: parseInt(T), fontFamily: F }}>{children}</Text>
-        {/* </View> */}
+        
       </LinearGradient>
     </TouchableOpacity>
   );

@@ -22,7 +22,7 @@ import styles from "./style";
 import TText from "../../../components/TText";
 
 const AllUsers = () => {
-  const [searchQuery, setSearchQuery] = useState(""); // State for the search query
+  const [searchQuery, setSearchQuery] = useState("");  
   const { data, loading, error, refetch } = useQuery(USERS_QUERY, {
     pollInterval: 5000,
   });
@@ -41,7 +41,7 @@ const AllUsers = () => {
   );
   const changeUserRole = async (id, currentRole) => {
     console.log("id", id, "role", currentRole);
-    const newRole = currentRole === "user" ? "admin" : "user"; // Toggle between roles
+    const newRole = currentRole === "user" ? "admin" : "user";  
 
     try {
       const data = await updateUserRole({
@@ -51,7 +51,7 @@ const AllUsers = () => {
           id,
         },
       });
-      refetch(); // Refresh after role update
+      refetch(); 
       Alert.alert("Success", `Role updated to "${newRole}".`);
     } catch (error) {
       console.error("Error updating role:", error);
@@ -67,7 +67,7 @@ const AllUsers = () => {
           id,
         },
       });
-      refetch(); // Refresh after role update
+      refetch(); 
       Alert.alert("Success", `User Deleted.`);
     } catch (error) {
       console.error("Error deleting user:", error);

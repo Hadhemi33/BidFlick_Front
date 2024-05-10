@@ -131,7 +131,7 @@ const SignIn = ({ navigation }) => {
           onChangeText={setPassword}
           placeholder="*********"
           secureTextEntry
-          // style={styles.input}
+        
         />
         <View style={styles.ForgotPass}>
           <View style={styles.Remember}>

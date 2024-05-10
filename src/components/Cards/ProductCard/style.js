@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 
     maxWidth: "98%",
     padding: 4,
-    objectFit: "scale-down", //as2el amine
+    objectFit: "scale-down",
     borderRadius: 10,
   },
   Infos: {

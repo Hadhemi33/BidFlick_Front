@@ -12,9 +12,12 @@ import LightButton from "../../../components/Buttons/LightButton";
 import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
 import { Categories_QUERY } from "../../../Graphql/querys";
+import { useUser } from "../../../Graphql/userContext";
 function CategoryAdd() {
+  const user = useUser();
+
   const [name, setName] = useState("");
-  const [id, setId] = useState("");
+
   const [validationError, setValidationError] = useState("");
   const navigation = useNavigation();
 
@@ -30,7 +33,7 @@ function CategoryAdd() {
       setValidationError("Name is required.");
       return;
     }
-
+    const id = user.id;
     setValidationError("");
 
     try {
@@ -45,7 +48,7 @@ function CategoryAdd() {
 
       console.log("Category created successfully.");
       setName("");
-      setId("");
+     
 
       navigation.navigate("CategoriesScreen", {
         refetchQueries: [{ query: Categories_QUERY }],
@@ -57,7 +60,7 @@ function CategoryAdd() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header Section */}
+     
       <View style={styles.Header}>
         <Text style={{ fontSize: 30, fontWeight: "600" }}>
           Create a New Category
@@ -72,20 +75,13 @@ function CategoryAdd() {
         />
       </View>
 
-      {/* Form Section */}
+ 
       <View style={styles.Forms}>
         <TextInput
           style={styles.InputStyle}
           placeholder="Name"
           value={name}
           onChangeText={setName}
-        />
-
-        <TextInput
-          style={styles.InputStyle}
-          placeholder="ID"
-          value={id}
-          onChangeText={setId}
         />
 
         {validationError && (

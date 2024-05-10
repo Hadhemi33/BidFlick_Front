@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 20,
     borderWidth: 1,
-    // borderColor: colors.lightGrey,
+  
     borderColor: "#BCBBBB",
     padding: 10,
   },
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     alignSelf: "center",
-    // marginBottom: 20,
+  
   },
 });
 

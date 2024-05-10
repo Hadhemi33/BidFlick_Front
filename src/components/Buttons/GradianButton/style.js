@@ -3,20 +3,18 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   linearGradient: {
     height: 48,
-    // width: 342,
+    
     alignSelf: "center",
     justifyContent: "center",
-    // marginBottom: 10,
+  
 
-    // alignItems: "center",
-
-    borderRadius: 40, // <-- Outer Border Radius
+    borderRadius: 40,
   },
   innerContainer: {
     flexDirection: "row",
-    borderRadius: 40, // <-- Inner Border Radius
+    borderRadius: 40, 
     flex: 1,
-    margin: 3, // <-- Border Width
+    margin: 3, 
     backgroundColor: "#fff",
     justifyContent: "center",
     alignContent: "center",

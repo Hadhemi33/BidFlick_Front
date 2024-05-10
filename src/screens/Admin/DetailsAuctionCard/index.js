@@ -16,7 +16,7 @@ import { SpecialProducts_QUERY } from "../../../Graphql/querys";
 import { useQuery } from "@apollo/client";
 
 const DetailsAuctionCard = ({ onPress }) => {
-  const navigation = useNavigation(); // Accessing navigation
+  const navigation = useNavigation();  
   const { data, loading, error } = useQuery(SpecialProducts_QUERY, {
     pollInterval: 30000,
   });
@@ -46,7 +46,7 @@ const DetailsAuctionCard = ({ onPress }) => {
   return (
     <View style={styles.container}>
       <ScrollView
-        // contentContainerStyle={styles.carouselContainer}
+      
         onScroll={handleScroll}
         scrollEventThrottle={16}
       >

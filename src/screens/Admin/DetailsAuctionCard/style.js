@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../../../constants/colors";
-// import colors from "../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +15,7 @@ const styles = StyleSheet.create({
   Infos: {
     height: "25%",
     width: "101%",
-    // flexDirection: "column",
+
     alignItems: "center",
     alignSelf: "flex-end",
     alignContent: "flex-end",
@@ -44,21 +43,16 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginBottom: 30,
-    // alignContent: "flex-end",
-    // alignItems: "flex-end",
+
     borderWidth: 1,
     borderColor: colors.greyGreen,
   },
   backgroundImage: {
     opacity: 0.8,
     alignSelf: "center",
-    // flex: 1,
     resizeMode: "cover",
 
-    // width: 362,
-    // width: "100%",
-    // resizeMode: "contain",
-    // height: 173,
+
     borderRadius: 10,
   },
   PriceContainer: {
@@ -73,8 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "flex-end",
-    // marginRight: 10,
-    // backgroundColor: colors.sea,
+  
   },
 
   cardInfoValue: {

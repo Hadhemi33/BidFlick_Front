@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../../../constants/colors";
-// import colors from "../../constants/colors";
+
 
 const styles = StyleSheet.create({
   container: {
@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   indicator: {
-    width: 35, // Width of each line
-    height: 2, // Height of each line
+    width: 35, 
+    height: 2, 
     backgroundColor: "gray",
-    margin: 5, // Spacing between lines
+    margin: 5, 
   },
   cardMore: {
     marginHorizontal: 10,

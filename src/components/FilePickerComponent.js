@@ -30,9 +30,9 @@ const FilePickerComponent = ({ onFileSelected, I, style }) => {
 
       const responseData = await response.json();
       if (responseData.secure_url) {
-        // Important: ensure you get the correct URL field
-        setImage(responseData.secure_url); // Save URL locally
-        onFileSelected(responseData.secure_url); // Pass the URL to the parent component
+     
+        setImage(responseData.secure_url); 
+        onFileSelected(responseData.secure_url); 
         Alert.alert("Success", "Image uploaded successfully!");
       } else {
         throw new Error("URL not received");
@@ -67,15 +67,7 @@ const FilePickerComponent = ({ onFileSelected, I, style }) => {
     <View>
       <TouchableOpacity style={styles.cont} onPress={handleImagePick}>
         {I && <Image style={styles.image} source={I} />}
-        {/* <Image
-          source={require("../../assets/upload.png")}
-          style={styles.backgroundImage}
-        /> */}
       </TouchableOpacity>
-      {/* <Button title="Pick an image from gallery" onPress={handleImagePick} /> */}
-      {/* {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )} */}
     </View>
   );
 };
@@ -83,9 +75,9 @@ const FilePickerComponent = ({ onFileSelected, I, style }) => {
 export default FilePickerComponent;
 const styles = {
   image: {
-    width: 40, // Customize as needed
-    height: 40, // Customize as needed
-    borderRadius: 10, // Example of additional styling
+    width: 40, 
+    height: 40,
+    borderRadius: 10, 
     marginLeft: 70,
     top: 10,
     alignSelf: "flex-end",

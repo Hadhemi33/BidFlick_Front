@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../../../constants/colors";
-// import colors from "../../constants/colors";
+
 
 const styles = StyleSheet.create({
   conttainer: {
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     padding: 20,
     flexDirection: "column",
     alignSelf: "center",
-    // marginLeft: 5,
+   
     borderWidth: 2,
     borderColor: colors.blueBorder,
     borderRadius: 50,

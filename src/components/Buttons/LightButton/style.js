@@ -6,15 +6,15 @@ const styles = StyleSheet.create({
 
     alignSelf: "center",
     justifyContent: "center",
-    // alignContent: "center",
+   
     alignItems: "center",
     marginBottom: 20,
-    borderRadius: 40, // <-- Outer Border Radius
+    borderRadius: 40, 
   },
   innerContainer: {
-    borderRadius: 15, // <-- Inner Border Radius
+    borderRadius: 15, 
     flex: 1,
-    margin: 5, // <-- Border Width
+    margin: 5,  
     backgroundColor: "#fff",
 
     justifyContent: "center",

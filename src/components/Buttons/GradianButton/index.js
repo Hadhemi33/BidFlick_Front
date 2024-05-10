@@ -1,4 +1,4 @@
-// Button.js
+
 import React from "react";
 import { Text, View, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
@@ -21,7 +21,6 @@ function GradianButton({ children, T, F, I, C, W, onPress, style }) {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={[styles.linearGradient, { width: parseInt(W) || 342 }]}
-        // style={[styles.linearGradient, style]}
       >
         <View style={styles.innerContainer}>
           {I && <Image style={styles.img} source={I} />}

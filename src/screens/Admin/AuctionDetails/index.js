@@ -36,10 +36,10 @@ const AuctionDetails = ({ route }) => {
       Alert.alert("Error", `An error occurred while deleting auction.`);
     }
   };
-  const { item } = route.params; // Getting the passed data
-  const navigation = useNavigation(); // Accessing navigation
+  const { item } = route.params; 
+  const navigation = useNavigation(); 
   return (
-    // <SafeAreaView style={styles.container}>
+   
 
     <ImageBackground
       key={item.id}
@@ -68,7 +68,7 @@ const AuctionDetails = ({ route }) => {
           </TouchableOpacity>
         </View>
       </View>
-      {/* <Image source={{ uri: item.ProductImage }} style={styles.img} /> */}
+
       <View style={styles.cont3}>
         <View style={styles.Infos}>
           <View style={styles.InfosTime}>
@@ -101,18 +101,11 @@ const AuctionDetails = ({ route }) => {
               Delete
             </TText>
           </TouchableOpacity>
-          {/* <GradianButton
-            onPress={() => navigation.navigate("Home")}
-            T="18"
-            F="semiBold"
-            C="green"
-          >
-            Delete
-          </GradianButton> */}
+         
         </View>
       </View>
     </ImageBackground>
-    // </SafeAreaView>
+   
   );
 };
 

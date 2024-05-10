@@ -52,20 +52,20 @@ const Home = () => {
           )}
         </TouchableOpacity>
       </LinearGradient>
-
+      <Text
+        onPress={() => {
+          navigation.navigate("CategoriesScreen");
+        }}
+      >
+        Categories
+      </Text>
       <AuctionCard
         searchQueryy={searchQueryy}
         onPress={(card) =>
           navigation.navigate("AuctionDetails", { item: card })
         }
       ></AuctionCard>
-      <Text
-        onPress={() => {
-          navigation.navigate("ProductAdd");
-        }}
-      >
-        {user.fullName}
-      </Text>
+
       <ProductCard
         searchQuery={searchQuery}
         onPress={(item) =>

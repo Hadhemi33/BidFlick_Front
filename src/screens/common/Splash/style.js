@@ -1,6 +1,4 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../../constants/colors";
-import { Header } from "react-native-elements";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,7 +7,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     width: "100%",
-    // justifyContent: "space-between",
+   
   },
   Header: {
     paddingHorizontal: 24,
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
     height: "20%",
   },
   LogoImg: {
-    // backgroundColor: colors.sea,
+   
 
     width: 292,
     height: 182,

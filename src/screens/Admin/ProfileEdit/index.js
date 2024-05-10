@@ -113,7 +113,9 @@ const ProfileEdit = ({ navigation }) => {
         </TouchableOpacity>
       </LinearGradient>
       <ImageBackground
-        source={{ uri: imageUrl || "fallback_image_url" }} // Ensure `imageUrl` is correct
+        source={{
+          uri: user.imageUrl,
+        }}
         style={styles.imageContainer}
         imageStyle={styles.backgroundImage}
       >

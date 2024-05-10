@@ -1,4 +1,3 @@
-// Button.js
 import React from "react";
 import { Text, SafeAreaView, View, TouchableOpacity } from "react-native";
 

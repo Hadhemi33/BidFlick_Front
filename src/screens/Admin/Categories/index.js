@@ -56,7 +56,7 @@ const CategoriesScreen = () => {
               await deleteCategory({
                 variables: { name },
               });
-              refetch(); // Rafraîchissement de la liste des catégories
+              refetch(); 
               Alert.alert("Success", `Category "${name}" deleted.`);
             } catch (error) {
               console.error("Error deleting category:", error);

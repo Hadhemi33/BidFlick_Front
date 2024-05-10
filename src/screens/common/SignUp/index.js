@@ -38,23 +38,7 @@ const SignUp = ({ navigation }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [Confirmpassword, setConfirmPassword] = useState("");
-  // const handleFormSubmit = async () => {
-  //   try {
-  //     const { data } = await signup({
-  //       variables: {
-  //         signupUserInput: {
-  //           fullName,
-  //           username,
-  //           password,
-  //           phoneNumber,
-  //         },
-  //       },
-  //     });
-  //     console.log("User created:", data.signup);
-  //   } catch (error) {
-  //     console.error("Error creating user:", error);
-  //   }
-  // };
+
   const handleFormSubmit = async () => {
     if (password !== Confirmpassword) {
       Alert.alert("Error", "Passwords do not match");
@@ -103,7 +87,7 @@ const SignUp = ({ navigation }) => {
       </View>
     );
   } else {
-    // console.log(JSON.stringify(data.getAllUsers[3]));
+   
   }
   return (
     <SafeAreaView style={styles.container}>

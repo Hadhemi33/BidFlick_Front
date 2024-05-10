@@ -16,9 +16,7 @@ const styles = StyleSheet.create({
   },
 
   statsCard: {
-    // marginHorizontal: 20,
     marginVertical: 10,
-    // padding: 20,
     borderRadius: 10,
   },
   card: {
@@ -28,10 +26,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 10,
     marginVertical: 5,
-    // alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
-    // padding: 10,
     borderRadius: 10,
     marginBottom: 10,
     width: 173,
@@ -43,7 +39,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     bottom: 0,
     right: -50,
-    // backgroundColor: "#000",
     width: "100%",
     display: "flex",
     flexDirection: "column",
@@ -99,7 +94,6 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 18,
     fontWeight: "bold",
-    //center
 
     marginBottom: 5,
   },

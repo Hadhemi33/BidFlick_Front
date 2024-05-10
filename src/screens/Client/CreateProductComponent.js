@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { View, Text, TextInput, Button } from "react-native";
-import { CREATE_PRODUCT_MUTATION } from "../../Graphql/mutations"; // Your mutation query
+import { CREATE_PRODUCT_MUTATION } from "../../Graphql/mutations"; 
 import FilePickerComponent from "../../components/FilePickerComponent";
 
 const CreateProduct = () => {
