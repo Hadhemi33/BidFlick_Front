@@ -43,11 +43,22 @@ export const UPLOAD_FILE_MUTATION = gql`
   }
 `;
 export const CHANGE_ROLE_MUTATION = gql`
-  mutation UpdateUserRole($updateUserInput: UpdateUserInput) {
-    updateUserRole(updateUserInput: $updateUserInput) {
+  mutation UpdateUserRole($updateUserInput: UpdateUserInput!, $id: String!) {
+    updateUserRole(updateUserInput: $updateUserInput, id: $id) {
+      id
+      imageUrl
       username
       fullName
       roles
+      likedProducts {
+        id
+      }
+      products {
+        id
+      }
+      specialProducts {
+        id
+      }
     }
   }
 `;
@@ -60,5 +71,10 @@ export const UPDATE_USER_MUTATION = gql`
       fullName
       phoneNumber
     }
+  }
+`;
+export const DELETE_ORDER_MUTATION = gql`
+  mutation DeleteOrder($id: String!) {
+    deleteOrder(id: $id)
   }
 `;

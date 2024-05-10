@@ -21,6 +21,7 @@ import AllUsers from "./src/screens/Admin/AllUsers";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserProvider from "./src/Graphql/userProvider";
+import Orders from "./src/screens/Admin/Orders";
 const Stack = createNativeStackNavigator();
 
 const theme = {
@@ -96,6 +97,11 @@ export default function App() {
                     component={CategoryAdd}
                     options={{ headerShown: false }}
                   />
+                  <Stack.Screen
+                    name="Orders"
+                    component={Orders}
+                    options={{ headerShown: false }}
+                  />
 
                   <Stack.Screen
                     name="DetailsAuctionCard"
@@ -110,15 +116,15 @@ export default function App() {
                     options={{ headerShown: false }}
                   />
                   <Stack.Screen
-                    name="ProductDetails"
-                    component={ProductDetails}
+                    name="AllUsers"
+                    component={AllUsers}
                     options={{ headerShown: false }}
                   />
                 </>
               ) : (
                 <Stack.Screen
-                  name="AllUsers"
-                  component={AllUsers}
+                  name="ProductDetails"
+                  component={ProductDetails}
                   options={{ headerShown: false }}
                 />
               )}

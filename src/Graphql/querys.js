@@ -24,7 +24,7 @@ export const AuthUser_QUERY = gql`
     getAuthUser {
       id
       imageUrl
-     
+
       phoneNumber
       username
       fullName
@@ -101,6 +101,30 @@ export const SpecialProducts_QUERY = gql`
         id
       }
       imageUrl
+    }
+  }
+`;
+export const ORDERS_QUERY = gql`
+  query GetAllOrders {
+    getAllOrders {
+      id
+      user {
+        id
+        fullName
+      }
+      products {
+        id
+        title
+      }
+    }
+  }
+`;
+export const HISTORY_QUERY = gql`
+  query getAllOrderHistory {
+    getAllOrderHistory {
+      id
+      totalPrice
+      paidAt
     }
   }
 `;

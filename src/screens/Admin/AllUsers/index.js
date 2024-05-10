@@ -34,11 +34,16 @@ const AllUsers = () => {
     }, [refetch])
   );
   const changeUserRole = async (id, currentRole) => {
+    console.log("id", id, "role", currentRole);
     const newRole = currentRole === "user" ? "admin" : "user"; // Toggle between roles
 
     try {
-      await updateUserRole({
-        variables: { id, roles: newRole },
+      const data = await updateUserRole({
+        variables: {
+          updateUserInput: { roles: newRole },
+
+          id,
+        },
       });
       refetch(); // Refresh after role update
       Alert.alert("Success", `Role updated to "${newRole}".`);

@@ -49,9 +49,9 @@ const Home = () => {
         }
       ></AuctionCard>
       <Text
-      // onPress={() => {
-      //   navigation.navigate("ProfileEdit");
-      // }}
+        onPress={() => {
+          navigation.navigate("Orders");
+        }}
       >
         {user.fullName}
       </Text>
