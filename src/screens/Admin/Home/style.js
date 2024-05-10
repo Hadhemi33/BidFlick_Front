@@ -11,22 +11,33 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   Header: {
+    display: "flex",
+    flexDirection: "row",
     marginTop: 0,
     height: "19%",
-    justifyContent: "center",
     alignContent: "center",
+    alignItems: "center",
     padding: 20,
-    display: "flex",
-    flexDirection: "column",
+    justifyContent: "space-between",
+
     backgroundColor: colors.blueLight,
   },
   SearchInput: {
     borderRadius: 20,
     borderWidth: 1,
     top: 13,
-
+    width: "80%",
+    height: "40%",
     borderColor: colors.rotana,
     padding: 10,
+  },
+  ProfileImage: {
+    top: 13,
+    backgroundColor: colors.sea,
+    width: 35,
+    height: 35,
+    borderRadius: 20,
+    // alignSelf: "center",
   },
 });
 

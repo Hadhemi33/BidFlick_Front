@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Image,
@@ -18,6 +18,9 @@ import TText from "../../../components/TText";
 import { colors } from "../../../constants/colors";
 import GradianButton from "../../../components/Buttons/GradianButton";
 import LightButton from "../../../components/Buttons/LightButton";
+import { useUser } from "../../../Graphql/userContext";
+import { UPDATE_USER_MUTATION } from "../../../Graphql/mutations";
+import { USERS_QUERY } from "../../../Graphql/querys";
 export const Users_QUERY = gql`
   query GetAllUsers {
     getAllUsers {
@@ -25,71 +28,55 @@ export const Users_QUERY = gql`
     }
   }
 `;
-const SIGN_UP_MUTATION = gql`
-  mutation Signup($signupUserInput: SignupUserInput!) {
-    signup(signupUserInput: $signupUserInput) {
-      id
-      username
-      fullName
-      phoneNumber
-    }
-  }
-`;
 const ProfileEdit = ({ navigation }) => {
+  const user = useUser();
+  // const img = user.imageUrl;
+  console.log("Sg with:", { fullName, username, phoneNumber });
+
   const { data, loading, error } = useQuery(Users_QUERY);
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [Confirmpassword, setConfirmPassword] = useState("");
-  // const handleFormSubmit = async () => {
-  //   try {
-  //     const { data } = await signup({
-  //       variables: {
-  //         signupUserInput: {
-  //           fullName,
-  //           username,
-  //           password,
-  //           phoneNumber,
-  //         },
-  //       },
-  //     });
-  //     console.log("User created:", data.signup);
-  //   } catch (error) {
-  //     console.error("Error creating user:", error);
-  //   }
-  // };
+  useEffect(() => {
+    if (user) {
+      setFullName(user.fullName || "");
+      setUsername(user.username || "");
+      setPhoneNumber(user.phoneNumber || "");
+    }
+  }, [user]); // Re-run if `user` changes
   const handleFormSubmit = async () => {
+    console.log("Submitting with:", { fullName, username, phoneNumber });
+
     if (password !== Confirmpassword) {
       Alert.alert("Error", "Passwords do not match");
       return;
     }
 
     try {
-      const { data } = await signup({
+      const { data } = await updateUser({
         variables: {
-          signupUserInput: {
-            fullName,
-            username,
-            password,
+          updateUserInput: {
             phoneNumber,
           },
         },
       });
-      console.log("User created:", data.signup);
-      Alert.alert("Success", "Account created successfully");
+      console.log("User updated:", data.updateUser);
+      Alert.alert("Success", "Profile updated successfully");
     } catch (error) {
-      console.error("Error creating user:", error);
-      Alert.alert("Error", "Could not create account");
+      console.error("Error updating user:", error);
+      Alert.alert("Error", "Could not update account");
     }
   };
-  const [signup, { loading: signupLoading, error: signupError }] = useMutation(
-    SIGN_UP_MUTATION,
-    {
-      refetchQueries: [{ query: Users_QUERY }],
-    }
-  );
-  if (loading || signupLoading) {
+  const [updateUser, { loading: updateLoading, error: updateError }] =
+    useMutation(
+      UPDATE_USER_MUTATION
+      //   , {
+      //   refetchQueries: [{ query: Users_QUERY }],
+      // }
+    );
+  if (loading || updateLoading) {
     console.log(JSON.stringify(data));
 
     return (
@@ -98,17 +85,17 @@ const ProfileEdit = ({ navigation }) => {
       </View>
     );
   }
-  // if (error || signupError) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={[styles.infoText, styles.errorText]}>
-  //         Error: {error ? error.message : signupError.message}
-  //       </Text>
-  //     </View>
-  //   );
-  // } else {
-  //   // console.log(JSON.stringify(data.getAllUsers[3]));
-  // }
+  if (error || updateError) {
+    return (
+      <View style={styles.container}>
+        <Text style={[styles.infoText, styles.errorText]}>
+          Error: {error ? error.message : updateError.message}
+        </Text>
+      </View>
+    );
+  } else {
+    console.log(JSON.stringify(data.updateUser));
+  }
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
@@ -124,7 +111,8 @@ const ProfileEdit = ({ navigation }) => {
 
       <ImageBackground
         // key={card.id}
-        source={require("../../../../assets/people19.png")}
+        source={{ uri: user.imageUrl }}
+        // source={require("../../../../assets/people19.png")}
         style={styles.imageContainer}
         imageStyle={styles.backgroundImage}
       >
@@ -139,36 +127,37 @@ const ProfileEdit = ({ navigation }) => {
         </TText>
         <TextInput
           style={styles.InputStyle}
-          // value={fullName}
-          // onChangeText={setFullName}
-          placeholder="Full Name"
+          value={fullName}
+          onChangeText={setFullName}
+          placeholder={user.fullName}
         />
         <TText T="16" F="light" C="black">
           Email
         </TText>
         <TextInput
           style={styles.InputStyle}
-          // value={username}
-          // onChangeText={setUsername}
-          placeholder="Email"
+          value={username}
+          onChangeText={setUsername}
+          placeholder={user.username}
         />
         <TText T="16" F="light" C="black">
           Phone number
         </TText>
         <TextInput
           style={styles.InputStyle}
-          // value={phoneNumber}
-          // onChangeText={setPhoneNumber}
-          placeholder="Phone number"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+          placeholder={user.phoneNumber}
         />
         <TText T="16" F="light" C="black">
           Password
         </TText>
         <TextInput
           style={styles.InputStyle}
-          // value={password}
-          // onChangeText={setPassword}
+          value={password}
+          onChangeText={setPassword}
           placeholder="*******"
+          secureTextEntry
         />
         <TText T="16" F="light" C="black">
           Confirm Password
@@ -176,8 +165,8 @@ const ProfileEdit = ({ navigation }) => {
 
         <TextInput
           style={styles.InputStyle}
-          // value={Confirmpassword}
-          // onChangeText={setConfirmPassword}
+          value={Confirmpassword}
+          onChangeText={setConfirmPassword}
           placeholder="*******"
           secureTextEntry
         />
@@ -193,7 +182,7 @@ const ProfileEdit = ({ navigation }) => {
         >
           Add Admin
         </GradianButton>
-        <LightButton T="18" F="semiBold" W="180">
+        <LightButton T="18" F="semiBold" W="180" onPress={handleFormSubmit}>
           Update
         </LightButton>
       </View>

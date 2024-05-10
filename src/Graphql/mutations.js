@@ -51,3 +51,14 @@ export const CHANGE_ROLE_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_USER_MUTATION = gql`
+  mutation UpdateUser($updateUserInput: UpdateUserInput!) {
+    updateUser(updateUserInput: $updateUserInput) {
+      id
+      username
+      fullName
+      phoneNumber
+    }
+  }
+`;

@@ -21,7 +21,6 @@ import AllUsers from "./src/screens/Admin/AllUsers";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserProvider from "./src/Graphql/userProvider";
-import { useUser } from "./src/Graphql/userContext";
 const Stack = createNativeStackNavigator();
 
 const theme = {
@@ -42,8 +41,7 @@ export default function App() {
 
     checkToken();
   }, []);
-  // const user = useUser(); // Get user information from context
-  // const isAdmin = user.roles.includes("admin"); 
+
   const [fontsLoaded] = useFonts(fontMap);
   if (!fontsLoaded) {
     return <AppLoading />;

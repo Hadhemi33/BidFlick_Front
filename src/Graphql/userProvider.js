@@ -6,7 +6,9 @@ import { AuthUser_QUERY } from "./querys";
 import UserContext from "./userContext";
 
 const UserProvider = ({ children }) => {
-  const { data, loading, error } = useQuery(AuthUser_QUERY);
+  const { data, loading, error } = useQuery(AuthUser_QUERY, {
+    pollInterval: 1000,
+  });
 
   if (loading) {
     return <Text>Loading user data...</Text>;
@@ -18,9 +20,7 @@ const UserProvider = ({ children }) => {
 
   const user = data.getAuthUser;
 
-  return (
-    <UserContext.Provider value={user}>{children}</UserContext.Provider>
-  );
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 
 export default UserProvider;

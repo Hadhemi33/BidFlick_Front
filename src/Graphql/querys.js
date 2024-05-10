@@ -3,6 +3,7 @@ export const USERS_QUERY = gql`
   query GetAllUsers {
     getAllUsers {
       id
+      imageUrl
       username
       fullName
       roles
@@ -22,6 +23,9 @@ export const AuthUser_QUERY = gql`
   query GetAuthUser {
     getAuthUser {
       id
+      imageUrl
+     
+      phoneNumber
       username
       fullName
       roles
