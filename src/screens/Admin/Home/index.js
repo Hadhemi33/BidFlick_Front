@@ -39,9 +39,20 @@ const Home = () => {
           onChangeText={handleSearchInput}
         />
         <TouchableOpacity onPress={() => navigation.navigate("ProfileEdit")}>
-          <Image style={styles.ProfileImage} source={{ uri: user.imageUrl }} />
+          {user.imageUrl ? (
+            <Image
+              style={styles.ProfileImage}
+              source={{ uri: user.imageUrl }}
+            />
+          ) : (
+            <Image
+              style={styles.ProfileImage}
+              source={require("../../../../assets/people19.png")}
+            />
+          )}
         </TouchableOpacity>
       </LinearGradient>
+
       <AuctionCard
         searchQueryy={searchQueryy}
         onPress={(card) =>
@@ -50,7 +61,7 @@ const Home = () => {
       ></AuctionCard>
       <Text
         onPress={() => {
-          navigation.navigate("Orders");
+          navigation.navigate("ProductAdd");
         }}
       >
         {user.fullName}

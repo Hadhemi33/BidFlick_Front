@@ -78,3 +78,16 @@ export const DELETE_ORDER_MUTATION = gql`
     deleteOrder(id: $id)
   }
 `;
+export const DELETE_Auction_MUTATION_ADMIN = gql`
+  mutation DeleteSpeciaProductAdmin($id: String!) {
+    deleteSpeciaProductAdmin(id: $id) {
+      title
+    }
+  }
+`;
+
+export const DELETE_USER_MUTATION = gql`
+  mutation DeleteUser($id: String!) {
+    deleteUser(id: $id)
+  }
+`;

@@ -61,8 +61,10 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   cam: {
+
     display: "flex",
     flex: 1,
+    
     alignSelf: "flex-end",
     justifyContent: "flex-end",
     shadowColor: "#000",
@@ -74,7 +76,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     marginRight: 20,
+   
   },
+  photos:{
+
+  }
+  ,
   Botns: {
     top: -40,
 

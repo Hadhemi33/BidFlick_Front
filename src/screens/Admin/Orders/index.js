@@ -12,21 +12,14 @@ import { AntDesign, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery, useMutation } from "@apollo/client";
-import {
-  HISTORY_QUERY,
-  ORDERS_QUERY,
-  USERS_QUERY,
-} from "../../../Graphql/querys";
-import {
-  CHANGE_ROLE_MUTATION,
-  DELETE_ORDER_MUTATION,
-} from "../../../Graphql/mutations";
+import { HISTORY_QUERY, ORDERS_QUERY } from "../../../Graphql/querys";
+import { DELETE_ORDER_MUTATION } from "../../../Graphql/mutations";
 import styles from "./style";
 
 import TText from "../../../components/TText";
 
 const Orders = () => {
-  const [searchQuery, setSearchQuery] = useState(""); // State for the search query
+  const [searchQuery, setSearchQuery] = useState("");
   const {
     data: HisData,
     loading: Hisloading,
@@ -48,7 +41,7 @@ const Orders = () => {
       refetch();
     }, [refetch])
   );
-  const handleDeleteHistory = async (id) => {
+  const handleDeleteOrder = async (id) => {
     console.log("id", id);
     try {
       const HisData = await deleteOrder({
@@ -88,7 +81,7 @@ const Orders = () => {
           <TouchableOpacity
             style={styles.delUser}
             onPress={() => {
-              handleDeleteHistory(item.id);
+              handleDeleteOrder(item.id);
             }}
           >
             <AntDesign name="delete" size={18} color="red" />

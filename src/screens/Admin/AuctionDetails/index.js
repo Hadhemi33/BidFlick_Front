@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  Alert,
 } from "react-native";
 import styles from "./style";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -14,7 +15,27 @@ import { useNavigation } from "@react-navigation/native";
 import TText from "../../../components/TText";
 import LightButton from "../../../components/Buttons/LightButton";
 import GradianButton from "../../../components/Buttons/GradianButton";
+import { DELETE_Auction_MUTATION_ADMIN } from "../../../Graphql/mutations";
+import { useMutation } from "@apollo/client";
 const AuctionDetails = ({ route }) => {
+  const [deleteSpeciaProductAdmin] = useMutation(
+    DELETE_Auction_MUTATION_ADMIN,
+    {}
+  );
+  const handleDeleteAuction = async (id) => {
+    console.log("id", id);
+    try {
+      const data = await deleteSpeciaProductAdmin({
+        variables: {
+          id,
+        },
+      });
+      Alert.alert("Success", `Auction Deleted.`);
+    } catch (error) {
+      console.error("Error deleting auction:", error);
+      Alert.alert("Error", `An error occurred while deleting auction.`);
+    }
+  };
   const { item } = route.params; // Getting the passed data
   const navigation = useNavigation(); // Accessing navigation
   return (
@@ -69,7 +90,14 @@ const AuctionDetails = ({ route }) => {
         </View>
         <View style={styles.BtnDelete}>
           <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-            <TText T="18" F="semiBold" C="green">
+            <TText
+              T="18"
+              F="semiBold"
+              C="green"
+              onPress={() => {
+                handleDeleteAuction(item.id);
+              }}
+            >
               Delete
             </TText>
           </TouchableOpacity>

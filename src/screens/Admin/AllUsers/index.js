@@ -13,7 +13,10 @@ import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery, useMutation } from "@apollo/client";
 import { USERS_QUERY } from "../../../Graphql/querys";
-import { CHANGE_ROLE_MUTATION } from "../../../Graphql/mutations";
+import {
+  CHANGE_ROLE_MUTATION,
+  DELETE_USER_MUTATION,
+} from "../../../Graphql/mutations";
 import styles from "./style";
 
 import TText from "../../../components/TText";
@@ -24,6 +27,9 @@ const AllUsers = () => {
     pollInterval: 5000,
   });
   const [updateUserRole] = useMutation(CHANGE_ROLE_MUTATION, {
+    refetchQueries: [{ query: USERS_QUERY }],
+  });
+  const [deleteUser] = useMutation(DELETE_USER_MUTATION, {
     refetchQueries: [{ query: USERS_QUERY }],
   });
 
@@ -50,6 +56,22 @@ const AllUsers = () => {
     } catch (error) {
       console.error("Error updating role:", error);
       Alert.alert("Error", `An error occurred while updating the role.`);
+    }
+  };
+  const deleteuser = async (id) => {
+    console.log("id", id);
+
+    try {
+      const data = await deleteUser({
+        variables: {
+          id,
+        },
+      });
+      refetch(); // Refresh after role update
+      Alert.alert("Success", `User Deleted.`);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      Alert.alert("Error", `An error occurred while deleting this user.`);
     }
   };
 
@@ -123,7 +145,10 @@ const AllUsers = () => {
               <AntDesign name="deleteuser" size={24} color="black" />
             )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.delUser}>
+          <TouchableOpacity
+            onPress={() => deleteuser(id)}
+            style={styles.delUser}
+          >
             <AntDesign name="delete" size={18} color="red" />
           </TouchableOpacity>
         </View>

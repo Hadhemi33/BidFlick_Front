@@ -85,7 +85,13 @@ function ProductAdd() {
           selectedCategories={selectedCategories}
           onChange={setSelectedCategories}
         />
-        <FilePickerComponent onFileSelected={handleFileSelected} />
+        <View style={{ width: "40%", height: "20%" }}>
+          {/* <FilePickerComponent onFileSelected={handleFileSelected} /> */}
+          <FilePickerComponent
+            onFileSelected={handleFileSelected}
+            I={require("../../../../assets/changeImage.png")}
+          />
+        </View>
         <LightButton
           style={styles.ButtonsPic}
           onPress={handleSubmit}

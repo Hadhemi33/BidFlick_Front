@@ -21,6 +21,7 @@ import LightButton from "../../../components/Buttons/LightButton";
 import { useUser } from "../../../Graphql/userContext";
 import { UPDATE_USER_MUTATION } from "../../../Graphql/mutations";
 import { USERS_QUERY } from "../../../Graphql/querys";
+import FilePickerComponent from "../../../components/FilePickerComponent";
 export const Users_QUERY = gql`
   query GetAllUsers {
     getAllUsers {
@@ -30,7 +31,7 @@ export const Users_QUERY = gql`
 `;
 const ProfileEdit = ({ navigation }) => {
   const user = useUser();
-  // const img = user.imageUrl;
+
   console.log("Sg with:", { fullName, username, phoneNumber });
 
   const { data, loading, error } = useQuery(Users_QUERY);
@@ -38,6 +39,7 @@ const ProfileEdit = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
   const [Confirmpassword, setConfirmPassword] = useState("");
   useEffect(() => {
     if (user) {
@@ -45,7 +47,7 @@ const ProfileEdit = ({ navigation }) => {
       setUsername(user.username || "");
       setPhoneNumber(user.phoneNumber || "");
     }
-  }, [user]); // Re-run if `user` changes
+  }, [user]);
   const handleFormSubmit = async () => {
     console.log("Submitting with:", { fullName, username, phoneNumber });
 
@@ -59,6 +61,9 @@ const ProfileEdit = ({ navigation }) => {
         variables: {
           updateUserInput: {
             phoneNumber,
+            fullName,
+            username,
+            imageUrl,
           },
         },
       });
@@ -69,13 +74,12 @@ const ProfileEdit = ({ navigation }) => {
       Alert.alert("Error", "Could not update account");
     }
   };
+  const handleFileSelected = (url) => {
+    setImageUrl(url);
+    console.log("Image URL received:", url);
+  };
   const [updateUser, { loading: updateLoading, error: updateError }] =
-    useMutation(
-      UPDATE_USER_MUTATION
-      //   , {
-      //   refetchQueries: [{ query: Users_QUERY }],
-      // }
-    );
+    useMutation(UPDATE_USER_MUTATION);
   if (loading || updateLoading) {
     console.log(JSON.stringify(data));
 
@@ -108,17 +112,17 @@ const ProfileEdit = ({ navigation }) => {
           <Feather name="chevron-left" color="#000" size={25} />
         </TouchableOpacity>
       </LinearGradient>
-
       <ImageBackground
-        // key={card.id}
-        source={{ uri: user.imageUrl }}
-        // source={require("../../../../assets/people19.png")}
+        source={{ uri: imageUrl || "fallback_image_url" }} // Ensure `imageUrl` is correct
         style={styles.imageContainer}
         imageStyle={styles.backgroundImage}
       >
-        <TouchableOpacity style={styles.cam}>
-          <Entypo name="camera" size={24} color="black" />
-        </TouchableOpacity>
+        <FilePickerComponent
+          style={styles.cam}
+          onFileSelected={handleFileSelected}
+          I={require("../../../../assets/changeImage.png")}
+        />
+        {/* Additional UI components */}
       </ImageBackground>
 
       <View style={styles.Forms}>
