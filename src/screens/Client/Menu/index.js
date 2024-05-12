@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native";
 import styles from "./style";
 
 import { useUser } from "../../../Graphql/userContext";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import AdminMenu from "./adminMenu";
 import UserMenu from "./userMenu.js";
 function Menu({ navigation }) {
@@ -15,7 +15,15 @@ function Menu({ navigation }) {
       setIsAdmin(true);
     }
   }, [user.roles]);
-
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem("accessToken");
+      navigation.navigate("SignIn");
+      console.log(user.roles);
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
   const [isAdmin, setIsAdmin] = useState(false);
   const navHome = () => {
     navigation.navigate("Home");
@@ -46,13 +54,13 @@ function Menu({ navigation }) {
           onOrdPress={navOrders}
           onUserPress={navUsers}
           onCatPress={navCategories}
+          onPress={logout}
         />
       ) : (
         <UserMenu
           onHomePress={navHome}
           onEditPress={navEdit}
           onAucPress={navAuctions}
-      
         />
       )}
     </SafeAreaView>

@@ -33,6 +33,7 @@ function AdminMenu({
   onUserPress,
   onOrdPress,
   onCatPress,
+  onPress,
 }) {
   const user = useUser();
 
@@ -170,7 +171,7 @@ function AdminMenu({
       </View>
       <GradianButton
         style={styles.ButtonsPic}
-        // onPress={handleSubmit}
+        onPress={onPress}
         T="18"
         F="semiBold"
         W="200"

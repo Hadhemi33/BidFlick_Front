@@ -53,23 +53,22 @@ export default function App() {
         <UserProvider>
           <NavigationContainer theme={theme}>
             <Stack.Navigator>
-              <>
-                <Stack.Screen
-                  name="Splash"
-                  component={Splash}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="Menu"
-                  component={Menu}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="SignIn"
-                  component={SignIn}
-                  options={{ headerShown: false }}
-                />
-              </>
+              <Stack.Screen
+                name="Splash"
+                component={Splash}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Menu"
+                component={Menu}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="SignIn"
+                component={SignIn}
+                options={{ headerShown: false }}
+              />
+
               {isLoggedIn ? (
                 <>
                   {/* <Stack.Screen
