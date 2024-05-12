@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   ButtonsPic: {
+    alignSelf: "center",
     marginTop: 20,
   },
   Create: {
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     alignSelf: "center",
-    
   },
 });
 

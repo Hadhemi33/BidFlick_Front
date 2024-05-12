@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { Text } from "react-native";
 import { AuthUser_QUERY } from "./querys";
 import UserContext from "./userContext";
+import TText from "../components/TText";
 
 const UserProvider = ({ children }) => {
   const { data, loading, error } = useQuery(AuthUser_QUERY, {
@@ -11,11 +12,11 @@ const UserProvider = ({ children }) => {
   });
 
   if (loading) {
-    return <Text>Loading user data...</Text>;
+    return <TText T="16" F="semiBold" C="black">Loading user data...</TText>;
   }
 
   if (error) {
-    return <Text>Error loading user data: {error.message}</Text>;
+    return <TText T="16" F="semiBold" C="black">Error loading user data: {error.message}</TText>;
   }
 
   const user = data.getAuthUser;

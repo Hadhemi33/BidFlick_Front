@@ -2,6 +2,27 @@ import { StyleSheet } from "react-native";
 import { colors } from "../../../constants/colors";
 
 const styles = StyleSheet.create({
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    marginLeft: 70,
+    top: 10,
+    alignSelf: "flex-end",
+    justifyContent: "flex-end",
+  },
+  cont: {
+    width: 40,
+    top: 70,
+
+    height: 30,
+    borderRadius: 10,
+    marginLeft: 70,
+    backgroundColor: colors.white,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    alignSelf: "flex-end",
+  },
   container: {
     flexDirection: "column",
     position: "absolute",
@@ -60,13 +81,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "flex-end",
   },
+  imageOverlay: {
+    backgroundColor: colors.white,
+  },
   cam: {
-
     display: "flex",
     flex: 1,
-    
-    alignSelf: "flex-end",
-    justifyContent: "flex-end",
+
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -76,12 +97,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     marginRight: 20,
-   
   },
-  photos:{
-
-  }
-  ,
+  photos: {},
   Botns: {
     top: -40,
 

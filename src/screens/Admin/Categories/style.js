@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 10,
     width: 173,
-    height: 96,
+    height: 100,
     borderWidth: 1,
     borderColor: colors.lightGreen,
     alignSelf: "center",
@@ -91,12 +91,7 @@ const styles = StyleSheet.create({
     borderLeftColor: colors.lightGreen,
     padding: 8,
   },
-  statValue: {
-    fontSize: 18,
-    fontWeight: "bold",
 
-    marginBottom: 5,
-  },
   statsCategory: {
     color: "#999",
   },
@@ -118,12 +113,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-  },
-
-  addButtonText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#fff",
   },
 });
 export default styles;

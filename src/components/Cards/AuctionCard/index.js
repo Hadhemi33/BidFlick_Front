@@ -26,7 +26,9 @@ const AuctionCard = ({ searchQueryy, onPress }) => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading...</Text>
+        <TText T="16" F="semiBold" C="black">
+          Loading...
+        </TText>
       </View>
     );
   }
@@ -34,7 +36,9 @@ const AuctionCard = ({ searchQueryy, onPress }) => {
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <Text>Error loading special products: {error.message}</Text>
+        <TText T="16" F="semiBold" C="black">
+          Error loading special products: {error.message}
+        </TText>
       </View>
     );
   }
@@ -46,7 +50,7 @@ const AuctionCard = ({ searchQueryy, onPress }) => {
 
   const handleScroll = (event) => {
     const scrollX = event.nativeEvent.contentOffset.x;
-    const width = 367 + 20;  
+    const width = 367 + 20;
     const currentIndex = Math.round(scrollX / width);
     setActiveIndex(currentIndex);
   };

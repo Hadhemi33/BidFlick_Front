@@ -24,14 +24,14 @@ const DetailsAuctionCard = ({ onPress }) => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading...</Text>
+        <TText T="16" F="semiBold" C="black">Loading...</TText>
       </View>
     );
   }
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <Text>Error loading special Products: {error.message}</Text>
+        <TText T="16" F="semiBold" C="black">Error loading special Products: {error.message}</TText>
       </View>
     );
   }

@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from "react";
 import {
-  Text,
   View,
   TouchableOpacity,
   FlatList,
   TextInput,
   ActivityIndicator,
   Alert,
+  Image,
 } from "react-native";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -15,7 +15,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { HISTORY_QUERY, ORDERS_QUERY } from "../../../Graphql/querys";
 import { DELETE_ORDER_MUTATION } from "../../../Graphql/mutations";
 import styles from "./style";
-
+import { MaterialIcons } from "@expo/vector-icons";
 import TText from "../../../components/TText";
 
 const Orders = () => {
@@ -84,7 +84,15 @@ const Orders = () => {
               handleDeleteOrder(item.id);
             }}
           >
-            <AntDesign name="delete" size={18} color="red" />
+            <AntDesign name="check" size={24} color="green" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.delUser}
+            onPress={() => {
+              handleDeleteOrder(item.id);
+            }}
+          >
+            <MaterialIcons name="delete-forever" size={24} color="red" />
           </TouchableOpacity>
         </View>
       </View>
@@ -99,18 +107,14 @@ const Orders = () => {
           <TText T="14" F="regular" C="black" style={styles.statValue}>
             {id}
           </TText>
-          <TText T="14" F="regular" C="black" style={styles.statValue}>
+          <TText T="10" F="regular" C="black" style={styles.statValue}>
             {paidAt}
           </TText>
-          <TText T="14" F="regular" C="black" style={styles.statValue}>
+          <TText T="11" F="regular" C="black" style={styles.statValue}>
             {totalPrice}
           </TText>
         </View>
-        <View style={styles.delAdd}>
-          <TouchableOpacity style={styles.delUser}>
-            <AntDesign name="delete" size={18} color="red" />
-          </TouchableOpacity>
-        </View>
+    
       </View>
     );
   };
@@ -139,7 +143,9 @@ const Orders = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading...</Text>
+        <TText T="16" F="semiBold" C="black">
+          Loading...
+        </TText>
       </View>
     );
   }
@@ -147,7 +153,9 @@ const Orders = () => {
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <Text>Error loading users: {error.message}</Text>
+        <TText T="16" F="semiBold" C="black">
+          Error loading users: {error.message}
+        </TText>
       </View>
     );
   }
@@ -163,11 +171,22 @@ const Orders = () => {
         <View style={styles.headerTitle}>
           <TextInput
             style={styles.SearchInput}
-            placeholder="Search order"
+            placeholder="Search order.."
             value={searchQuery}
             onChangeText={handleSearchInput}
           />
         </View>
+      </View>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity>
+          <Image
+            source={require("../../../../assets/order.png")}
+            style={{ width: 35, height: 35 }}
+          />
+        </TouchableOpacity>
+        <TText T="16" F="regular" C="sea">
+          All Orders
+        </TText>
       </View>
 
       <View style={styles.statsCard}>
@@ -178,6 +197,18 @@ const Orders = () => {
           renderItem={({ item }) => <CardCat item={item} />}
         />
       </View>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity>
+          <Image
+            source={require("../../../../assets/archive.png")}
+            style={{ width: 30, height: 30 }}
+          />
+        </TouchableOpacity>
+        <TText T="16" F="regular" C="sea">
+          Archives
+        </TText>
+      </View>
+
       <View style={styles.statsCard}>
         <FlatList
           data={filtredHistory}

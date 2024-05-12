@@ -15,6 +15,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { Categories_QUERY } from "../../../Graphql/querys";
 import { DELETE_CATEGORY_MUTATION } from "../../../Graphql/mutations";
 import styles from "./style";
+import TText from "../../../components/TText";
 
 const CategoriesScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -56,7 +57,7 @@ const CategoriesScreen = () => {
               await deleteCategory({
                 variables: { name },
               });
-              refetch(); 
+              refetch();
               Alert.alert("Success", `Category "${name}" deleted.`);
             } catch (error) {
               console.error("Error deleting category:", error);
@@ -75,15 +76,17 @@ const CategoriesScreen = () => {
 
   const CardCat = ({ item }) => (
     <View style={styles.statItem}>
-      <Text style={styles.statValue}>{item.name}</Text>
+      <TText T="16" F="regular" C="black" style={styles.statValue}>
+        {item.name}
+      </TText>
 
-      <Text style={styles.productCount}>
+      <TText T="16" F="light" C="black" style={styles.productCount}>
         {item.products.length} product{item.products.length > 1 ? "s" : ""}
-      </Text>
-      <Text style={styles.productCount}>
+      </TText>
+      <TText T="16" F="light" C="black" style={styles.productCount}>
         {item.specialProducts.length} auction
         {item.specialProducts.length > 1 ? "s" : ""}
-      </Text>
+      </TText>
       <TouchableOpacity onPress={() => handleDeleteCat(item.name)}>
         <AntDesign name="delete" size={16} color="red" />
       </TouchableOpacity>
@@ -99,7 +102,9 @@ const CategoriesScreen = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading...</Text>
+        <TText T="16" F="regular" C="black">
+          Loading...
+        </TText>
       </View>
     );
   }
@@ -107,7 +112,9 @@ const CategoriesScreen = () => {
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <Text>Error loading categories: {error.message}</Text>
+        <TText T="16" F="regular" C="black">
+          Error loading categories: {error.message}
+        </TText>
       </View>
     );
   }
@@ -139,7 +146,7 @@ const CategoriesScreen = () => {
         />
       </View>
       <TouchableOpacity style={styles.addButton} onPress={handleAddButtonPress}>
-        <Text style={styles.addButtonText}>+</Text>
+        <TText T="30" F="bold" C="white"  style={styles.addButtonText}>+</TText>
       </TouchableOpacity>
     </View>
   );

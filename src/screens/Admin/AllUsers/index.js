@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import {
-  Text,
+
   View,
   TouchableOpacity,
   FlatList,
@@ -22,7 +22,7 @@ import styles from "./style";
 import TText from "../../../components/TText";
 
 const AllUsers = () => {
-  const [searchQuery, setSearchQuery] = useState("");  
+  const [searchQuery, setSearchQuery] = useState("");
   const { data, loading, error, refetch } = useQuery(USERS_QUERY, {
     pollInterval: 5000,
   });
@@ -41,7 +41,7 @@ const AllUsers = () => {
   );
   const changeUserRole = async (id, currentRole) => {
     console.log("id", id, "role", currentRole);
-    const newRole = currentRole === "user" ? "admin" : "user";  
+    const newRole = currentRole === "user" ? "admin" : "user";
 
     try {
       const data = await updateUserRole({
@@ -51,7 +51,7 @@ const AllUsers = () => {
           id,
         },
       });
-      refetch(); 
+      refetch();
       Alert.alert("Success", `Role updated to "${newRole}".`);
     } catch (error) {
       console.error("Error updating role:", error);
@@ -67,7 +67,7 @@ const AllUsers = () => {
           id,
         },
       });
-      refetch(); 
+      refetch();
       Alert.alert("Success", `User Deleted.`);
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -85,7 +85,7 @@ const AllUsers = () => {
     return (
       <View style={styles.userItem}>
         <View style={styles.infos}>
-          <TText T="14" F="regular" C="black" style={styles.statValue}>
+          <TText T="12" F="regular" C="black" style={styles.statValue}>
             {fullName}
           </TText>
           <View style={styles.nbr}>
@@ -165,7 +165,7 @@ const AllUsers = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading...</Text>
+        <TText T="16" F="semiBold" C="black">Loading...</TText>
       </View>
     );
   }
@@ -173,7 +173,7 @@ const AllUsers = () => {
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <Text>Error loading users: {error.message}</Text>
+        <TText T="16" F="semiBold" C="black">Error loading users: {error.message}</TText>
       </View>
     );
   }
@@ -189,7 +189,7 @@ const AllUsers = () => {
         <View style={styles.headerTitle}>
           <TextInput
             style={styles.SearchInput}
-            placeholder="Search client"
+            placeholder="Search user.."
             value={searchQuery}
             onChangeText={handleSearchInput}
           />

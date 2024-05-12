@@ -6,7 +6,6 @@ import { Categories_QUERY } from "../../Graphql/querys";
 import styles from "./ProductAdd/style";
 import { getDefaultValues } from "@apollo/client/utilities";
 
-
 const CategorySelector = ({ selectedCategories, onChange }) => {
   const { data, loading, error } = useQuery(Categories_QUERY);
 
@@ -21,11 +20,19 @@ const CategorySelector = ({ selectedCategories, onChange }) => {
   }
 
   if (error) {
-    return <Text>Error loading categories: {error.message}</Text>;
+    return (
+      <TText T="16" F="semiBold" C="black">
+        Error loading categories: {error.message}
+      </TText>
+    );
   }
 
   if (!data || !data.getAllCategories) {
-    return <Text>No categories found</Text>;
+    return (
+      <TText T="16" F="semiBold" C="black">
+        No categories found
+      </TText>
+    );
   }
 
   return (
@@ -36,12 +43,13 @@ const CategorySelector = ({ selectedCategories, onChange }) => {
           style={{ flexDirection: "row", alignItems: "center" }}
         >
           <Checkbox
-          
             style={styles.checkbox}
             value={selectedCategories === category.id}
             onValueChange={() => handleCategoryChange(category.id)}
           />
-          <Text>{category.name}</Text>
+          <TText T="16" F="regular" C="black">
+            {category.name}
+          </TText>
         </View>
       ))}
     </ScrollView>

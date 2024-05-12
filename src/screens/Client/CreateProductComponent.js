@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { View, Text, TextInput, Button } from "react-native";
+import { View, TextInput, Button } from "react-native";
 import { CREATE_PRODUCT_MUTATION } from "../../Graphql/mutations"; 
 import FilePickerComponent from "../../components/FilePickerComponent";
+import TText from "../../components/TText";
 
 const CreateProduct = () => {
   const [title, setTitle] = useState("");
@@ -43,7 +44,7 @@ const CreateProduct = () => {
 
   return (
     <View style={{ padding: 16 }}>
-      <Text>Create a New Product</Text>
+      <TText T="16" F="semiBold" C="black">Create a New Product</TText>
       <TextInput placeholder="Title" value={title} onChangeText={setTitle} />
       <TextInput
         placeholder="Description"
@@ -59,13 +60,13 @@ const CreateProduct = () => {
       <FilePickerComponent onFileSelected={handleFileSelected} />
      
       <Button title="Create Product" onPress={handleSubmit} />
-      {loading && <Text>Loading...</Text>}
-      {error && <Text>Error: {error.message}</Text>}
+      {loading && <TText T="16" F="semiBold" C="black">Loading...</TText>}
+      {error && <TText T="16" F="semiBold" C="black">Error: {error.message}</TText>}
       {data && (
-        <Text>
+        <TText T="16" F="semiBold" C="black">
           Product Created: {data.createProduct.title}, Image URL:{" "}
           {data.createProduct.imageUrl}
-        </Text>
+        </TText>
       )}
     </View>
   );

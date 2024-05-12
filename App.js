@@ -18,10 +18,11 @@ import ProfileEdit from "./src/screens/Admin/ProfileEdit";
 import ProductAdd from "./src/screens/Client/ProductAdd";
 import CategoryAdd from "./src/screens/Client/CategoryAdd";
 import AllUsers from "./src/screens/Admin/AllUsers";
-
+import "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserProvider from "./src/Graphql/userProvider";
 import Orders from "./src/screens/Admin/Orders";
+import Menu from "./src/screens/Client/Menu";
 const Stack = createNativeStackNavigator();
 
 const theme = {
@@ -52,18 +53,30 @@ export default function App() {
         <UserProvider>
           <NavigationContainer theme={theme}>
             <Stack.Navigator>
-              <Stack.Screen
-                name="Splash"
-                component={Splash}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="SignIn"
-                component={SignIn}
-                options={{ headerShown: false }}
-              />
+              <>
+                <Stack.Screen
+                  name="Splash"
+                  component={Splash}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="Menu"
+                  component={Menu}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="SignIn"
+                  component={SignIn}
+                  options={{ headerShown: false }}
+                />
+              </>
               {isLoggedIn ? (
                 <>
+                  {/* <Stack.Screen
+                    name="Menu"
+                    component={Menu}
+                    options={{ headerShown: false }}
+                  /> */}
                   <Stack.Screen
                     name="ProductAdd"
                     component={ProductAdd}

@@ -74,7 +74,7 @@ const SignIn = ({ navigation }) => {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.infoText}>Loading...</Text>
+        <TText T="16" F="semiBold" C="black" style={styles.infoText}>Loading...</TText>
       </View>
     );
   }
@@ -82,9 +82,9 @@ const SignIn = ({ navigation }) => {
   if (error || signinError) {
     return (
       <View style={styles.container}>
-        <Text style={[styles.infoText, styles.errorText]}>
+        <TText T="16" F="semiBold" C="black" style={[styles.infoText, styles.errorText]}>
           Error: {error ? error.message : signinError.message}
-        </Text>
+        </TText>
       </View>
     );
   } else {

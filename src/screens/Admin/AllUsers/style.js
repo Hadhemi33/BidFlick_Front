@@ -75,14 +75,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
-  
+
     width: "20%",
   },
-  infos:{ flexDirection: "column",
-  width: "70%",
-  height: "100%",
+  infos: {
+    flexDirection: "column",
+    width: "70%",
+    height: "100%",
 
-  justifyContent: "space-between",},
+    justifyContent: "space-between",
+  },
   userItem: {
     marginTop: 20,
     flex: 1,
@@ -130,12 +132,9 @@ const styles = StyleSheet.create({
     borderLeftColor: colors.lightGreen,
     padding: 8,
   },
-  productCount: {
-  },
-  statValue: {
-    fontSize: 18,
-    fontWeight: "bold",
-
+  productCount: {},
+  SearchInput: {
+    fontFamily: "regular",
   },
   statsCategory: {
     color: "#999",

@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: "99%",
     height: 80,
-   
+
     borderBottomWidth: 0.1,
     borderRightWidth: 0.3,
     borderLeftWidth: 0.3,
@@ -133,12 +133,12 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   productCount: {},
-  statValue: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
+
   statsCategory: {
     color: "#999",
+  },
+  SearchInput: {
+    fontFamily: "regular",
   },
   addButton: {
     position: "absolute",

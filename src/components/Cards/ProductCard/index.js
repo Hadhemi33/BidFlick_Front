@@ -38,7 +38,7 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading...</Text>
+        <TText T="16" F="semiBold" C="black">Loading...</TText>
       </View>
     );
   }
@@ -46,7 +46,7 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <Text>Error loading special Products: {error.message}</Text>
+        <TText T="16" F="semiBold" C="black">Error loading special Products: {error.message}</TText>
       </View>
     );
   }
@@ -65,7 +65,7 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
             imageStyle={styles.backgroundImage}
           >
             <View style={styles.Likes}>
-              <Text style={styles.LikesText}>{item.nbrLike}</Text>
+              <TText T="16" F="regular" C="black" style={styles.LikesText}>{item.nbrLike}</TText>
               <TouchableOpacity onPress={() => toggleLike(item.id)}>
                 <Image
                   style={styles.LikesImage}

@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  TextInput,
-  ActivityIndicator,
-} from "react-native";
+import { SafeAreaView, View, TextInput, ActivityIndicator } from "react-native";
 import { useMutation } from "@apollo/client";
 import { CREATE_CATEGORY_MUTATION } from "../../../Graphql/mutations";
 import LightButton from "../../../components/Buttons/LightButton";
@@ -13,6 +7,8 @@ import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
 import { Categories_QUERY } from "../../../Graphql/querys";
 import { useUser } from "../../../Graphql/userContext";
+import TText from "../../../components/TText";
+import GradianButton from "../../../components/Buttons/GradianButton";
 function CategoryAdd() {
   const user = useUser();
 
@@ -48,7 +44,6 @@ function CategoryAdd() {
 
       console.log("Category created successfully.");
       setName("");
-     
 
       navigation.navigate("CategoriesScreen", {
         refetchQueries: [{ query: Categories_QUERY }],
@@ -60,11 +55,10 @@ function CategoryAdd() {
 
   return (
     <SafeAreaView style={styles.container}>
-     
       <View style={styles.Header}>
-        <Text style={{ fontSize: 30, fontWeight: "600" }}>
+        <TText T="24" F="bold" C="black">
           Create a New Category
-        </Text>
+        </TText>
         <View
           style={{
             borderBottomColor: "black",
@@ -75,7 +69,6 @@ function CategoryAdd() {
         />
       </View>
 
- 
       <View style={styles.Forms}>
         <TextInput
           style={styles.InputStyle}
@@ -85,24 +78,31 @@ function CategoryAdd() {
         />
 
         {validationError && (
-          <Text style={{ color: "red" }}>{validationError}</Text>
+          <TText T="16" F="semiBold" C="black" style={{ color: "red" }}>
+            {validationError}
+          </TText>
         )}
 
-        <LightButton
+        <GradianButton
           style={styles.ButtonsPic}
           onPress={handleSubmit}
           T="18"
           F="semiBold"
+          W="200"
         >
-          Create Category
-        </LightButton>
+          Create
+        </GradianButton>
 
         {loading && <ActivityIndicator size="large" color="#0000ff" />}
-        {error && <Text style={{ color: "red" }}>Error: {error.message}</Text>}
+        {error && (
+          <TText T="16" F="semiBold" C="black" style={{ color: "red" }}>
+            Error: {error.message}
+          </TText>
+        )}
         {data && (
-          <Text style={{ color: "green" }}>
+          <TText T="16" F="semiBold" C="black" style={{ color: "green" }}>
             Category Created: {data.createCategory.name}
-          </Text>
+          </TText>
         )}
       </View>
     </SafeAreaView>

@@ -85,16 +85,16 @@ const ProfileEdit = ({ navigation }) => {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.infoText}>Loading...</Text>
+        <TText T="16" F="semiBold" C="black" style={styles.infoText}>Loading...</TText>
       </View>
     );
   }
   if (error || updateError) {
     return (
       <View style={styles.container}>
-        <Text style={[styles.infoText, styles.errorText]}>
+        <TText T="16" F="semiBold" C="black" style={[styles.infoText, styles.errorText]}>
           Error: {error ? error.message : updateError.message}
-        </Text>
+        </TText>
       </View>
     );
   } else {
@@ -120,10 +120,13 @@ const ProfileEdit = ({ navigation }) => {
         imageStyle={styles.backgroundImage}
       >
         <FilePickerComponent
-          style={styles.cam}
+          styleCont={styles.cont}
+          styleImage={styles.image}
+         
           onFileSelected={handleFileSelected}
           I={require("../../../../assets/changeImage.png")}
         />
+
         {/* Additional UI components */}
       </ImageBackground>
 

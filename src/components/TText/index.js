@@ -2,7 +2,7 @@ import React from "react";
 import { Text, SafeAreaView, View, TouchableOpacity } from "react-native";
 
 import { colors } from "../../constants/colors";
-function TText({ children, T, F, C, onPress }) {
+function TText({ children, T, F, C, onPress, style }) {
   return (
     <TouchableOpacity>
       <Text
@@ -13,6 +13,7 @@ function TText({ children, T, F, C, onPress }) {
             fontFamily: F,
             color: colors[C],
           },
+          style,
         ]}
       >
         {children}

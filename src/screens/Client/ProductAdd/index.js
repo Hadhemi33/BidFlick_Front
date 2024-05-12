@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Text, TextInput } from "react-native";
+import { SafeAreaView, View, TextInput } from "react-native";
 import { useMutation } from "@apollo/client";
 import { CREATE_PRODUCT_MUTATION } from "../../../Graphql/mutations";
 
@@ -100,9 +100,9 @@ function ProductAdd() {
         >
           Create Product
         </LightButton>
-        {loading && <Text>Loading...</Text>}
-        {error && <Text>Error: {error.message}</Text>}
-        {data && <Text>Product Created: {data.createProduct.title}</Text>}
+        {loading && <TText T="16" F="semiBold" C="black">Loading...</TText>}
+        {error && <TText T="16" F="semiBold" C="black">Error: {error.message}</TText>}
+        {data && <TText T="16" F="semiBold" C="black">Product Created: {data.createProduct.title}</TText>}
       </View>
     </SafeAreaView>
   );
