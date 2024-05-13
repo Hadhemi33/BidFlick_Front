@@ -30,20 +30,21 @@ const styles = StyleSheet.create({
     top: -20,
     height: 30,
     borderRadius: 10,
-    marginLeft: 70,
+    // marginLeft: 70,
     backgroundColor: colors.white,
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
-    alignSelf: "flex-end",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    alignSelf: "flex-start",
   },
   image: {
     width: 40,
     height: 40,
     borderRadius: 10,
-    marginLeft: 70,
+    // marginLeft: 70,
     top: 10,
-    alignSelf: "flex-end",
-    justifyContent: "flex-end",
+
+    // alignSelf: "flex-end",
+    justifyContent: "flex-start",
   },
   Buttons: {
     marginTop: 20,
@@ -59,12 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "flex-end",
   },
-  img: {
-    width: 50,
-    height: 50,
-    alignSelf: "center",
-    marginBottom: 20,
-  },
+
   InputStyle: {
     marginVertical: 12,
     flexDirection: "row",
@@ -79,7 +75,21 @@ const styles = StyleSheet.create({
     height: 100,
     marginBottom: 10,
   },
-
+  calendar: {
+    alignSelf: "center",
+    alignContent: "center",
+    // backgroundColor: colors.sea,
+    marginLeft: 4,
+  },
+  timePick: {
+    display: "flex",
+    flexDirection: "row",
+    alignContent:'center',
+    alignItems:'center',
+    justifyContent:'center',
+    alignSelf: "center",
+    
+  },
   Remember: {
     display: "flex",
     flexDirection: "row",
@@ -91,14 +101,7 @@ const styles = StyleSheet.create({
     borderColor: colors.lightGreen,
     borderRadius: 20,
   },
-  Biometric: {
-    width: "40%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    alignSelf: "center",
-  },
+
 });
 
 export default styles;

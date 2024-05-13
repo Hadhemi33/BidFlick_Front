@@ -26,7 +26,7 @@ function Menu({ navigation }) {
   };
   const [isAdmin, setIsAdmin] = useState(false);
   const navHome = () => {
-    navigation.navigate("Home");
+    navigation.navigate("AuctionAdd");
   };
   const navHomeUser = () => {
     navigation.navigate("HomeUser");

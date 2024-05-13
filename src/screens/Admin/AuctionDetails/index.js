@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
-
   SafeAreaView,
   TouchableOpacity,
   Image,
@@ -9,15 +8,53 @@ import {
   Alert,
 } from "react-native";
 import styles from "./style";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Feather from "@expo/vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 import TText from "../../../components/TText";
-import LightButton from "../../../components/Buttons/LightButton";
-import GradianButton from "../../../components/Buttons/GradianButton";
+
 import { DELETE_Auction_MUTATION_ADMIN } from "../../../Graphql/mutations";
 import { useMutation } from "@apollo/client";
+const calculateTimeRemaining = (endDate) => {
+  const endDateObj = new Date(endDate);
+  const currentDateObj = new Date();
+
+  const timeDifference = endDateObj - currentDateObj;
+
+  const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
+  const remainingTimeWithoutYears =
+    timeDifference % (1000 * 60 * 60 * 24 * 365);
+
+  const months = Math.floor(
+    remainingTimeWithoutYears / (1000 * 60 * 60 * 24 * 30)
+  );
+  const remainingTimeWithoutMonths =
+    remainingTimeWithoutYears % (1000 * 60 * 60 * 24 * 30);
+
+  const days = Math.floor(remainingTimeWithoutMonths / (1000 * 60 * 60 * 24));
+  const remainingTimeWithoutDays =
+    remainingTimeWithoutMonths % (1000 * 60 * 60 * 24);
+
+  const hours = Math.floor(remainingTimeWithoutDays / (1000 * 60 * 60));
+  const remainingTimeWithoutHours = remainingTimeWithoutDays % (1000 * 60 * 60);
+
+  const minutes = Math.floor(remainingTimeWithoutHours / (1000 * 60));
+  const remainingTimeWithoutMinutes = remainingTimeWithoutHours % (1000 * 60);
+
+  const seconds = Math.floor(remainingTimeWithoutMinutes / 1000);
+
+  return { years, months, days, hours, minutes, seconds };
+};
 const AuctionDetails = ({ route }) => {
+  const [remainingTime, setRemainingTime] = useState(
+    calculateTimeRemaining(route.params.item.endingIn)
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRemainingTime(calculateTimeRemaining(route.params.item.endingIn));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
   const [deleteSpeciaProductAdmin] = useMutation(
     DELETE_Auction_MUTATION_ADMIN,
     {}
@@ -36,11 +73,16 @@ const AuctionDetails = ({ route }) => {
       Alert.alert("Error", `An error occurred while deleting auction.`);
     }
   };
-  const { item } = route.params; 
-  const navigation = useNavigation(); 
-  return (
-   
+  const { item } = route.params;
+  const navigation = useNavigation();
 
+  // const da = item.createdAt.split("T")[0];
+  // const time = item.createdAt.split("T")[1].split(".")[0];
+
+  const { years, months, days, hours, minutes, seconds } =
+    calculateTimeRemaining(item.endingIn);
+
+  return (
     <ImageBackground
       key={item.id}
       source={{ uri: item.imageUrl }}
@@ -76,7 +118,7 @@ const AuctionDetails = ({ route }) => {
               Ending in :
             </TText>
             <TText T="15" F="bold">
-              {item.endingIn}
+              {years}Y:{months}M:{days}D:{hours}H:{minutes}M:{seconds}S
             </TText>
           </View>
           <View style={styles.InfosTime}>
@@ -101,11 +143,9 @@ const AuctionDetails = ({ route }) => {
               Delete
             </TText>
           </TouchableOpacity>
-         
         </View>
       </View>
     </ImageBackground>
-   
   );
 };
 
