@@ -22,6 +22,16 @@ const styles = StyleSheet.create({
 
     backgroundColor: colors.blueLight,
   },
+  icon: {
+    alignSelf: "center",
+    marginLeft: 10,
+    // width: "13%",
+  },
+  titre: { flexDirection: "row", marginRight: 10, marginTop: 5 },
+  auctions: {
+    alignSelf: "center",
+    marginLeft: 10,
+  },
   SearchInput: {
     borderRadius: 20,
     borderWidth: 1,

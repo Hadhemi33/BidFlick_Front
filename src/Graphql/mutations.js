@@ -13,7 +13,37 @@ export const CREATE_PRODUCT_MUTATION = gql`
     }
   }
 `;
-
+export const CREATE_AUCTION_MUTATION = gql`
+  mutation CreateSpecialProduct(
+    $createSpecialProductInput: CreateSpecialProductInput!
+  ) {
+    createSpecialProduct(
+      createSpecialProductInput: $createSpecialProductInput
+    ) {
+      id
+      createdAt
+      nbrLike
+      endingIn
+      user {
+        id
+      }
+      likedBy {
+        id
+      }
+      title
+      price
+      description
+      discount
+      category {
+        id
+        specialProducts {
+          id
+        }
+      }
+      imageUrl
+    }
+  }
+`;
 export const CREATE_CATEGORY_MUTATION = gql`
   mutation CreateCategory(
     $createCategoryInput: CreateCategoryInput!

@@ -28,6 +28,9 @@ function Menu({ navigation }) {
   const navHome = () => {
     navigation.navigate("Home");
   };
+  const navHomeUser = () => {
+    navigation.navigate("HomeUser");
+  };
   const navEdit = () => {
     navigation.navigate("ProfileEdit");
   };
@@ -58,7 +61,7 @@ function Menu({ navigation }) {
         />
       ) : (
         <UserMenu
-          onHomePress={navHome}
+          onHomePress={navHomeUser}
           onEditPress={navEdit}
           onAucPress={navAuctions}
         />

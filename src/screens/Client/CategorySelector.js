@@ -5,6 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import { Categories_QUERY } from "../../Graphql/querys";
 import styles from "./ProductAdd/style";
 import { getDefaultValues } from "@apollo/client/utilities";
+import TText from "../../components/TText";
 
 const CategorySelector = ({ selectedCategories, onChange }) => {
   const { data, loading, error } = useQuery(Categories_QUERY);
@@ -36,7 +37,11 @@ const CategorySelector = ({ selectedCategories, onChange }) => {
   }
 
   return (
-    <ScrollView showsVerticalScrollIndicator={true} style={styles.ScrollView}>
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={true}
+      style={styles.ScrollView}
+    >
       {data.getAllCategories.map((category) => (
         <View
           key={category.id}

@@ -22,8 +22,29 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     marginBottom: 20,
-  },
 
+    top: 0,
+  },
+  cont: {
+    width: 40,
+    top: -20,
+    height: 30,
+    borderRadius: 10,
+    marginLeft: 70,
+    backgroundColor: colors.white,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    alignSelf: "flex-end",
+  },
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    marginLeft: 70,
+    top: 10,
+    alignSelf: "flex-end",
+    justifyContent: "flex-end",
+  },
   Buttons: {
     marginTop: 20,
     display: "flex",
@@ -45,7 +66,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   InputStyle: {
-    marginVertical: 16,
+    marginVertical: 12,
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 15,
@@ -55,8 +76,8 @@ const styles = StyleSheet.create({
     padding: 13,
   },
   ScrollView: {
-    height: 0,
-    marginBottom: 0,
+    height: 100,
+    marginBottom: 10,
   },
 
   Remember: {
@@ -66,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   checkbox: {
-    marginHorizontal: 6,
+    margin: 8,
     borderColor: colors.lightGreen,
     borderRadius: 20,
   },
