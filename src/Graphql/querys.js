@@ -108,13 +108,17 @@ export const ORDERS_QUERY = gql`
   query GetAllOrders {
     getAllOrders {
       id
+      totalPrice
+      # paidAt
       user {
         id
         fullName
+        username
       }
       products {
         id
         title
+        price
       }
     }
   }

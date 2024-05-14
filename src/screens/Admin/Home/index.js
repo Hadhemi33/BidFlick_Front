@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  SafeAreaView,
-  Image,
-
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { SafeAreaView, Image, TextInput, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
 import AuctionCard from "../../../components/Cards/AuctionCard";
@@ -24,7 +18,6 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        // colors={["#C5F5ED", colors.white]}
         colors={["#F1F1F1", "#E0FBE2"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
@@ -50,7 +43,7 @@ const Home = () => {
           )}
         </TouchableOpacity>
       </LinearGradient>
-    
+
       <AuctionCard
         searchQueryy={searchQueryy}
         onPress={(card) =>

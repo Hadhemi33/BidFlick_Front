@@ -37,6 +37,9 @@ function Menu({ navigation }) {
   const navOrders = () => {
     navigation.navigate("Orders");
   };
+  const navOrdersUser = () => {
+    navigation.navigate("OrdersClient");
+  };
   const navAuctions = () => {
     navigation.navigate("DetailsAuctionCard");
   };
@@ -46,6 +49,9 @@ function Menu({ navigation }) {
 
   const navCategories = () => {
     navigation.navigate("CategoriesScreen");
+  };
+  const back = () => {
+    navigation.goBack();
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -58,9 +64,13 @@ function Menu({ navigation }) {
           onUserPress={navUsers}
           onCatPress={navCategories}
           onPress={logout}
+          onPressBack={back}
         />
       ) : (
         <UserMenu
+          onPressBack={back}
+          onPress={logout}
+          onOrdPress={navOrdersUser}
           onHomePress={navHomeUser}
           onEditPress={navEdit}
           onAucPress={navAuctions}

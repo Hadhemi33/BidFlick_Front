@@ -121,3 +121,8 @@ export const DELETE_USER_MUTATION = gql`
     deleteUser(id: $id)
   }
 `;
+export const PAYMENT_MUTATION = gql`
+  mutation CreatePaymentIntent($amount: Float!, $currency: String!) {
+    createPaymentIntent(amount: $amount, currency: $currency)
+  }
+`;

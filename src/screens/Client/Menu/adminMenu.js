@@ -31,6 +31,7 @@ function AdminMenu({
   onAucPress,
   onEditPress,
   onUserPress,
+  onPressBack,
   onOrdPress,
   onCatPress,
   onPress,
@@ -56,10 +57,7 @@ function AdminMenu({
         end={{ x: 1, y: 0 }}
         style={styles.Header}
       >
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.back}
-        >
+        <TouchableOpacity onPress={onPressBack} style={styles.back}>
           <Feather name="chevron-left" color="#000" size={30} />
         </TouchableOpacity>
         <View style={styles.user}>

@@ -25,7 +25,15 @@ import TText from "../../../components/TText";
 
 import { useUser } from "../../../Graphql/userContext";
 import GradianButton from "../../../components/Buttons/GradianButton";
-function UserMenu({ navigation, onHomePress, onAucPress, onEditPress }) {
+function UserMenu({
+  navigation,
+  onHomePress,
+  onPress,
+  onOrdPress,
+  onPressBack,
+  onAucPress,
+  onEditPress,
+}) {
   const user = useUser();
 
   const Arrow = ({ onPress }) => (
@@ -47,10 +55,7 @@ function UserMenu({ navigation, onHomePress, onAucPress, onEditPress }) {
         end={{ x: 1, y: 0 }}
         style={styles.Header}
       >
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.back}
-        >
+        <TouchableOpacity onPress={onPressBack} style={styles.back}>
           <Feather name="chevron-left" color="#000" size={30} />
         </TouchableOpacity>
         <View style={styles.user}>
@@ -108,7 +113,19 @@ function UserMenu({ navigation, onHomePress, onAucPress, onEditPress }) {
           </TText>
           <Arrow onPress={onAucPress} />
         </View>
-
+        <View style={styles.choice}>
+          <Entypo
+            onPress={onOrdPress}
+            name="archive"
+            size={30}
+            color="black"
+            style={styles.icon}
+          />
+          <TText onPress={onOrdPress} T="16" F="regular" C="black">
+            Orders
+          </TText>
+          <Arrow onPress={onOrdPress} />
+        </View>
         <View style={styles.choice}>
           <Entypo
             onPress={onEditPress}
@@ -124,8 +141,8 @@ function UserMenu({ navigation, onHomePress, onAucPress, onEditPress }) {
         </View>
       </View>
       <GradianButton
+      onPress={onPressBack}
         style={styles.ButtonsPic}
-        // onPress={handleSubmit}
         T="18"
         F="semiBold"
         W="200"

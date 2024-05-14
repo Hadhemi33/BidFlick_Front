@@ -23,8 +23,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserProvider from "./src/Graphql/userProvider";
 import Orders from "./src/screens/Admin/Orders";
 import Menu from "./src/screens/Client/Menu";
+import { StripeProvider } from "@stripe/stripe-react-native";
 import HomeUser from "./src/screens/Admin/Home/homeUser";
 import AuctionAdd from "./src/screens/Client/AuctionAdd";
+import PaymentScreen from "./src/screens/Client/Payment";
+import OrdersClient from "./src/screens/Admin/OrdersClient";
+import OrderDetails from "./src/screens/Admin/OrderDetails";
 const Stack = createNativeStackNavigator();
 
 const theme = {
@@ -53,108 +57,128 @@ export default function App() {
     return (
       <ApolloProvider client={client}>
         <UserProvider>
-          <NavigationContainer theme={theme}>
-            <Stack.Navigator>
-              <Stack.Screen
-                name="Splash"
-                component={Splash}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="AuctionAdd"
-                component={AuctionAdd}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Menu"
-                component={Menu}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="SignIn"
-                component={SignIn}
-                options={{ headerShown: false }}
-              />
+          <StripeProvider
+            publishableKey="pk_test_51NvT6pJbmdmPG9jvysqtceUPBezUOLCsxKMJCziF9x1qp8cyYc2w2rxetrizKS07YwxJwyNug8p67v5UQNh8XHq300fbwcZLXR"
+            // urlScheme="your-url-scheme"
+            // merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}"
+          >
+            <NavigationContainer theme={theme}>
+              <Stack.Navigator>
+                <Stack.Screen
+                  name="Splash"
+                  component={Splash}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="PaymentScreen"
+                  component={PaymentScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="AuctionAdd"
+                  component={AuctionAdd}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="Menu"
+                  component={Menu}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="OrderDetails"
+                  component={OrderDetails}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="SignIn"
+                  component={SignIn}
+                  options={{ headerShown: false }}
+                />
 
-              {isLoggedIn ? (
-                <>
-                  {/* <Stack.Screen
+                {isLoggedIn ? (
+                  <>
+                    {/* <Stack.Screen
                     name="Menu"
                     component={Menu}
                     options={{ headerShown: false }}
                   /> */}
-                  <Stack.Screen
-                    name="ProductAdd"
-                    component={ProductAdd}
-                    options={{ headerShown: false }}
-                  />
+                    <Stack.Screen
+                      name="ProductAdd"
+                      component={ProductAdd}
+                      options={{ headerShown: false }}
+                    />
 
-                  <Stack.Screen
-                    name="CategoriesScreen"
-                    component={CategoriesScreen}
-                    options={{ headerShown: false }}
-                  />
-                  <Stack.Screen
-                    name="HomeUser"
-                    component={HomeUser}
-                    options={{ headerShown: false }}
-                  />
+                    <Stack.Screen
+                      name="CategoriesScreen"
+                      component={CategoriesScreen}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="HomeUser"
+                      component={HomeUser}
+                      options={{ headerShown: false }}
+                    />
 
-                  <Stack.Screen
-                    name="Home"
-                    component={Home}
-                    options={{ headerShown: false }}
-                  />
+                    <Stack.Screen
+                      name="Home"
+                      component={Home}
+                      options={{ headerShown: false }}
+                    />
 
-                  <Stack.Screen
-                    name="SignUp"
-                    component={SignUp}
-                    options={{ headerShown: false }}
-                  />
-                  <Stack.Screen
-                    name="ProfileEdit"
-                    component={ProfileEdit}
-                    options={{ headerShown: false }}
-                  />
+                    <Stack.Screen
+                      name="SignUp"
+                      component={SignUp}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="ProfileEdit"
+                      component={ProfileEdit}
+                      options={{ headerShown: false }}
+                    />
 
+                    <Stack.Screen
+                      name="CategoryAdd"
+                      component={CategoryAdd}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="Orders"
+                      component={Orders}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="OrdersClient"
+                      component={OrdersClient}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="DetailsAuctionCard"
+                      component={DetailsAuctionCard}
+                      options={{
+                        title: "Auctions Available",
+                      }}
+                    />
+                    <Stack.Screen
+                      name="AuctionDetails"
+                      component={AuctionDetails}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="AllUsers"
+                      component={AllUsers}
+                      options={{ headerShown: false }}
+                    />
+                  </>
+                ) : (
                   <Stack.Screen
-                    name="CategoryAdd"
-                    component={CategoryAdd}
+                    name="ProductDetails"
+                    component={ProductDetails}
                     options={{ headerShown: false }}
                   />
-                  <Stack.Screen
-                    name="Orders"
-                    component={Orders}
-                    options={{ headerShown: false }}
-                  />
-
-                  <Stack.Screen
-                    name="DetailsAuctionCard"
-                    component={DetailsAuctionCard}
-                    options={{
-                      title: "Auctions Available",
-                    }}
-                  />
-                  <Stack.Screen
-                    name="AuctionDetails"
-                    component={AuctionDetails}
-                    options={{ headerShown: false }}
-                  />
-                  <Stack.Screen
-                    name="AllUsers"
-                    component={AllUsers}
-                    options={{ headerShown: false }}
-                  />
-                </>
-              ) : (
-                <Stack.Screen
-                  name="ProductDetails"
-                  component={ProductDetails}
-                  options={{ headerShown: false }}
-                />
-              )}
-            </Stack.Navigator>
-          </NavigationContainer>
+                )}
+              </Stack.Navigator>
+            </NavigationContainer>
+          </StripeProvider>
         </UserProvider>
       </ApolloProvider>
     );

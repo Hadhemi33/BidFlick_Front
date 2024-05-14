@@ -118,7 +118,7 @@ const AuctionDetails = ({ route }) => {
               Ending in :
             </TText>
             <TText T="15" F="bold">
-              {years}Y:{months}M:{days}D:{hours}H:{minutes}M:{seconds}S
+              {years}:{months}:{days}:{hours}:{minutes}:{seconds}
             </TText>
           </View>
           <View style={styles.InfosTime}>
