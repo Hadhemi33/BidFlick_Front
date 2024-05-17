@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../../../constants/colors";
 
-
 const styles = StyleSheet.create({
   container: {
     paddingTop: 30,
@@ -47,11 +46,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginRight: 5,
   },
-  cardInfoValue: {
-    fontWeight: "400",
-    fontSize: 40,
-    color: colors.black,
-  },
+  cardInfoValue: {},
   cardInfoLabel: {
     marginTop: 5,
 
@@ -73,10 +68,10 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   indicator: {
-    width: 35, 
-    height: 2, 
+    width: 35,
+    height: 2,
     backgroundColor: "gray",
-    margin: 5, 
+    margin: 5,
   },
   cardMore: {
     marginHorizontal: 10,

@@ -85,14 +85,21 @@ const ProfileEdit = ({ navigation }) => {
 
     return (
       <View style={styles.container}>
-        <TText T="16" F="semiBold" C="black" style={styles.infoText}>Loading...</TText>
+        <TText T="16" F="semiBold" C="black" style={styles.infoText}>
+          Loading...
+        </TText>
       </View>
     );
   }
   if (error || updateError) {
     return (
       <View style={styles.container}>
-        <TText T="16" F="semiBold" C="black" style={[styles.infoText, styles.errorText]}>
+        <TText
+          T="16"
+          F="semiBold"
+          C="black"
+          style={[styles.infoText, styles.errorText]}
+        >
           Error: {error ? error.message : updateError.message}
         </TText>
       </View>
@@ -103,7 +110,7 @@ const ProfileEdit = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={["#C5F5ED", colors.white]}
+        colors={["#FFFFFF", "#FFFFFF"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={styles.Header}
@@ -122,7 +129,6 @@ const ProfileEdit = ({ navigation }) => {
         <FilePickerComponent
           styleCont={styles.cont}
           styleImage={styles.image}
-         
           onFileSelected={handleFileSelected}
           I={require("../../../../assets/changeImage.png")}
         />

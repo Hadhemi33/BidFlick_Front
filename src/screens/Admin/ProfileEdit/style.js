@@ -39,6 +39,8 @@ const styles = StyleSheet.create({
     alignContent: "center",
     padding: 20,
     display: "flex",
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.rotana,
     flexDirection: "column",
     backgroundColor: colors.blueLight,
   },
@@ -75,6 +77,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   backgroundImage: {
+    
     borderRadius: 70,
     alignContent: "flex-end",
     alignSelf: "flex-end",

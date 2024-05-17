@@ -50,7 +50,7 @@ function UserMenu({
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={["#F1F1F1", "#E0FBE2"]}
+        colors={["#FFFFFF", "#FFFFFF"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={styles.Header}
@@ -141,7 +141,7 @@ function UserMenu({
         </View>
       </View>
       <GradianButton
-      onPress={onPressBack}
+        onPress={onPressBack}
         style={styles.ButtonsPic}
         T="18"
         F="semiBold"

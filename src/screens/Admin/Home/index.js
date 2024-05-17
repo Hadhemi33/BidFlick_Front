@@ -18,7 +18,8 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={["#F1F1F1", "#E0FBE2"]}
+        colors={["#FFFFFF", "#FFFFFF"]}
+        // colors={["#F1F1F1", "#E0FBE2"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={styles.Header}

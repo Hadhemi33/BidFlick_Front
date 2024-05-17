@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     justifyContent: "space-between",
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.rotana,
 
     backgroundColor: colors.blueLight,
   },

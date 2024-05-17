@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignContent: "center",
     padding: 20,
-
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.sea,
     backgroundColor: colors.blueLight,
   },
   InputStyle: {

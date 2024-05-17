@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  SafeAreaView,
   TouchableOpacity,
   Image,
   ImageBackground,
@@ -51,7 +50,18 @@ const AuctionDetails = ({ route }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRemainingTime(calculateTimeRemaining(route.params.item.endingIn));
+      const timeRemaining = calculateTimeRemaining(route.params.item.endingIn);
+      setRemainingTime(timeRemaining);
+      if (
+        timeRemaining.years <= 0 &&
+        timeRemaining.months <= 0 &&
+        timeRemaining.days <= 0 &&
+        timeRemaining.hours <= 0 &&
+        timeRemaining.minutes <= 0 &&
+        timeRemaining.seconds <= 0
+      ) {
+        clearInterval(interval); // Stop the interval when time is up
+      }
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -76,76 +86,84 @@ const AuctionDetails = ({ route }) => {
   const { item } = route.params;
   const navigation = useNavigation();
 
-  // const da = item.createdAt.split("T")[0];
-  // const time = item.createdAt.split("T")[1].split(".")[0];
+  // const { years, months, days, hours, minutes, seconds } =
+  //   calculateTimeRemaining(item.endingIn);
+  const { years, months, days, hours, minutes, seconds } = remainingTime;
 
-  const { years, months, days, hours, minutes, seconds } =
-    calculateTimeRemaining(item.endingIn);
+  const timeLeft = years + months + days + hours + minutes + seconds;
 
   return (
-    <ImageBackground
-      key={item.id}
-      source={{ uri: item.imageUrl }}
-      style={styles.container}
-      imageStyle={styles.backgroundImage}
-    >
-      <View style={styles.header}>
-        <View style={styles.Likess}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Feather name="chevron-left" color="#000" size={25} />
-          </TouchableOpacity>
-          <TText T="17" F="regular" style={styles.LikesText}>
-            {item.user.fullName}
-          </TText>
+    <View style={styles.container}>
+      <ImageBackground
+        key={item.id}
+        source={{ uri: item.imageUrl }}
+        style={styles.containerr}
+        imageStyle={styles.backgroundImage}
+      >
+        <View style={styles.header}>
+          <View style={styles.Likess}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Feather name="chevron-left" color="#000" size={25} />
+            </TouchableOpacity>
+            <TText T="17" F="regular" style={styles.LikesText}>
+              {item.user.fullName}
+            </TText>
+          </View>
+          <View style={styles.Likes}>
+            <TText T="17" F="regular" style={styles.LikesText}>
+              {item.nbrLike}
+            </TText>
+            <TouchableOpacity onPress={() => toggleLike(item.id)}>
+              <Image
+                style={styles.LikesImage}
+                source={require("../../../../assets/heart_8812101.png")}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.Likes}>
-          <TText T="17" F="regular" style={styles.LikesText}>
-            {item.nbrLike}
-          </TText>
-          <TouchableOpacity onPress={() => toggleLike(item.id)}>
-            <Image
-              style={styles.LikesImage}
-              source={require("../../../../assets/heart_8812101.png")}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
 
-      <View style={styles.cont3}>
-        <View style={styles.Infos}>
-          <View style={styles.InfosTime}>
-            <TText T="13" F="semiBold">
-              Ending in :
-            </TText>
-            <TText T="15" F="bold">
-              {years}:{months}:{days}:{hours}:{minutes}:{seconds}
-            </TText>
+        <View style={styles.cont3}>
+          <View style={styles.Infos}>
+            <View style={styles.InfosTime}>
+              <TText T="13" F="semiBold">
+                {timeLeft <= 0 ? "Expired" : "Ending in"} :
+              </TText>
+              {timeLeft <= 0 ? (
+                <TText T="15" F="bold">
+                  Expired
+                </TText>
+              ) : (
+                <TText T="15" F="bold">
+                  {years}:{months}:{days}:{hours}:{minutes}:{seconds}
+                </TText>
+              )}
+            </View>
+            <View style={styles.InfosTime}>
+              <TText T="13" F="semiBold">
+                Highest Price :
+              </TText>
+              <TText T="15" F="bold">
+                {item.price}$
+              </TText>
+            </View>
           </View>
-          <View style={styles.InfosTime}>
-            <TText T="13" F="semiBold">
-              Highest Price :
-            </TText>
-            <TText T="15" F="bold">
-              {item.price}$
-            </TText>
+          <View style={styles.BtnDelete}>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <TText
+                T="18"
+                F="semiBold"
+                C="green"
+                onPress={() => {
+                  handleDeleteAuction(item.id);
+                }}
+              >
+                Delete
+              </TText>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.BtnDelete}>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-            <TText
-              T="18"
-              F="semiBold"
-              C="green"
-              onPress={() => {
-                handleDeleteAuction(item.id);
-              }}
-            >
-              Delete
-            </TText>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </View>
   );
 };
 

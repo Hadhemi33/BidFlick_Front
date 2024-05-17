@@ -29,6 +29,9 @@ import AuctionAdd from "./src/screens/Client/AuctionAdd";
 import PaymentScreen from "./src/screens/Client/Payment";
 import OrdersClient from "./src/screens/Admin/OrdersClient";
 import OrderDetails from "./src/screens/Admin/OrderDetails";
+
+import Notifications from "./src/screens/Admin/Notifications";
+
 const Stack = createNativeStackNavigator();
 
 const theme = {
@@ -57,11 +60,7 @@ export default function App() {
     return (
       <ApolloProvider client={client}>
         <UserProvider>
-          <StripeProvider
-            publishableKey="pk_test_51NvT6pJbmdmPG9jvysqtceUPBezUOLCsxKMJCziF9x1qp8cyYc2w2rxetrizKS07YwxJwyNug8p67v5UQNh8XHq300fbwcZLXR"
-            // urlScheme="your-url-scheme"
-            // merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}"
-          >
+          <StripeProvider publishableKey="pk_test_51NvT6pJbmdmPG9jvysqtceUPBezUOLCsxKMJCziF9x1qp8cyYc2w2rxetrizKS07YwxJwyNug8p67v5UQNh8XHq300fbwcZLXR">
             <NavigationContainer theme={theme}>
               <Stack.Navigator>
                 <Stack.Screen
@@ -80,6 +79,12 @@ export default function App() {
                   options={{ headerShown: false }}
                 />
                 <Stack.Screen
+                  name="Notifications"
+                  component={Notifications}
+                  options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
                   name="Menu"
                   component={Menu}
                   options={{ headerShown: false }}
@@ -94,7 +99,6 @@ export default function App() {
                   component={SignIn}
                   options={{ headerShown: false }}
                 />
-
                 {isLoggedIn ? (
                   <>
                     {/* <Stack.Screen

@@ -4,10 +4,21 @@ import { colors } from "../../../constants/colors";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    padding: 20,
+    marginTop: 60,
+    padding: 10,
+    marginBottom: 40,
   },
-
+  containerr: {
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    alignSelf: "center",
+    // padding: 20,
+    width: "100%",
+    height: "65%",
+    backgroundColor: colors.sea,
+  },
   header: {
     display: "flex",
     flexDirection: "row",
@@ -15,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
 
     width: "100%",
-    top: 50,
+    top: 10,
     paddingHorizontal: 20,
     position: "absolute",
   },
@@ -26,26 +37,17 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     marginBottom: 10,
   },
-  cardContainer: {
-    display: "flex",
-    marginHorizontal: 10,
-    alignItems: "flex-end",
-    alignSelf: "flex-end",
-    justifyContent: "flex-end",
-    width: 367,
-    height: 176,
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 30,
-    borderWidth: 1,
-    borderColor: colors.greyGreen,
-  },
-  backgroundImage: {
-    objectFit: "scale-down",
-    opacity: 0.8,
-    alignSelf: "center",
 
+  backgroundImage: {
+    objectFit: "cover",
+    opacity: 0.8,
+    position: "absolute",
+    alignItems: "center",
+    alignContent: "center",
+    alignSelf: "center",
     borderRadius: 10,
+    width: "100%",
+    height: "100%",
   },
   Likess: {
     padding: 4,
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   BtnDelete: {
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: colors.white,
     borderWidth: 2,
     borderColor: colors.blueBorder,
     alignContent: "center",
