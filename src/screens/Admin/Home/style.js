@@ -24,10 +24,37 @@ const styles = StyleSheet.create({
 
     backgroundColor: colors.blueLight,
   },
+  notif: {
+    flexDirection: "column",
+    top: 17,
+    marginRight: 5,
+  },
+  circle: {
+    width: 20,
+    height: 20,
+    alignSelf: "center",
+
+    top: -28,
+    borderRadius: 10,
+
+    backgroundColor: colors.rotana,
+  },
+  iconImages: {
+    flexDirection: "row",
+    alignItems: "center",
+
+    alignContent: "center",
+    justifyContent: "space-between",
+    // backgroundColor: colors.sea,
+  },
   icon: {
     alignSelf: "center",
     marginLeft: 10,
     // width: "13%",
+  },
+  statValue: {
+    alignSelf: "center",
+    backgroundColor: colors.rotana,
   },
   titre: { flexDirection: "row", marginRight: 10, marginTop: 5 },
   auctions: {
@@ -45,10 +72,15 @@ const styles = StyleSheet.create({
   },
   ProfileImage: {
     top: 13,
-    backgroundColor: colors.sea,
+    // backgroundColor: colors.sea,
     width: 35,
+    alignSelf: "center",
     height: 35,
     borderRadius: 20,
+  },
+  notifIcon: {
+    alignSelf: "center",
+    top: 10,
   },
 });
 

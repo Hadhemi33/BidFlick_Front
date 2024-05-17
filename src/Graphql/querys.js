@@ -132,3 +132,14 @@ export const HISTORY_QUERY = gql`
     }
   }
 `;
+export const NOTIFICATION_QUERY = gql`
+  query GetNotifications {
+    getNotifications {
+      id
+      message
+      user {
+        id
+      }
+    }
+  }
+`;

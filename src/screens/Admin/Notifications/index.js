@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   View,
   TouchableOpacity,
@@ -8,26 +8,24 @@ import {
   Alert,
   Image,
 } from "react-native";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery, useMutation } from "@apollo/client";
-import { HISTORY_QUERY, ORDERS_QUERY } from "../../../Graphql/querys";
+import {
+  HISTORY_QUERY,
+  NOTIFICATION_QUERY,
+  ORDERS_QUERY,
+} from "../../../Graphql/querys";
 import { DELETE_ORDER_MUTATION } from "../../../Graphql/mutations";
 import styles from "./style";
 import { MaterialIcons } from "@expo/vector-icons";
 import TText from "../../../components/TText";
 import { useUser } from "../../../Graphql/userContext";
-import NotificationAdmin from "./notificationAdmin";
-import NotificationClient from "./notificationClient";
 
 const Notifications = () => {
   const user = useUser();
-  useEffect(() => {
-    if (user.roles === "admin") {
-      setIsAdmin(true);
-    }
-  }, [user.roles]);
+
   const [isAdmin, setIsAdmin] = useState(false);
   const connectedUserId = user.id;
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,11 +37,8 @@ const Notifications = () => {
   } = useQuery(HISTORY_QUERY, {
     pollInterval: 5000,
   });
-  const { data, loading, error, refetch } = useQuery(ORDERS_QUERY, {
+  const { data, loading, error, refetch } = useQuery(NOTIFICATION_QUERY, {
     pollInterval: 5000,
-  });
-  const [deleteOrder] = useMutation(DELETE_ORDER_MUTATION, {
-    refetchQueries: [{ query: ORDERS_QUERY, query: HISTORY_QUERY }],
   });
 
   const navigation = useNavigation();
@@ -52,7 +47,12 @@ const Notifications = () => {
       refetch();
     }, [refetch])
   );
-
+  const handleSearchInput = (text) => {
+    setSearchQuery(text);
+  };
+  const filtredOrders = data
+    ? data.getNotifications.filter((notif) => notif.user.id === connectedUserId)
+    : [];
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
@@ -63,6 +63,44 @@ const Notifications = () => {
       </View>
     );
   }
+  const CardCat = ({ item }) => {
+    const { id, user, message } = item;
+
+    return (
+      <View style={styles.userItem}>
+        <View style={styles.infos}>
+          {/* <TText
+            T="14"
+            F="regular"
+            C="black"
+            style={styles.statValue}
+            onPress={() => navigation.navigate("OrderDetails", { item })}
+          >
+            {id}
+          </TText> */}
+          <TText
+            T="14"
+            F="regular"
+            C="black"
+            style={styles.statValue}
+            onPress={() => navigation.navigate("OrderDetails", { item })}
+          >
+            {message}
+          </TText>
+        </View>
+        <View style={styles.delAdd}>
+          <TouchableOpacity
+            style={styles.delUser}
+            onPress={() => {
+              handleDeleteOrder(item.id);
+            }}
+          >
+            <MaterialIcons name="delete-forever" size={24} color="red" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
 
   if (error) {
     return (
@@ -76,7 +114,30 @@ const Notifications = () => {
 
   return (
     <View style={styles.container}>
-      {isAdmin ? <NotificationAdmin /> : <NotificationClient />}
+      <View style={styles.header}>
+        <View style={styles.headerIcon}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Feather name="chevron-left" color="#000" size={25} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.headerTitle}>
+          <TextInput
+            style={styles.SearchInput}
+            placeholder="Search order.."
+            value={searchQuery}
+            onChangeText={handleSearchInput}
+          />
+        </View>
+      </View>
+
+      <View style={styles.statsCard}>
+        <FlatList
+          data={filtredOrders}
+          keyExtractor={(item, index) => item.id}
+          numColumns={1}
+          renderItem={({ item }) => <CardCat item={item} />}
+        />
+      </View>
     </View>
   );
 };

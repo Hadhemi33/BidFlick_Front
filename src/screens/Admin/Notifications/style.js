@@ -4,7 +4,7 @@ import { colors } from "../../../constants/colors";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60,
+    marginTop: 20,
     padding: 20,
     marginBottom: 40,
   },
@@ -28,6 +28,13 @@ const styles = StyleSheet.create({
   statsCard: {
     marginVertical: 10,
     borderRadius: 10,
+  },
+  iconImages: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "space-between",
+    backgroundColor: colors.sea,
   },
   card: {
     marginTop: 20,
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   userItem: {
-    marginTop: 20,
+    marginTop: 10,
     flex: 1,
 
     marginHorizontal: 10,
