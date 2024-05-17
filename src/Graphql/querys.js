@@ -137,6 +137,7 @@ export const NOTIFICATION_QUERY = gql`
     getNotifications {
       id
       message
+      createdAt
       user {
         id
       }

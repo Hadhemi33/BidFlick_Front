@@ -12,34 +12,46 @@ import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery, useMutation } from "@apollo/client";
-import {
-  HISTORY_QUERY,
-  NOTIFICATION_QUERY,
-  ORDERS_QUERY,
-} from "../../../Graphql/querys";
-import { DELETE_ORDER_MUTATION } from "../../../Graphql/mutations";
+import { NOTIFICATION_QUERY } from "../../../Graphql/querys";
 import styles from "./style";
 import { MaterialIcons } from "@expo/vector-icons";
 import TText from "../../../components/TText";
 import { useUser } from "../../../Graphql/userContext";
+import { DELETE_NOTIF } from "../../../Graphql/mutations";
 
 const Notifications = () => {
   const user = useUser();
 
-  const [isAdmin, setIsAdmin] = useState(false);
   const connectedUserId = user.id;
   const [searchQuery, setSearchQuery] = useState("");
-  const {
-    data: HisData,
-    loading: Hisloading,
-    error: HisError,
-    refetch: HisRefetch,
-  } = useQuery(HISTORY_QUERY, {
-    pollInterval: 5000,
-  });
+
   const { data, loading, error, refetch } = useQuery(NOTIFICATION_QUERY, {
-    pollInterval: 5000,
+    pollInterval: 1000,
   });
+  const [deleteNotification] = useMutation(DELETE_NOTIF, {
+    refetchQueries: [{ query: NOTIFICATION_QUERY }],
+  });
+  const handleDeleteNotif = async (id) => {
+    try {
+      console.log(typeof id);
+
+      const deldata = deleteNotification({
+        variables: {
+          id: id.toString(),
+        },
+      });
+      refetch();
+      Alert.alert("Success", `notif Deleted.`);
+    } catch (error) {
+      console.error("Error deleting Notification:", HisError);
+      console.log("id", id);
+
+      Alert.alert(
+        "Error",
+        `An error occurred while deleting the notification.`
+      );
+    }
+  };
 
   const navigation = useNavigation();
   useFocusEffect(
@@ -50,8 +62,20 @@ const Notifications = () => {
   const handleSearchInput = (text) => {
     setSearchQuery(text);
   };
+
   const filtredOrders = data
     ? data.getNotifications.filter((notif) => notif.user.id === connectedUserId)
+    : [];
+  const filtredUsers = filtredOrders
+    ? filtredOrders.filter((order) => {
+        const searchLower = searchQuery.toLowerCase();
+
+        const matchesUserFullName = order.message
+          ?.toLowerCase()
+          .includes(searchLower);
+
+        return matchesUserFullName;
+      })
     : [];
   if (loading) {
     return (
@@ -64,20 +88,21 @@ const Notifications = () => {
     );
   }
   const CardCat = ({ item }) => {
-    const { id, user, message } = item;
-
+    const { id, user, message, createdAt } = item;
+    const date = createdAt.slice(0, 19).replace("T", " ");
+    console.log(date);
     return (
       <View style={styles.userItem}>
         <View style={styles.infos}>
-          {/* <TText
-            T="14"
+          <TText
+            T="10"
             F="regular"
-            C="black"
+            C="darkGrey"
             style={styles.statValue}
             onPress={() => navigation.navigate("OrderDetails", { item })}
           >
-            {id}
-          </TText> */}
+            {date}
+          </TText>
           <TText
             T="14"
             F="regular"
@@ -92,7 +117,7 @@ const Notifications = () => {
           <TouchableOpacity
             style={styles.delUser}
             onPress={() => {
-              handleDeleteOrder(item.id);
+              handleDeleteNotif(item.id);
             }}
           >
             <MaterialIcons name="delete-forever" size={24} color="red" />
@@ -132,7 +157,7 @@ const Notifications = () => {
 
       <View style={styles.statsCard}>
         <FlatList
-          data={filtredOrders}
+          data={filtredUsers}
           keyExtractor={(item, index) => item.id}
           numColumns={1}
           renderItem={({ item }) => <CardCat item={item} />}

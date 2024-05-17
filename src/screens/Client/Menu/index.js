@@ -29,7 +29,7 @@ function Menu({ navigation }) {
     navigation.navigate("AuctionAdd");
   };
   const navHomeUser = () => {
-    navigation.navigate("Notifications");
+    navigation.navigate("HomeUser");
   };
   const navEdit = () => {
     navigation.navigate("ProfileEdit");

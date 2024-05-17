@@ -126,3 +126,8 @@ export const PAYMENT_MUTATION = gql`
     createPaymentIntent(amount: $amount, currency: $currency)
   }
 `;
+export const DELETE_NOTIF = gql`
+  mutation DeleteNotification($id: String!) {
+    deleteNotification(id: $id)
+  }
+`;

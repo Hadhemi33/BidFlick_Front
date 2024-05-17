@@ -12,7 +12,7 @@ import AuctionCard from "../../../components/Cards/AuctionCard";
 import ProductCard from "../../../components/Cards/ProductCard";
 import { useUser } from "../../../Graphql/userContext";
 import { useNavigation } from "@react-navigation/native";
-import { FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
+import { FontAwesome5, FontAwesome6, Ionicons } from "@expo/vector-icons";
 import TText from "../../../components/TText";
 
 const HomeUser = () => {
@@ -39,26 +39,41 @@ const HomeUser = () => {
           value={searchQuery}
           onChangeText={handleSearchInput}
         />
-        <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
-          {user.imageUrl ? (
-            <Image
-              style={styles.ProfileImage}
-              source={{ uri: user.imageUrl }}
-            />
-          ) : (
-            <Image
-              style={styles.ProfileImage}
-              source={require("../../../../assets/people19.png")}
-            />
-          )}
-        </TouchableOpacity>
+        <View style={styles.iconImages}>
+          <View style={styles.notif}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Notifications")}
+            >
+              <Ionicons
+                style={styles.notifIcon}
+                name="notifications-outline"
+                size={30}
+                color="black"
+              />
+            </TouchableOpacity>
+
+            <View style={styles.circle}>
+              {/* <TText T="14" F="bold" C="white" style={styles.statValue}>
+                1
+              </TText> */}
+            </View>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
+            {user.imageUrl ? (
+              <Image
+                style={styles.ProfileImage}
+                source={{ uri: user.imageUrl }}
+              />
+            ) : (
+              <Image
+                style={styles.ProfileImage}
+                source={require("../../../../assets/people19.png")}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
       </LinearGradient>
-      <View style={styles.titre}>
-        <FontAwesome5 name="fire" size={20} color="black" style={styles.icon} />
-        <TText T="18" F="semiBold" C="black" style={styles.auctions}>
-          Auctions :
-        </TText>
-      </View>
+
       <TText
         onPress={() => navigation.navigate("AuctionAdd")}
         T="18"

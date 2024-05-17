@@ -13,7 +13,7 @@ import ProductCard from "../../../components/Cards/ProductCard";
 import { useUser } from "../../../Graphql/userContext";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import TText from "../../../components/TText";
+
 const Home = () => {
   const navigation = useNavigation();
   const user = useUser();
@@ -27,7 +27,6 @@ const Home = () => {
     <SafeAreaView style={styles.container}>
       <LinearGradient
         colors={["#FFFFFF", "#FFFFFF"]}
-        // colors={["#F1F1F1", "#E0FBE2"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={styles.Header}
@@ -40,7 +39,9 @@ const Home = () => {
         />
         <View style={styles.iconImages}>
           <View style={styles.notif}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Notifications")}
+            >
               <Ionicons
                 style={styles.notifIcon}
                 name="notifications-outline"
