@@ -131,3 +131,14 @@ export const DELETE_NOTIF = gql`
     deleteNotification(id: $id)
   }
 `;
+export const SET_BID = gql`
+  mutation CreateSpecialProductPrice(
+    $createSpecialProductPriceInput: CreateSpecialProductPriceInput!
+  ) {
+    createSpecialProductPrice(
+      createSpecialProductPriceInput: $createSpecialProductPriceInput
+    ) {
+      price
+    }
+  }
+`;

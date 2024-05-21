@@ -10,6 +10,7 @@ import CategorySelector from "../CategorySelector";
 import FilePickerComponent from "../../../components/FilePickerComponent";
 import { Alert } from "react-native";
 import TText from "../../../components/TText";
+import { Text } from "react-native";
 function ProductAdd() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -85,12 +86,17 @@ function ProductAdd() {
           selectedCategories={selectedCategories}
           onChange={setSelectedCategories}
         />
-        <View style={{ width: "40%", height: "20%" }}>
+        <View style={{ width: "100%", height: "20%" }}>
           {/* <FilePickerComponent onFileSelected={handleFileSelected} /> */}
           <FilePickerComponent
+            styleCont={styles.cont}
             onFileSelected={handleFileSelected}
+            styleImage={styles.image}
             I={require("../../../../assets/changeImage.png")}
           />
+          <TText T="13" F="light" C="lightGrey" style={styles.addText}>
+            Add Picture
+          </TText>
         </View>
         <LightButton
           style={styles.ButtonsPic}
@@ -100,9 +106,21 @@ function ProductAdd() {
         >
           Create Product
         </LightButton>
-        {loading && <TText T="16" F="semiBold" C="black">Loading...</TText>}
-        {error && <TText T="16" F="semiBold" C="black">Error: {error.message}</TText>}
-        {data && <TText T="16" F="semiBold" C="black">Product Created: {data.createProduct.title}</TText>}
+        {loading && (
+          <TText T="16" F="semiBold" C="black">
+            Loading...
+          </TText>
+        )}
+        {error && (
+          <TText T="16" F="semiBold" C="black">
+            Error: {error.message}
+          </TText>
+        )}
+        {data && (
+          <TText T="16" F="semiBold" C="black">
+            Product Created: {data.createProduct.title}
+          </TText>
+        )}
       </View>
     </SafeAreaView>
   );

@@ -10,6 +10,27 @@ const styles = StyleSheet.create({
     padding: 60,
     position: "absolute",
   },
+  cont: {
+    marginTop: 10,
+    width: 60,
+    height: 60,
+    borderRadius: 10,
+
+    backgroundColor: colors.white,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 10,
+  },
+  addText: {
+    alignSelf: "center",
+    alignContent: "center",
+    top: -10,
+  },
   Header: {
     display: "flex",
     flexDirection: "column",

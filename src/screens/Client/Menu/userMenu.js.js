@@ -25,8 +25,8 @@ import TText from "../../../components/TText";
 
 import { useUser } from "../../../Graphql/userContext";
 import GradianButton from "../../../components/Buttons/GradianButton";
+import { useNavigation } from "@react-navigation/native";
 function UserMenu({
-  navigation,
   onHomePress,
   onPress,
   onOrdPress,
@@ -35,6 +35,7 @@ function UserMenu({
   onEditPress,
 }) {
   const user = useUser();
+  const navigation = useNavigation();
 
   const Arrow = ({ onPress }) => (
     <Feather
@@ -72,7 +73,26 @@ function UserMenu({
           </TText>
         </View>
       </LinearGradient>
-
+      <View style={styles.add}>
+        <TText
+          onPress={() => navigation.navigate("ProductAdd")}
+          T="13"
+          F="regular"
+          C="black"
+          style={styles.addText}
+        >
+          + Product
+        </TText>
+        <TText
+          onPress={() => navigation.navigate("AuctionAdd")}
+          T="13"
+          F="regular"
+          C="black"
+          style={styles.addText}
+        >
+          + Auction
+        </TText>
+      </View>
       <View style={styles.choices}>
         <View style={styles.choice}>
           <FontAwesome

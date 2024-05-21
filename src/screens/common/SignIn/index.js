@@ -56,7 +56,7 @@ const SignIn = ({ navigation }) => {
       await AsyncStorage.setItem("accessToken", token);
       const retrievedToken = await AsyncStorage.getItem("accessToken");
       console.log("Retrieved token:", retrievedToken);
-      navigation.navigate("Home");
+      navigation.navigate("HomeUser");
     } catch (error) {
       console.error("Error creating user:", error);
     }
@@ -74,7 +74,9 @@ const SignIn = ({ navigation }) => {
 
     return (
       <View style={styles.container}>
-        <TText T="16" F="semiBold" C="black" style={styles.infoText}>Loading...</TText>
+        <TText T="16" F="semiBold" C="black" style={styles.infoText}>
+          Loading...
+        </TText>
       </View>
     );
   }
@@ -82,7 +84,12 @@ const SignIn = ({ navigation }) => {
   if (error || signinError) {
     return (
       <View style={styles.container}>
-        <TText T="16" F="semiBold" C="black" style={[styles.infoText, styles.errorText]}>
+        <TText
+          T="16"
+          F="semiBold"
+          C="black"
+          style={[styles.infoText, styles.errorText]}
+        >
           Error: {error ? error.message : signinError.message}
         </TText>
       </View>
@@ -131,7 +138,6 @@ const SignIn = ({ navigation }) => {
           onChangeText={setPassword}
           placeholder="*********"
           secureTextEntry
-        
         />
         <View style={styles.ForgotPass}>
           <View style={styles.Remember}>

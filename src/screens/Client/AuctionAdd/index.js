@@ -192,7 +192,15 @@ function AuctionAdd() {
           <Text>Auction Created: {data.createSpecialProduct.title}</Text>
         )}
       </View>
-      <Text onPress={handleSubmit}>Create</Text>
+      <LightButton
+        style={styles.ButtonsPic}
+        onPress={handleSubmit}
+        T="18"
+        F="semiBold"
+      >
+        Create
+      </LightButton>
+      {/* <Text onPress={handleSubmit}>Create</Text> */}
     </SafeAreaView>
   );
 }

@@ -10,11 +10,17 @@ import styles from "./style";
 import Feather from "@expo/vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 import TText from "../../../components/TText";
-
-import { DELETE_Auction_MUTATION_ADMIN } from "../../../Graphql/mutations";
+import InputSpinner from "react-native-input-spinner";
+import {
+  DELETE_Auction_MUTATION_ADMIN,
+  SET_BID,
+} from "../../../Graphql/mutations";
 import { useMutation } from "@apollo/client";
+import { useUser } from "../../../Graphql/userContext";
+import { colors } from "../../../constants/colors";
 const calculateTimeRemaining = (endDate) => {
   const endDateObj = new Date(endDate);
+
   const currentDateObj = new Date();
 
   const timeDifference = endDateObj - currentDateObj;
@@ -44,6 +50,21 @@ const calculateTimeRemaining = (endDate) => {
   return { years, months, days, hours, minutes, seconds };
 };
 const AuctionDetails = ({ route }) => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
+
+  const user = useUser();
+  const connectedUserId = user.id;
+  const productUserId = route.params.item.user.id;
+  // console.log(productUserId, connectedUserId);
+  useEffect(() => {
+    if (connectedUserId === productUserId) {
+      setIsOwner(true);
+    }
+    if (user.roles === "admin") {
+      setIsAdmin(true);
+    }
+  }, [connectedUserId, productUserId, user.roles]);
   const [remainingTime, setRemainingTime] = useState(
     calculateTimeRemaining(route.params.item.endingIn)
   );
@@ -60,7 +81,7 @@ const AuctionDetails = ({ route }) => {
         timeRemaining.minutes <= 0 &&
         timeRemaining.seconds <= 0
       ) {
-        clearInterval(interval); // Stop the interval when time is up
+        clearInterval(interval);
       }
     }, 1000);
     return () => clearInterval(interval);
@@ -69,6 +90,27 @@ const AuctionDetails = ({ route }) => {
     DELETE_Auction_MUTATION_ADMIN,
     {}
   );
+  const [price, setPrice] = useState("");
+
+  const [createSpecialProductPrice] = useMutation(SET_BID, {});
+  const handleBid = async (id) => {
+    console.log("id", id);
+    try {
+      const data = await createSpecialProductPrice({
+        variables: {
+          createSpecialProductPriceInput: {
+            specialProductId: id,
+            price: price.toString(),
+          },
+        },
+      });
+      Alert.alert("Success", `Bid set.`);
+    } catch (error) {
+      console.error("Error biding auction:", error);
+      Alert.alert("Error", `An error occurred while biding auction.`);
+    }
+  };
+
   const handleDeleteAuction = async (id) => {
     console.log("id", id);
     try {
@@ -149,17 +191,39 @@ const AuctionDetails = ({ route }) => {
           </View>
           <View style={styles.BtnDelete}>
             <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-              <TText
-                T="18"
-                F="semiBold"
-                C="green"
-                onPress={() => {
-                  handleDeleteAuction(item.id);
-                }}
-              >
-                Delete
-              </TText>
+              {isAdmin || isOwner ? (
+                <TText
+                  T="18"
+                  F="semiBold"
+                  C="green"
+                  onPress={() => {
+                    handleDeleteAuction(item.id);
+                  }}
+                >
+                  Delete
+                </TText>
+              ) : (
+                <TText
+                  T="18"
+                  F="semiBold"
+                  C="green"
+                  onPress={() => {
+                    handleBid(item.id);
+                  }}
+                >
+                  Set a Bid
+                </TText>
+              )}
             </TouchableOpacity>
+            <InputSpinner
+              // max={10}
+              min={item.price}
+              step={2}
+              colorMax={"#f04048"}
+              colorMin={colors.blueLight}
+              value={price}
+              onChange={setPrice}
+            />
           </View>
         </View>
       </ImageBackground>

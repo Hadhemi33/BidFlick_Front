@@ -14,20 +14,28 @@ import { useUser } from "../../../Graphql/userContext";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5, FontAwesome6, Ionicons } from "@expo/vector-icons";
 import TText from "../../../components/TText";
+import { useQuery } from "@apollo/client";
+import { Categories_QUERY } from "../../../Graphql/querys";
 
 const HomeUser = () => {
   const navigation = useNavigation();
   const user = useUser();
+  const { dataCa, loadingCa, errorCat, refetchCat } = useQuery(
+    Categories_QUERY,
+    {
+      pollInterval: 5000,
+    }
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const handleSearchInput = (searchQuery) => {
     setSearchQuery(searchQuery || " ");
   };
 
   const searchQueryy = searchQuery;
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        // colors={["#C5F5ED", colors.white]}
         colors={["#FFFFFF", "#FFFFFF"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
@@ -74,15 +82,12 @@ const HomeUser = () => {
         </View>
       </LinearGradient>
 
-      <TText
-        onPress={() => navigation.navigate("AuctionAdd")}
-        T="18"
-        F="semiBold"
-        C="black"
-        style={styles.auctions}
-      >
-        Auctions :
-      </TText>
+      <View style={styles.titre}>
+        <FontAwesome5 name="fire" size={20} color="black" style={styles.icon} />
+        <TText T="18" F="semiBold" C="black" style={styles.auctions}>
+          Auctions :
+        </TText>
+      </View>
       <AuctionCard
         searchQueryy={searchQueryy}
         onPress={(card) =>
