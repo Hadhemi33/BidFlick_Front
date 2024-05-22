@@ -16,22 +16,26 @@ import { SpecialProducts_QUERY } from "../../../Graphql/querys";
 import { useQuery } from "@apollo/client";
 
 const DetailsAuctionCard = ({ onPress }) => {
-  const navigation = useNavigation();  
+  const navigation = useNavigation();
   const { data, loading, error } = useQuery(SpecialProducts_QUERY, {
-    pollInterval: 30000,
+    pollInterval: 1000,
   });
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <TText T="16" F="semiBold" C="black">Loading...</TText>
+        <TText T="16" F="semiBold" C="black">
+          Loading...
+        </TText>
       </View>
     );
   }
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <TText T="16" F="semiBold" C="black">Error loading special Products: {error.message}</TText>
+        <TText T="16" F="semiBold" C="black">
+          Error loading special Products: {error.message}
+        </TText>
       </View>
     );
   }
@@ -45,11 +49,7 @@ const DetailsAuctionCard = ({ onPress }) => {
   };
   return (
     <View style={styles.container}>
-      <ScrollView
-      
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-      >
+      <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
         {data?.getAllSpecialProducts.map((card, index) => (
           <View key={card.id}>
             <ImageBackground

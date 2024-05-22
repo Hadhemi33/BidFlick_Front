@@ -8,7 +8,7 @@ import {
   Alert,
   Image,
 } from "react-native";
-import {  Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery, useMutation } from "@apollo/client";
@@ -148,7 +148,7 @@ const Notifications = () => {
         <View style={styles.headerTitle}>
           <TextInput
             style={styles.SearchInput}
-            placeholder="Search order.."
+            placeholder="Search ..."
             value={searchQuery}
             onChangeText={handleSearchInput}
           />

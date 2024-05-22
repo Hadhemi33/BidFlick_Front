@@ -18,11 +18,11 @@ import {
 import { useMutation } from "@apollo/client";
 import { useUser } from "../../../Graphql/userContext";
 import { colors } from "../../../constants/colors";
+import { SpecialProducts_QUERY } from "../../../Graphql/querys";
+
 const calculateTimeRemaining = (endDate) => {
   const endDateObj = new Date(endDate);
-
   const currentDateObj = new Date();
-
   const timeDifference = endDateObj - currentDateObj;
 
   const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
@@ -49,6 +49,7 @@ const calculateTimeRemaining = (endDate) => {
 
   return { years, months, days, hours, minutes, seconds };
 };
+
 const AuctionDetails = ({ route }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
@@ -56,15 +57,20 @@ const AuctionDetails = ({ route }) => {
   const user = useUser();
   const connectedUserId = user.id;
   const productUserId = route.params.item.user.id;
-  // console.log(productUserId, connectedUserId);
+
   useEffect(() => {
-    if (connectedUserId === productUserId) {
+    if (connectedUserId === productUserId && !isOwner) {
       setIsOwner(true);
+    } else if (connectedUserId !== productUserId && isOwner) {
+      setIsOwner(false);
     }
-    if (user.roles === "admin") {
+    if (user.roles === "admin" && !isAdmin) {
       setIsAdmin(true);
+    } else if (user.roles !== "admin" && isAdmin) {
+      setIsAdmin(false);
     }
   }, [connectedUserId, productUserId, user.roles]);
+
   const [remainingTime, setRemainingTime] = useState(
     calculateTimeRemaining(route.params.item.endingIn)
   );
@@ -86,13 +92,16 @@ const AuctionDetails = ({ route }) => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
   const [deleteSpeciaProductAdmin] = useMutation(
     DELETE_Auction_MUTATION_ADMIN,
     {}
   );
   const [price, setPrice] = useState("");
 
-  const [createSpecialProductPrice] = useMutation(SET_BID, {});
+  const [createSpecialProductPrice] = useMutation(SET_BID, {
+    refetchQueries: [{ query: SpecialProducts_QUERY }],
+  });
   const handleBid = async (id) => {
     console.log("id", id);
     try {
@@ -125,11 +134,11 @@ const AuctionDetails = ({ route }) => {
       Alert.alert("Error", `An error occurred while deleting auction.`);
     }
   };
+
   const { item } = route.params;
   const navigation = useNavigation();
-
-  // const { years, months, days, hours, minutes, seconds } =
-  //   calculateTimeRemaining(item.endingIn);
+  const ppri = parseFloat(item.price);
+  const stepp = (parseFloat(item.discount) / 100) * ppri + 1;
   const { years, months, days, hours, minutes, seconds } = remainingTime;
 
   const timeLeft = years + months + days + hours + minutes + seconds;
@@ -216,12 +225,11 @@ const AuctionDetails = ({ route }) => {
               )}
             </TouchableOpacity>
             <InputSpinner
-              // max={10}
               min={item.price}
-              step={2}
               colorMax={"#f04048"}
               colorMin={colors.blueLight}
               value={price}
+              step={stepp}
               onChange={setPrice}
             />
           </View>
