@@ -82,11 +82,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
-    width: "20%",
+    width: "10%",
   },
   infos: {
     flexDirection: "column",
-    width: "70%",
+    width: "90%",
     height: "100%",
 
     justifyContent: "space-between",

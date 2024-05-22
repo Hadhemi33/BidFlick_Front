@@ -8,7 +8,7 @@ import {
   Alert,
   Image,
 } from "react-native";
-import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
+import {  Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery, useMutation } from "@apollo/client";
