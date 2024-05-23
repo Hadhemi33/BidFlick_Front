@@ -1,33 +1,38 @@
 import React, { useState } from "react";
-import { View, Button, Alert, SafeAreaView } from "react-native";
+import { View, Alert, SafeAreaView, ActivityIndicator } from "react-native";
 import { CardField, useStripe } from "@stripe/stripe-react-native";
 import styles from "./style";
 import { PAYMENT_MUTATION } from "../../../Graphql/mutations";
 import { useMutation } from "@apollo/client";
+import GradianButton from "../../../components/Buttons/GradianButton";
+import { colors } from "../../../constants/colors";
 
-const PaymentScreen = () => {
+const PaymentScreen = ({ style, amountTotal }) => {
   const { confirmPayment } = useStripe();
   const [createPaymentIntent] = useMutation(PAYMENT_MUTATION);
   const [clientSecret, setClientSecret] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const pay = async (amount, currency) => {
+  const pay = async () => {
+    setLoading(true);
+    console.log(typeof parseFloat(amountTotal));
     try {
-      const data = await createPaymentIntent({
+      const { data } = await createPaymentIntent({
         variables: {
-          amount: 5000,
+          amount: parseFloat(amountTotal) + 0.4,
           currency: "usd",
         },
       });
 
       const clientSecret = data.createPaymentIntent;
       setClientSecret(clientSecret);
-      handlePayPress(clientSecret);
-      Alert.alert("Success", `payment ok.`);
+      await handlePayPress(clientSecret);
+      Alert.alert("Success", "Payment successful.");
     } catch (error) {
-      console.log(data.createPaymentIntent);
-
-      console.error("Error payment :", error);
-      Alert.alert("Error", `An error occurred while payment.`);
+      console.error("Error payment:", error);
+      Alert.alert("Error", "An error occurred while processing the payment.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,28 +53,31 @@ const PaymentScreen = () => {
         Alert.alert("Success", "The payment was confirmed successfully!");
       }
     } catch (e) {
-      console.log("ee", e);
+      console.error("Payment confirmation error:", e);
     }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, style]}>
       <CardField
         postalCodeEnabled={false}
         placeholders={{
           number: "4242 4242 4242 4242",
         }}
-        cardStyle={{
-          backgroundColor: "#FFFFFF",
-          textColor: "#000000",
-        }}
         style={{
-          width: "100%",
-          height: 50,
+          alignSelf: "flex-start",
+          width: "90%",
+          height: 20,
           marginVertical: 30,
         }}
       />
-      <Button onPress={pay} title="Pay" />
+      {loading ? (
+        <ActivityIndicator size="large" color={colors.primary} />
+      ) : (
+        <GradianButton T="18" F="semiBold" W="180" onPress={() => pay()}>
+          Pay
+        </GradianButton>
+      )}
     </SafeAreaView>
   );
 };

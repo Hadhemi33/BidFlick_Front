@@ -139,9 +139,10 @@ const OrderDetails = ({ route }) => {
           {item.totalPrice}$
         </TText>
       </View>
-      <GradianButton T="18" F="semiBold" W="180">
+      {/* <GradianButton T="18" F="semiBold" W="180" style={styles.payBtn}>
         Pay
-      </GradianButton>
+      </GradianButton> */}
+      <PaymentScreen style={styles.pay} amountTotal={item.totalPrice} />
     </View>
   );
 };

@@ -19,7 +19,11 @@ const styles = StyleSheet.create({
   invoiceInfo: {
     flexDirection: "row",
   },
+  pay: {
+    // backgroundColor: colors.sea,
 
+    marginTop: 20,
+  },
   text: {
     marginLeft: 5,
     alignSelf: "center,",
