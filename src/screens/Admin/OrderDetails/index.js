@@ -1,46 +1,20 @@
-import React, { useCallback, useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  FlatList,
-  TextInput,
-  ActivityIndicator,
-  Alert,
-  Image,
-  Text,
-} from "react-native";
-import { AntDesign, Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { View, Alert } from "react-native";
 import { useQuery, useMutation } from "@apollo/client";
 import { HISTORY_QUERY, ORDERS_QUERY } from "../../../Graphql/querys";
 import { DELETE_ORDER_MUTATION } from "../../../Graphql/mutations";
+import { useFocusEffect } from "@react-navigation/native";
+import TText from "../../../components/TText";
+import PaymentScreen from "../../Client/Payment";
 import styles from "./style";
 
-import TText from "../../../components/TText";
-import { useUser } from "../../../Graphql/userContext";
-import PaymentScreen from "../../Client/Payment";
-import LightButton from "../../../components/Buttons/LightButton";
-import GradianButton from "../../../components/Buttons/GradianButton";
-// import Barcode from "react-native-barcode-builder";
 const OrderDetails = ({ route }) => {
-  const navigation = useNavigation();
-  const user = useUser();
-
   const { item } = route.params;
-  const {
-    data: HisData,
-    loading: Hisloading,
-    error: HisError,
-    refetch: HisRefetch,
-  } = useQuery(HISTORY_QUERY, {
-    pollInterval: 5000,
-  });
-  const { data, loading, error, refetch } = useQuery(ORDERS_QUERY, {
+  const { refetch } = useQuery(ORDERS_QUERY, {
     pollInterval: 5000,
   });
   const [deleteOrder] = useMutation(DELETE_ORDER_MUTATION, {
-    refetchQueries: [{ query: ORDERS_QUERY, query: HISTORY_QUERY }],
+    refetchQueries: [{ query: ORDERS_QUERY }, { query: HISTORY_QUERY }],
   });
 
   useFocusEffect(
@@ -48,31 +22,17 @@ const OrderDetails = ({ route }) => {
       refetch();
     }, [refetch])
   );
+
   const handleDeleteOrder = async (id) => {
-    console.log("id", id);
     try {
-      const HisData = await deleteOrder({
-        variables: {
-          id,
-        },
-      });
-      HisRefetch();
+      await deleteOrder({ variables: { id } });
       Alert.alert("Success", `Order Deleted.`);
+      refetch();
     } catch (error) {
-      console.error("Error updating role:", HisError);
+      console.error("Error updating role:", error);
       Alert.alert("Error", `An error occurred while updating the role.`);
     }
   };
-
-  if (error) {
-    return (
-      <View style={styles.errorContainer}>
-        <TText T="16" F="semiBold" C="black">
-          Error loading users: {error.message}
-        </TText>
-      </View>
-    );
-  }
 
   return (
     <View style={styles.container}>
@@ -91,7 +51,6 @@ const OrderDetails = ({ route }) => {
           </TText>
         </View>
       </View>
-      {/* <Barcode value={item.id} format="CODE128" /> */}
       <View style={styles.divider} />
       <View style={styles.customerInfoContainer}>
         <TText T="18" F="regular" C="black" style={styles.subtitle}>
@@ -139,11 +98,13 @@ const OrderDetails = ({ route }) => {
           {item.totalPrice}$
         </TText>
       </View>
-      {/* <GradianButton T="18" F="semiBold" W="180" style={styles.payBtn}>
-        Pay
-      </GradianButton> */}
-      <PaymentScreen style={styles.pay} amountTotal={item.totalPrice} />
+      <PaymentScreen
+        style={styles.pay}
+        amountTotal={item.totalPrice}
+        id={item.id}
+      />
     </View>
   );
 };
+
 export default OrderDetails;

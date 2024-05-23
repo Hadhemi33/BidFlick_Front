@@ -122,8 +122,12 @@ export const DELETE_USER_MUTATION = gql`
   }
 `;
 export const PAYMENT_MUTATION = gql`
-  mutation CreatePaymentIntent($amount: Float!, $currency: String!) {
-    createPaymentIntent(amount: $amount, currency: $currency)
+  mutation CreatePaymentIntent(
+    $orderId: ID!
+    $amount: Float!
+    $currency: String!
+  ) {
+    createPaymentIntent(orderId: $orderId, amount: $amount, currency: $currency)
   }
 `;
 export const DELETE_NOTIF = gql`

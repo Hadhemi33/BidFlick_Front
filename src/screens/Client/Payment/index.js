@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { View, Alert, SafeAreaView, ActivityIndicator } from "react-native";
 import { CardField, useStripe } from "@stripe/stripe-react-native";
-import styles from "./style";
-import { PAYMENT_MUTATION } from "../../../Graphql/mutations";
 import { useMutation } from "@apollo/client";
+import { PAYMENT_MUTATION } from "../../../Graphql/mutations";
 import GradianButton from "../../../components/Buttons/GradianButton";
 import { colors } from "../../../constants/colors";
+import styles from "./style";
 
-const PaymentScreen = ({ style, amountTotal }) => {
+const PaymentScreen = ({ style, amountTotal, id }) => {
   const { confirmPayment } = useStripe();
   const [createPaymentIntent] = useMutation(PAYMENT_MUTATION);
   const [clientSecret, setClientSecret] = useState(null);
@@ -15,11 +15,17 @@ const PaymentScreen = ({ style, amountTotal }) => {
 
   const pay = async () => {
     setLoading(true);
-    console.log(typeof parseFloat(amountTotal));
+
     try {
+      console.log("Payment Variables: ", {
+        orderId: id,
+        amount: parseFloat(amountTotal),
+        currency: "usd",
+      });
       const { data } = await createPaymentIntent({
         variables: {
-          amount: parseFloat(amountTotal) + 0.4,
+          orderId: id,
+          amount: parseFloat(amountTotal),
           currency: "usd",
         },
       });
@@ -43,7 +49,7 @@ const PaymentScreen = ({ style, amountTotal }) => {
 
     try {
       const { paymentIntent, error } = await confirmPayment(clientSecret, {
-        type: "Card",
+        paymentMethodType: "Card",
         billingDetails,
       });
 
@@ -67,7 +73,7 @@ const PaymentScreen = ({ style, amountTotal }) => {
         style={{
           alignSelf: "flex-start",
           width: "90%",
-          height: 20,
+          height: 50,
           marginVertical: 30,
         }}
       />
