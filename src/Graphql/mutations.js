@@ -135,6 +135,7 @@ export const DELETE_NOTIF = gql`
     deleteNotification(id: $id)
   }
 `;
+
 export const SET_BID = gql`
   mutation CreateSpecialProductPrice(
     $createSpecialProductPriceInput: CreateSpecialProductPriceInput!
@@ -144,5 +145,24 @@ export const SET_BID = gql`
     ) {
       price
     }
+  }
+`;
+export const REQ_PASS_RESET = gql`
+  mutation RequestPasswordReset($username: String!) {
+    requestPasswordReset(username: $username)
+  }
+`;
+export const VERIF_RESET_CODE = gql`
+  mutation VerifyResetCode($username: String!, $code: String!) {
+    verifyResetCode(username: $username, code: $code)
+  }
+`;
+export const RESET_PASS = gql`
+  mutation ResetPassword(
+    $username: String!
+    $code: String!
+    $newPassword: String!
+  ) {
+    resetPassword(username: $username, code: $code, newPassword: $newPassword)
   }
 `;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Image,
   SafeAreaView,
   StyleSheet,
@@ -19,6 +20,7 @@ import TText from "../../../components/TText";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useAuth } from "../../../../App";
+import { REQ_PASS_RESET } from "../../../Graphql/mutations";
 export const Users_QUERY = gql`
   query GetAllUsers {
     getAllUsers {
@@ -68,6 +70,30 @@ const SignIn = ({ navigation }) => {
       refetchQueries: [{ query: Users_QUERY }],
     }
   );
+  const use = username;
+  const [requestPasswordReset, { loadingReq, errorReq, dataReq }] =
+    useMutation(REQ_PASS_RESET);
+  const handleReqResetPass = async () => {
+    try {
+      if (!username) {
+        Alert.alert("Please enter your email address.");
+      }
+
+      const response = await requestPasswordReset({
+        variables: {
+          username,
+        },
+      });
+      console.log("email sended.");
+
+      navigation.navigate("CodeMail", { username });
+    } catch (errorReq) {
+      if (errorReq.message.includes("User not found")) {
+        Alert.alert("No account found");
+      }
+      console.error("Error sending mail:", errorReq);
+    }
+  };
 
   if (loading || signinLoading) {
     console.log(JSON.stringify(data));
@@ -101,7 +127,7 @@ const SignIn = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.Header}>
         <TText T="30" F="semiBold" C="black">
-          Welcome Back !{" "}
+          Welcome Back !
         </TText>
         <TText T="16" F="light" C="black">
           Sign in to access your account
@@ -150,7 +176,7 @@ const SignIn = ({ navigation }) => {
               Remember me
             </TText>
           </View>
-          <TText T="14" F="light" C="black">
+          <TText T="14" F="light" C="black" onPress={handleReqResetPass}>
             Forgot password?
           </TText>
         </View>

@@ -36,7 +36,13 @@ const PaymentScreen = ({ style, amountTotal, id }) => {
       Alert.alert("Success", "Payment successful.");
     } catch (error) {
       console.error("Error payment:", error);
-      Alert.alert("Error", "An error occurred while processing the payment.");
+
+      // Check for the specific "deja payé" error
+      if (error.message.includes("deja payé")) {
+        Alert.alert("Error", "This order has already been paid.");
+      } else {
+        Alert.alert("Error", "An error occurred while processing the payment.");
+      }
     } finally {
       setLoading(false);
     }

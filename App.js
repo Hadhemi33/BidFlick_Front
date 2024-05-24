@@ -31,6 +31,10 @@ import OrdersClient from "./src/screens/Admin/OrdersClient";
 import OrderDetails from "./src/screens/Admin/OrderDetails";
 
 import Notifications from "./src/screens/Admin/Notifications";
+import codeMail from "./src/screens/common/resetPassword/codeMail";
+import CodeMail from "./src/screens/common/resetPassword/codeMail";
+import resetPassword from "./src/screens/common/resetPassword/resetPassword";
+import ResetPassword from "./src/screens/common/resetPassword/resetPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -69,6 +73,12 @@ export default function App() {
                   options={{ headerShown: false }}
                 />
                 <Stack.Screen
+                  name="CodeMail"
+                  component={CodeMail}
+                  options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
                   name="PaymentScreen"
                   component={PaymentScreen}
                   options={{ headerShown: false }}
@@ -81,6 +91,11 @@ export default function App() {
                 <Stack.Screen
                   name="Notifications"
                   component={Notifications}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="ResetPassword"
+                  component={ResetPassword}
                   options={{ headerShown: false }}
                 />
 
