@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery, useMutation } from "@apollo/client";
 import { HISTORY_QUERY, ORDERS_QUERY } from "../../../Graphql/querys";
-import { DELETE_ORDER_MUTATION } from "../../../Graphql/mutations";
+import { DELETE_ORDER } from "../../../Graphql/mutations";
 import styles from "./style";
 import { MaterialIcons } from "@expo/vector-icons";
 import TText from "../../../components/TText";
@@ -31,7 +31,7 @@ const Orders = () => {
   const { data, loading, error, refetch } = useQuery(ORDERS_QUERY, {
     pollInterval: 5000,
   });
-  const [deleteOrder] = useMutation(DELETE_ORDER_MUTATION, {
+  const [deleteOrder] = useMutation(DELETE_ORDER, {
     refetchQueries: [{ query: ORDERS_QUERY, query: HISTORY_QUERY }],
   });
 
@@ -46,7 +46,7 @@ const Orders = () => {
     try {
       const HisData = await deleteOrder({
         variables: {
-          id,
+          orderId: id,
         },
       });
       HisRefetch();
@@ -114,7 +114,6 @@ const Orders = () => {
             {totalPrice}
           </TText>
         </View>
-    
       </View>
     );
   };

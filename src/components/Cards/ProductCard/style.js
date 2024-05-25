@@ -33,6 +33,11 @@ const styles = StyleSheet.create({
     height: 30,
     marginLeft: 5,
   },
+  PanierImage: {
+    width: 25,
+    height: 25,
+    marginLeft: 5,
+  },
   Productimage: {
     width: 150,
     height: 150,

@@ -109,7 +109,8 @@ export const ORDERS_QUERY = gql`
     getAllOrders {
       id
       totalPrice
-      # paidAt
+      paid
+      createdAt
       user {
         id
         fullName

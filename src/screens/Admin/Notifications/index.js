@@ -156,12 +156,24 @@ const Notifications = () => {
       </View>
 
       <View style={styles.statsCard}>
-        <FlatList
-          data={filtredUsers}
-          keyExtractor={(item, index) => item.id}
-          numColumns={1}
-          renderItem={({ item }) => <CardCat item={item} />}
-        />
+        {filtredUsers.length === 0 ? (
+          <View style={styles.noData}>
+            <Image
+              style={styles.noDataImg}
+              source={require("../../../../assets/NoNotify.gif")}
+            />
+            {/* <TText T="16" F="semiBold" C="black">
+              No Notifications
+            </TText> */}
+          </View>
+        ) : (
+          <FlatList
+            data={filtredUsers}
+            keyExtractor={(item, index) => item.id}
+            numColumns={1}
+            renderItem={({ item }) => <CardCat item={item} />}
+          />
+        )}
       </View>
     </View>
   );

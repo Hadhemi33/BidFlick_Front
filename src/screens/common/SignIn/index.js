@@ -13,13 +13,12 @@ import Checkbox from "expo-checkbox";
 import styles from "./style";
 import LightButton from "../../../components/Buttons/LightButton";
 import GradianButton from "../../../components/Buttons/GradianButton";
-import Input from "../../../components/Input";
-import text from "../../../components/TText";
+
 import { useMutation, gql, useQuery } from "@apollo/client";
 import TText from "../../../components/TText";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { useAuth } from "../../../../App";
+
 import { REQ_PASS_RESET } from "../../../Graphql/mutations";
 export const Users_QUERY = gql`
   query GetAllUsers {

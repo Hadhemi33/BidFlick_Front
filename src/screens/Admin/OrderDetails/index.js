@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { View, Alert } from "react-native";
 import { useQuery, useMutation } from "@apollo/client";
 import { HISTORY_QUERY, ORDERS_QUERY } from "../../../Graphql/querys";
-import { DELETE_ORDER_MUTATION } from "../../../Graphql/mutations";
 import { useFocusEffect } from "@react-navigation/native";
 import TText from "../../../components/TText";
 import PaymentScreen from "../../Client/Payment";
@@ -13,26 +12,12 @@ const OrderDetails = ({ route }) => {
   const { refetch } = useQuery(ORDERS_QUERY, {
     pollInterval: 5000,
   });
-  const [deleteOrder] = useMutation(DELETE_ORDER_MUTATION, {
-    refetchQueries: [{ query: ORDERS_QUERY }, { query: HISTORY_QUERY }],
-  });
 
   useFocusEffect(
     useCallback(() => {
       refetch();
     }, [refetch])
   );
-
-  const handleDeleteOrder = async (id) => {
-    try {
-      await deleteOrder({ variables: { id } });
-      Alert.alert("Success", `Order Deleted.`);
-      refetch();
-    } catch (error) {
-      console.error("Error updating role:", error);
-      Alert.alert("Error", `An error occurred while updating the role.`);
-    }
-  };
 
   return (
     <View style={styles.container}>

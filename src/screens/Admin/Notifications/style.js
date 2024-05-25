@@ -18,6 +18,13 @@ const styles = StyleSheet.create({
     alignContent: "flex-end",
     alignItems: "flex-end",
   },
+  noDataImg: {
+    marginLeft: 15,
+    width: 400,
+    top: 40,
+    height: 400,
+    alignSelf: "center",
+  },
   userCard: {
     flexDirection: "row",
     alignItems: "center",

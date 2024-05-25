@@ -10,8 +10,7 @@ import {
 } from "react-native";
 import styles from "./style";
 import LightButton from "../../../components/Buttons/LightButton";
-import GradianButton from "../../../components/Buttons/GradianButton";
-import Input from "../../../components/Input";
+
 import { useMutation, gql, useQuery } from "@apollo/client";
 import TText from "../../../components/TText";
 export const Users_QUERY = gql`

@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery, useMutation } from "@apollo/client";
 import { HISTORY_QUERY, ORDERS_QUERY } from "../../../Graphql/querys";
-import { DELETE_ORDER_MUTATION } from "../../../Graphql/mutations";
+import { DELETE_ORDER } from "../../../Graphql/mutations";
 import styles from "./style";
 import { MaterialIcons } from "@expo/vector-icons";
 import TText from "../../../components/TText";
@@ -29,12 +29,12 @@ const OrdersClient = () => {
     error: HisError,
     refetch: HisRefetch,
   } = useQuery(HISTORY_QUERY, {
-    pollInterval: 5000,
+    pollInterval: 3000,
   });
   const { data, loading, error, refetch } = useQuery(ORDERS_QUERY, {
     pollInterval: 5000,
   });
-  const [deleteOrder] = useMutation(DELETE_ORDER_MUTATION, {
+  const [deleteOrder] = useMutation(DELETE_ORDER, {
     refetchQueries: [{ query: ORDERS_QUERY, query: HISTORY_QUERY }],
   });
 
@@ -49,14 +49,14 @@ const OrdersClient = () => {
     try {
       const HisData = await deleteOrder({
         variables: {
-          id,
+          orderId: id,
         },
       });
       HisRefetch();
       Alert.alert("Success", `Order Deleted.`);
     } catch (error) {
-      console.error("Error updating role:", HisError);
-      Alert.alert("Error", `An error occurred while updating the role.`);
+      console.error("Error deleting order:", HisError);
+      Alert.alert("Error", `An error occurred while deleting order.`);
     }
   };
 
@@ -65,8 +65,8 @@ const OrdersClient = () => {
   };
 
   const CardCat = ({ item }) => {
-    const { id, user, products } = item;
-
+    const { id, user, products, paid, createdAt } = item;
+    const date = createdAt.slice(0, 19).replace("T", " ");
     return (
       <View style={styles.userItem}>
         <View style={styles.infos}>
@@ -77,14 +77,25 @@ const OrdersClient = () => {
             style={styles.statValue}
             onPress={() => navigation.navigate("OrderDetails", { item })}
           >
-            {id}
+            {date}
           </TText>
-          <TText T="14" F="regular" C="black" style={styles.statValue}>
-            {user.fullName}
-          </TText>
-          <TText T="14" F="regular" C="black" style={styles.statValue}>
-            {products.length}
-          </TText>
+          <View style={{ flexDirection: "row" }}>
+            <TText T="14" F="regular" C="black" style={styles.statValue}>
+              N°
+            </TText>
+            <TText T="14" F="regular" C="black" style={styles.statValue}>
+              {id}
+            </TText>
+          </View>
+          {paid === true ? (
+            <TText T="14" F="regular" C="black" style={styles.statValue}>
+              paid
+            </TText>
+          ) : (
+            <TText T="14" F="regular" C="black" style={styles.statValue}>
+              not paid
+            </TText>
+          )}
         </View>
         <View style={styles.delAdd}>
           <TouchableOpacity
@@ -107,9 +118,36 @@ const OrdersClient = () => {
       </View>
     );
   };
+  const CardHis = ({ item }) => {
+    const { id, totalPrice, paidAt } = item;
 
+    return (
+      <View style={styles.userItem}>
+        <View style={styles.infos}>
+          <TText T="14" F="regular" C="black" style={styles.statValue}>
+            {id}
+          </TText>
+          <TText T="10" F="regular" C="black" style={styles.statValue}>
+            {paidAt}
+          </TText>
+          <TText T="11" F="regular" C="black" style={styles.statValue}>
+            {totalPrice}
+          </TText>
+        </View>
+      </View>
+    );
+  };
   const filtredOrders = data
     ? data.getAllOrders.filter((order) => order.user.id === connectedUserId)
+    : [];
+  const filtredHistory = HisData
+    ? HisData.getAllOrderHistory.filter((history) => {
+        const searchLower = searchQuery.toLowerCase();
+
+        const matchesOrderId = history.id.toLowerCase().includes(searchLower);
+
+        return matchesOrderId;
+      })
     : [];
   if (loading) {
     return (
@@ -167,6 +205,26 @@ const OrdersClient = () => {
           keyExtractor={(item, index) => item.id}
           numColumns={1}
           renderItem={({ item }) => <CardCat item={item} />}
+        />
+      </View>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity>
+          <Image
+            source={require("../../../../assets/archive.png")}
+            style={{ width: 30, height: 30 }}
+          />
+        </TouchableOpacity>
+        <TText T="16" F="regular" C="sea">
+          Archives
+        </TText>
+      </View>
+
+      <View style={styles.statsCard}>
+        <FlatList
+          data={filtredHistory}
+          keyExtractor={(item, index) => item.id}
+          numColumns={1}
+          renderItem={({ item }) => <CardHis item={item} />}
         />
       </View>
     </View>

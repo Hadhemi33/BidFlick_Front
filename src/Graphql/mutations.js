@@ -103,11 +103,7 @@ export const UPDATE_USER_MUTATION = gql`
     }
   }
 `;
-export const DELETE_ORDER_MUTATION = gql`
-  mutation DeleteOrder($id: String!) {
-    deleteOrder(id: $id)
-  }
-`;
+
 export const DELETE_Auction_MUTATION_ADMIN = gql`
   mutation DeleteSpeciaProductAdmin($id: String!) {
     deleteSpeciaProductAdmin(id: $id) {
@@ -164,5 +160,25 @@ export const RESET_PASS = gql`
     $newPassword: String!
   ) {
     resetPassword(username: $username, code: $code, newPassword: $newPassword)
+  }
+`;
+export const ADD_PRODUCT_ORDER = gql`
+  mutation AddProductToOrder($productId: String!) {
+    addProductToOrder(productId: $productId)
+  }
+`;
+export const VALIDATE_ORDER = gql`
+  mutation ValidateOrder($orderId: ID!) {
+    validateOrder(orderId: $orderId)
+  }
+`;
+export const DELETE_ORDER = gql`
+  mutation DeleteOrder($orderId: ID!) {
+    deleteOrder(orderId: $orderId)
+  }
+`;
+export const DELETE_ORDER_MUTATION = gql`
+  mutation DeleteOrder($id: ID!) {
+    deleteOrder(id: $id)
   }
 `;

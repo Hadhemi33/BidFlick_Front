@@ -10,13 +10,9 @@ import {
 } from "react-native";
 import styles from "./style";
 import TText from "../../TText";
-import { CREATE_CATEGORY_MUTATION } from "../../../Graphql/mutations";
+
 import { useMutation, useQuery } from "@apollo/client";
-import {
-  Categories_QUERY,
-  Products_QUERY,
-  SpecialProducts_QUERY,
-} from "../../../Graphql/querys";
+import { Products_QUERY } from "../../../Graphql/querys";
 const ProductCard = ({ navigation, onPress, searchQuery }) => {
   const {
     data = { getAllProducts: [] },
@@ -38,7 +34,9 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <TText T="16" F="semiBold" C="black">Loading...</TText>
+        <TText T="16" F="semiBold" C="black">
+          Loading...
+        </TText>
       </View>
     );
   }
@@ -46,7 +44,9 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <TText T="16" F="semiBold" C="black">Error loading special Products: {error.message}</TText>
+        <TText T="16" F="semiBold" C="black">
+          Error loading special Products: {error.message}
+        </TText>
       </View>
     );
   }
@@ -65,8 +65,10 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
             imageStyle={styles.backgroundImage}
           >
             <View style={styles.Likes}>
-              <TText T="16" F="regular" C="black" style={styles.LikesText}>{item.nbrLike}</TText>
-              <TouchableOpacity onPress={() => toggleLike(item.id)}>
+              {/* <TText T="16" F="regular" C="black" style={styles.LikesText}>
+                {item.nbrLike}
+              </TText> */}
+              {/* <TouchableOpacity onPress={() => toggleLike(item.id)}>
                 <Image
                   style={styles.LikesImage}
                   source={
@@ -74,6 +76,11 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
                       ? require("../../../../assets/heart_8812101.png")
                       : require("../../../../assets/heart.png")
                   }
+                /> */}
+              <TouchableOpacity onPress={() => toggleLike(item.id)}>
+                <Image
+                  style={styles.PanierImage}
+                  source={require("../../../../assets/addPanier.png")}
                 />
               </TouchableOpacity>
             </View>

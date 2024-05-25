@@ -212,26 +212,29 @@ const AuctionDetails = ({ route }) => {
                   Delete
                 </TText>
               ) : (
-                <TText
-                  T="18"
-                  F="semiBold"
-                  C="green"
-                  onPress={() => {
-                    handleBid(item.id);
-                  }}
-                >
-                  Set a Bid
-                </TText>
+                <View>
+                  <TText
+                    T="18"
+                    F="semiBold"
+                    C="green"
+                    style={{ marginLeft: 5, alignSelf: "center" }}
+                    onPress={() => {
+                      handleBid(item.id);
+                    }}
+                  >
+                    Set a Bid
+                  </TText>
+                  <InputSpinner
+                    min={item.price}
+                    colorMax={"#f04048"}
+                    colorMin={colors.blueLight}
+                    value={price}
+                    step={stepp}
+                    onChange={setPrice}
+                  />
+                </View>
               )}
             </TouchableOpacity>
-            <InputSpinner
-              min={item.price}
-              colorMax={"#f04048"}
-              colorMin={colors.blueLight}
-              value={price}
-              step={stepp}
-              onChange={setPrice}
-            />
           </View>
         </View>
       </ImageBackground>
