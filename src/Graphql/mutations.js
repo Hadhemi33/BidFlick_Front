@@ -100,6 +100,7 @@ export const UPDATE_USER_MUTATION = gql`
       username
       fullName
       phoneNumber
+      address
     }
   }
 `;
@@ -163,22 +164,18 @@ export const RESET_PASS = gql`
   }
 `;
 export const ADD_PRODUCT_ORDER = gql`
-  mutation AddProductToOrder($productId: String!) {
-    addProductToOrder(productId: $productId)
+  mutation AddProductToOrder($productId: String!, $orderId: String!) {
+    addProductToOrder(productId: $productId, orderId: $orderId)
   }
 `;
 export const VALIDATE_ORDER = gql`
-  mutation ValidateOrder($orderId: ID!) {
+  mutation ValidateOrder($orderId: String!) {
     validateOrder(orderId: $orderId)
   }
 `;
+
 export const DELETE_ORDER = gql`
-  mutation DeleteOrder($orderId: ID!) {
+  mutation DeleteOrder($orderId: String!) {
     deleteOrder(orderId: $orderId)
-  }
-`;
-export const DELETE_ORDER_MUTATION = gql`
-  mutation DeleteOrder($id: ID!) {
-    deleteOrder(id: $id)
   }
 `;

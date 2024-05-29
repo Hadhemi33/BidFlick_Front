@@ -7,12 +7,14 @@ import {
   ImageBackground,
   FlatList,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import styles from "./style";
 import TText from "../../TText";
 
 import { useMutation, useQuery } from "@apollo/client";
 import { Products_QUERY } from "../../../Graphql/querys";
+import { ADD_PRODUCT_ORDER } from "../../../Graphql/mutations";
 const ProductCard = ({ navigation, onPress, searchQuery }) => {
   const {
     data = { getAllProducts: [] },
@@ -22,6 +24,26 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
   } = useQuery(Products_QUERY, {
     pollInterval: 5000,
   });
+  const [addProduct, { loadingAdd, errorAdd, dataAdd }] =
+    useMutation(ADD_PRODUCT_ORDER);
+
+  const handlAddProduct = async (id) => {
+    console.log("id", id);
+    try {
+      const HisData = await addProduct({
+        variables: {
+          productId: id,
+         
+        },
+      });
+
+      Alert.alert("Success", `Product Added.`);
+    } catch (e) {
+      console.error("Error adding product:", e);
+      Alert.alert("Error", `An error occurred while adding product.`);
+    }
+  };
+
   const search = searchQuery.toLowerCase();
   const [products, setProducts] = useState(data?.getAllProducts || []);
   const filteredProducts = data
@@ -77,7 +99,7 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
                       : require("../../../../assets/heart.png")
                   }
                 /> */}
-              <TouchableOpacity onPress={() => toggleLike(item.id)}>
+              <TouchableOpacity onPress={() => handlAddProduct(item.id)}>
                 <Image
                   style={styles.PanierImage}
                   source={require("../../../../assets/addPanier.png")}

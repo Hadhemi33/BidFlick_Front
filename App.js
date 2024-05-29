@@ -35,6 +35,7 @@ import codeMail from "./src/screens/common/resetPassword/codeMail";
 import CodeMail from "./src/screens/common/resetPassword/codeMail";
 import resetPassword from "./src/screens/common/resetPassword/resetPassword";
 import ResetPassword from "./src/screens/common/resetPassword/resetPassword";
+import Meta from "./src/ProtectedRoute";
 
 const Stack = createNativeStackNavigator();
 
@@ -77,7 +78,11 @@ export default function App() {
                   component={CodeMail}
                   options={{ headerShown: false }}
                 />
-
+                <Stack.Screen
+                  name="Meta"
+                  component={Meta}
+                  options={{ headerShown: false }}
+                />
                 <Stack.Screen
                   name="PaymentScreen"
                   component={PaymentScreen}
@@ -104,6 +109,7 @@ export default function App() {
                   component={Menu}
                   options={{ headerShown: false }}
                 />
+
                 <Stack.Screen
                   name="OrderDetails"
                   component={OrderDetails}
@@ -177,6 +183,7 @@ export default function App() {
                         title: "Auctions Available",
                       }}
                     />
+
                     <Stack.Screen
                       name="AuctionDetails"
                       component={AuctionDetails}

@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery, useMutation } from "@apollo/client";
 import { HISTORY_QUERY, ORDERS_QUERY } from "../../../Graphql/querys";
-import { DELETE_ORDER } from "../../../Graphql/mutations";
+import { DELETE_ORDER, VALIDATE_ORDER } from "../../../Graphql/mutations";
 import styles from "./style";
 import { MaterialIcons } from "@expo/vector-icons";
 import TText from "../../../components/TText";
@@ -37,6 +37,12 @@ const OrdersClient = () => {
   const [deleteOrder] = useMutation(DELETE_ORDER, {
     refetchQueries: [{ query: ORDERS_QUERY, query: HISTORY_QUERY }],
   });
+  const [validateOrder, { loadingAdd, errorAdd, dataAdd }] = useMutation(
+    VALIDATE_ORDER,
+    {
+      refetchQueries: [{ query: ORDERS_QUERY }],
+    }
+  );
 
   const navigation = useNavigation();
   useFocusEffect(
@@ -44,10 +50,26 @@ const OrdersClient = () => {
       refetch();
     }, [refetch])
   );
+  const handleValidOrder = async (idd) => {
+    try {
+      console.log("Validating order with id:", idd);
+      const valData = await validateOrder({
+        variables: {
+          orderId: "33",
+        },
+      });
+      HisRefetch();
+      Alert.alert("Success", `Order validated.`);
+    } catch (e) {
+      console.error("Error validating order:", e);
+      Alert.alert("Error", `An error occurred while validating order.`);
+    }
+  };
+
   const handleDeleteOrder = async (id) => {
     console.log("id", id);
     try {
-      const HisData = await deleteOrder({
+      const oddata = await deleteOrder({
         variables: {
           orderId: id,
         },
@@ -65,7 +87,7 @@ const OrdersClient = () => {
   };
 
   const CardCat = ({ item }) => {
-    const { id, user, products, paid, createdAt } = item;
+    const { id,  paid, createdAt } = item;
     const date = createdAt.slice(0, 19).replace("T", " ");
     return (
       <View style={styles.userItem}>
@@ -101,7 +123,7 @@ const OrdersClient = () => {
           <TouchableOpacity
             style={styles.delUser}
             onPress={() => {
-              handleDeleteOrder(item.id);
+              handleValidOrder(item.id);
             }}
           >
             <AntDesign name="check" size={24} color="green" />

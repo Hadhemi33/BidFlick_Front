@@ -49,9 +49,7 @@ const HomeUser = () => {
         />
         <View style={styles.iconImages}>
           <View style={styles.notif}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Notifications")}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate("Meta")}>
               <Ionicons
                 style={styles.notifIcon}
                 name="notifications-outline"
