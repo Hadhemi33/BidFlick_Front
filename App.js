@@ -32,9 +32,9 @@ import OrdersClient from "./src/screens/Admin/OrdersClient";
 import OrderDetails from "./src/screens/Admin/OrderDetails";
 
 import Notifications from "./src/screens/Admin/Notifications";
-import codeMail from "./src/screens/common/resetPassword/codeMail";
+
 import CodeMail from "./src/screens/common/resetPassword/codeMail";
-import resetPassword from "./src/screens/common/resetPassword/resetPassword";
+
 import ResetPassword from "./src/screens/common/resetPassword/resetPassword";
 import Meta from "./src/ProtectedRoute";
 import { StreamChat } from "stream-chat";
