@@ -126,21 +126,24 @@ import {
 import { useUser } from "../../../Graphql/userContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./style";
+import NewChannel from "./newChannel";
 
 const StreamClient = StreamChat.getInstance("b68fsmsejna4");
 
 const ChatScreen = () => {
   const [clientReady, setClientReady] = useState(false);
   const [channel, setChannel] = useState(null);
-
+  const [thread, setThread] = useState(null);
   const user = useUser();
-
+  const mockChannels = [
+    { id: "1", data: { name: "Channel 1" } },
+    { id: "2", data: { name: "Channel 2" } },
+    { id: "3", data: { name: "Channel 3" } },
+  ];
   useEffect(() => {
     const setupClient = async () => {
       try {
         const storedToken = await AsyncStorage.getItem("accessToken");
-
- 
 
         await StreamClient.connectUser(
           {
@@ -168,11 +171,22 @@ const ChatScreen = () => {
       StreamClient.disconnectUser();
     };
   }, [user]);
-
+  const onBackPress = () => {
+    if (thread) {
+      setThread(null);
+    } else if (channel) {
+      setChannel(null);
+    }
+  };
   if (!clientReady) return null;
 
   return (
     <OverlayProvider style={styles.container}>
+      <TouchableOpacity onPress={onBackPress} disabled={!channel}>
+        <View style={{ height: 60, paddingLeft: 16, paddingTop: 40 }}>
+          {channel && <Text>Back</Text>}
+        </View>
+      </TouchableOpacity>
       <Chat client={StreamClient}>
         {channel ? (
           <Channel channel={channel} keyboardVerticalOffset={0}>
@@ -180,8 +194,21 @@ const ChatScreen = () => {
             <MessageInput />
           </Channel>
         ) : (
-          <ChannelList onSelect={setChannel} />
+          //   <ChannelList onSelect={setChannel} />
+          <ChannelList
+            onSelect={(channelId) => {
+              const selectedChannel = channel.find(
+                (ch) => ch.id === channelId.id
+              );
+              setChannel(selectedChannel);
+            }}
+            filters={{}}
+            sort={{}}
+            options={{}}
+            channels={mockChannels}
+          />
         )}
+        <NewChannel />
       </Chat>
     </OverlayProvider>
   );

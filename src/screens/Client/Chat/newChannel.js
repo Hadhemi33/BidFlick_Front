@@ -9,18 +9,18 @@ import UserListItem from "../../../components/Chat";
 
 import { useNavigation } from "@react-navigation/native";
 const StreamClient = StreamChat.getInstance("b68fsmsejna4");
-const users = [
-  { id: 1, name: "John" },
-  { id: 2, name: "Jane" },
-  { id: 3, name: "Alice" },
-  { id: 4, name: "Bob" },
-  // Add more static user data as needed
-];
+// const users = [
+//   { id: 1, name: "John" },
+//   { id: 2, name: "Jane" },
+//   { id: 3, name: "Alice" },
+//   { id: 4, name: "Bob" },
+//   // Add more static user data as needed
+// ];
 const NewChannel = () => {
   const { data, loading, error } = useQuery(USERS_QUERY, {
     pollInterval: 5000,
   });
-  //   const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const navigation = useNavigation();
 
@@ -32,6 +32,19 @@ const NewChannel = () => {
 
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
+  // return (
+  //   <OverlayProvider>
+  //     <Chat client={StreamClient}>
+  //       <FlatList
+  //         data={users}
+  //         keyExtractor={(item) => item.id.toString()}
+  //         renderItem={({ item }) => (
+  //           <UserListItem user={item} navigation={navigation} />
+  //         )}
+  //       />
+  //     </Chat>
+  //   </OverlayProvider>
+  // );
   return (
     <OverlayProvider>
       <Chat client={StreamClient}>
@@ -45,19 +58,6 @@ const NewChannel = () => {
       </Chat>
     </OverlayProvider>
   );
-  //   return (
-  //     <OverlayProvider>
-  //       <Chat client={StreamClient}>
-  //         <FlatList
-  //           data={users}
-  //           keyExtractor={(item) => item.id.toString()}
-  //           renderItem={({ item }) => (
-  //             <UserListItem user={item} navigation={navigation} />
-  //           )}
-  //         />
-  //       </Chat>
-  //     </OverlayProvider>
-  //   );
 };
 
 export default NewChannel;
