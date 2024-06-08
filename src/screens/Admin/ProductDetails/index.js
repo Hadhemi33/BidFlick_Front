@@ -7,10 +7,40 @@ import { useNavigation } from "@react-navigation/native";
 import TText from "../../../components/TText";
 
 import { LinearGradient } from "expo-linear-gradient";
+import { StreamChat } from "stream-chat";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "../../../Graphql/userContext";
+const StreamClient = StreamChat.getInstance("b68fsmsejna4");
 
 const ProductDetails = ({ route }) => {
   const { item } = route.params;
   const navigation = useNavigation();
+  const user = useUser();
+  const startChannelWithSeller = async () => {
+    console.log("start");
+    try {
+      const storedToken = await AsyncStorage.getItem("accessToken");
+
+      await StreamClient.connectUser(
+        {
+          id: user.id.toString(),
+          name: user.fullName,
+          image: user.imageUrl,
+        },
+        StreamClient.devToken(user.id.toString())
+      );
+
+      const channel = StreamClient.channel("messaging", {
+        members: [item.user.id.toString(), user.id.toString()],
+      });
+      await channel.watch();
+
+      navigation.navigate("ChatScreen", { channelId: channel.id });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  console.log("here");
   return (
     <SafeAreaView style={styles.conttainer}>
       <View style={styles.header}>
@@ -58,9 +88,16 @@ const ProductDetails = ({ route }) => {
                 style={styles.SellerImg}
               />
 
-              <TText T="18" F="regular" style={styles.LikesText}>
-                {item.user.fullName}
-              </TText>
+              <TouchableOpacity>
+                <TText
+                  T="18"
+                  F="regular"
+                  style={styles.LikesText}
+                  onPress={startChannelWithSeller}
+                >
+                  'hi'{item.user.fullName}
+                </TText>
+              </TouchableOpacity>
             </View>
             <LinearGradient
               colors={["#2EBC7C", "#C3FCF1"]}

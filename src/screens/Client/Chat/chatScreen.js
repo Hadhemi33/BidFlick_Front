@@ -130,16 +130,13 @@ import NewChannel from "./newChannel";
 
 const StreamClient = StreamChat.getInstance("b68fsmsejna4");
 
-const ChatScreen = () => {
+const ChatScreen = ({ route, navigation }) => {
   const [clientReady, setClientReady] = useState(false);
   const [channel, setChannel] = useState(null);
-  const [thread, setThread] = useState(null);
+  const { channelId } = route.params || {}; // Get channelId from route params
+
   const user = useUser();
-  const mockChannels = [
-    { id: "1", data: { name: "Channel 1" } },
-    { id: "2", data: { name: "Channel 2" } },
-    { id: "3", data: { name: "Channel 3" } },
-  ];
+
   useEffect(() => {
     const setupClient = async () => {
       try {
@@ -149,15 +146,16 @@ const ChatScreen = () => {
           {
             id: user.id.toString(),
             name: user.fullName,
-            // image: user.imageUrl,
+            image: user.imageUrl,
           },
           StreamClient.devToken(user.id.toString())
         );
 
-        const channel = StreamClient.channel("messaging", "the_park", {
-          name: "The Park",
-        });
-        setChannel(channel);
+        if (channelId) {
+          const existingChannel = StreamClient.channel("messaging", channelId);
+          await existingChannel.watch();
+          setChannel(existingChannel);
+        }
 
         setClientReady(true);
       } catch (e) {
@@ -170,24 +168,24 @@ const ChatScreen = () => {
     return () => {
       StreamClient.disconnectUser();
     };
-  }, [user]);
-  const onBackPress = () => {
-    if (thread) {
-      setThread(null);
-    } else if (channel) {
-      setChannel(null);
-    }
-  };
+  }, [user, channelId]);
+  // const onBackPress = () => {
+  //   if (thread) {
+  //     setThread(null);
+  //   } else if (channel) {
+  //     setChannel(null);
+  //   }
+  // };
   if (!clientReady) return null;
 
   return (
-    <OverlayProvider style={styles.container}>
-      <TouchableOpacity onPress={onBackPress} disabled={!channel}>
+    <OverlayProvider>
+      <TouchableOpacity onPress={() => navigation.goBack()} disabled={!channel}>
         <View style={{ height: 60, paddingLeft: 16, paddingTop: 40 }}>
           {channel && <Text>Back</Text>}
         </View>
       </TouchableOpacity>
-      <Chat client={StreamClient}>
+      {/* <Chat client={StreamClient}>
         {channel ? (
           <Channel channel={channel} keyboardVerticalOffset={0}>
             <MessageList />
@@ -206,6 +204,22 @@ const ChatScreen = () => {
             sort={{}}
             options={{}}
             channels={mockChannels}
+          />
+        )}
+        <NewChannel />
+      </Chat> */}
+      <Chat client={StreamClient}>
+        {channel ? (
+          <Channel channel={channel} keyboardVerticalOffset={0}>
+            <MessageInput style={{ bottom: 20 }} />
+            <MessageList />
+          </Channel>
+        ) : (
+          <ChannelList
+            onSelect={setChannel}
+            filters={{ members: { $in: [user.id.toString()] } }}
+            sort={{ last_message_at: -1 }}
+            options={{ state: true, watch: true }}
           />
         )}
         <NewChannel />

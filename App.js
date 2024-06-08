@@ -213,6 +213,11 @@ export default function App() {
                           component={AllUsers}
                           options={{ headerShown: false }}
                         />
+                         <Stack.Screen
+                        name="ProductDetails"
+                        component={ProductDetails}
+                        options={{ headerShown: false }}
+                      />
                       </>
                     ) : (
                       <Stack.Screen
