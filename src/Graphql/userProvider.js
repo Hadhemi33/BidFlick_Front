@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 
-import { Text } from "react-native";
+
 import { AuthUser_QUERY } from "./querys";
 import UserContext from "./userContext";
 import TText from "../components/TText";
@@ -12,11 +12,19 @@ const UserProvider = ({ children }) => {
   });
 
   if (loading) {
-    return <TText T="16" F="semiBold" C="black">Loading user data...</TText>;
+    return (
+      <TText T="16" F="semiBold" C="black">
+        Loading user data...
+      </TText>
+    );
   }
 
   if (error) {
-    return <TText T="16" F="semiBold" C="black">Error loading user data: {error.message}</TText>;
+    return (
+      <TText T="16" F="semiBold" C="black">
+        Error loading user data: {error.message}
+      </TText>
+    );
   }
 
   const user = data.getAuthUser;

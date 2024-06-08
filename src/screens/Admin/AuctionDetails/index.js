@@ -97,7 +97,7 @@ const AuctionDetails = ({ route }) => {
     DELETE_Auction_MUTATION_ADMIN,
     {}
   );
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
 
   const [createSpecialProductPrice] = useMutation(SET_BID, {
     refetchQueries: [{ query: SpecialProducts_QUERY }],
@@ -105,11 +105,12 @@ const AuctionDetails = ({ route }) => {
   const handleBid = async (id) => {
     console.log("id", id);
     try {
+
       const data = await createSpecialProductPrice({
         variables: {
           createSpecialProductPriceInput: {
             specialProductId: id,
-            price: price.toString(),
+            price: "0.0"+price.toString(),
           },
         },
       });
@@ -225,12 +226,12 @@ const AuctionDetails = ({ route }) => {
                     Set a Bid
                   </TText>
                   <InputSpinner
-                    min={item.price}
+                    min={parseFloat(item.price)}
                     colorMax={"#f04048"}
                     colorMin={colors.blueLight}
                     value={price}
-                    step={stepp}
-                    onChange={setPrice}
+                    step={0.1}
+                    onChange={(num) => setPrice(parseFloat(num))}
                   />
                 </View>
               )}

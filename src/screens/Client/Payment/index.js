@@ -79,12 +79,13 @@ const PaymentScreen = ({ style, amountTotal, id }) => {
         style={{
           alignSelf: "flex-start",
           width: "90%",
+
           height: 50,
           marginVertical: 30,
         }}
       />
       {loading ? (
-        <ActivityIndicator size="large" color={colors.primary} />
+        <ActivityIndicator size="large" color={colors.black} />
       ) : (
         <GradianButton T="18" F="semiBold" W="180" onPress={() => pay()}>
           Pay

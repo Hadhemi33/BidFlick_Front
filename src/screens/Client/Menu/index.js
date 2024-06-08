@@ -46,6 +46,9 @@ function Menu({ navigation }) {
   const navUsers = () => {
     navigation.navigate("AllUsers");
   };
+  const navWallet = () => {
+    navigation.navigate("Meta");
+  };
 
   const navCategories = () => {
     navigation.navigate("CategoriesScreen");
@@ -74,6 +77,7 @@ function Menu({ navigation }) {
           onHomePress={navHomeUser}
           onEditPress={navEdit}
           onAucPress={navAuctions}
+          onWalletPress={navWallet}
         />
       )}
     </SafeAreaView>

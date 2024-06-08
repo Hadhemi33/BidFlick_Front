@@ -33,6 +33,7 @@ function UserMenu({
   onPressBack,
   onAucPress,
   onEditPress,
+  onWalletPress,
 }) {
   const user = useUser();
   const navigation = useNavigation();
@@ -158,6 +159,13 @@ function UserMenu({
             Profile
           </TText>
           <Arrow onPress={onEditPress} />
+        </View>
+        <View style={styles.choice}>
+          <Entypo name="wallet" size={30} color="black" style={styles.icon} />
+          <TText onPress={onWalletPress} T="16" F="regular" C="black">
+            Wallet
+          </TText>
+          <Arrow onPress={onWalletPress} />
         </View>
       </View>
       <GradianButton
