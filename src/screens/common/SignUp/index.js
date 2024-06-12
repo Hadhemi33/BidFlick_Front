@@ -73,20 +73,26 @@ const SignUp = ({ navigation }) => {
 
     return (
       <View style={styles.container}>
-        <TText T="16" F="semiBold" C="black" style={styles.infoText}>Loading...</TText>
+        <TText T="16" F="semiBold" C="black" style={styles.infoText}>
+          Loading...
+        </TText>
       </View>
     );
   }
   if (error || signupError) {
     return (
       <View style={styles.container}>
-        <TText T="16" F="semiBold" C="black" style={[styles.infoText, styles.errorText]}>
+        <TText
+          T="16"
+          F="semiBold"
+          C="black"
+          style={[styles.infoText, styles.errorText]}
+        >
           Error: {error ? error.message : signupError.message}
         </TText>
       </View>
     );
   } else {
-   
   }
   return (
     <SafeAreaView style={styles.container}>

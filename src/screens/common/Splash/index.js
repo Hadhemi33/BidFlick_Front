@@ -1,10 +1,8 @@
 import React from "react";
-import { Image, SafeAreaView, Text, View } from "react-native";
+import { Image, SafeAreaView, View } from "react-native";
 import styles from "./style";
 import TText from "../../../components/TText";
 import GradianButton from "../../../components/Buttons/GradianButton";
-
-import CreateProduct from "../../Client/CreateProductComponent";
 
 const Splash = ({ navigation }) => {
   return (

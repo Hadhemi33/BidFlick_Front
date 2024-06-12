@@ -61,7 +61,7 @@ const Notifications = () => {
   );
   const handleSearchInput = (text) => {
     setSearchQuery(text);
-  };
+  };r
 
   const filtredOrders = data
     ? data.getNotifications.filter((notif) => notif.user.id === connectedUserId)

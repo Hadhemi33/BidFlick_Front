@@ -52,8 +52,6 @@ const theme = {
   },
 };
 
-const serverClient = new StreamChat("b68fsmsejna4");
-
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
@@ -64,174 +62,164 @@ export default function App() {
 
     checkToken();
   }, []);
-
   const [fontsLoaded] = useFonts(fontMap);
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
       <ApolloProvider client={client}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <UserProvider>
-            <OverlayProvider>
-              <StripeProvider publishableKey="pk_test_51NvT6pJbmdmPG9jvysqtceUPBezUOLCsxKMJCziF9x1qp8cyYc2w2rxetrizKS07YwxJwyNug8p67v5UQNh8XHq300fbwcZLXR">
-                <NavigationContainer theme={theme}>
-                  <Stack.Navigator>
+        {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
+        <UserProvider>
+          {/* <OverlayProvider> */}
+          <StripeProvider publishableKey="pk_test_51NvT6pJbmdmPG9jvysqtceUPBezUOLCsxKMJCziF9x1qp8cyYc2w2rxetrizKS07YwxJwyNug8p67v5UQNh8XHq300fbwcZLXR">
+            <NavigationContainer theme={theme}>
+              <Stack.Navigator>
+                <Stack.Screen
+                  name="Splash"
+                  component={Splash}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="CodeMail"
+                  component={CodeMail}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="Meta"
+                  component={Meta}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="PaymentScreen"
+                  component={PaymentScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="AuctionAdd"
+                  component={AuctionAdd}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="ChatScreen"
+                  component={ChatScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="NewChannel"
+                  component={NewChannel}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="Notifications"
+                  component={Notifications}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="ResetPassword"
+                  component={ResetPassword}
+                  options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                  name="Menu"
+                  component={Menu}
+                  options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                  name="OrderDetails"
+                  component={OrderDetails}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="SignIn"
+                  component={SignIn}
+                  options={{ headerShown: false }}
+                />
+                {isLoggedIn ? (
+                  <>
                     <Stack.Screen
-                      name="Splash"
-                      component={Splash}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="CodeMail"
-                      component={CodeMail}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="Meta"
-                      component={Meta}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="PaymentScreen"
-                      component={PaymentScreen}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="AuctionAdd"
-                      component={AuctionAdd}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="ChatScreen"
-                      component={ChatScreen}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="NewChannel"
-                      component={NewChannel}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="Notifications"
-                      component={Notifications}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="ResetPassword"
-                      component={ResetPassword}
+                      name="ProductAdd"
+                      component={ProductAdd}
                       options={{ headerShown: false }}
                     />
 
                     <Stack.Screen
-                      name="Menu"
-                      component={Menu}
+                      name="CategoriesScreen"
+                      component={CategoriesScreen}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="HomeUser"
+                      component={HomeUser}
                       options={{ headerShown: false }}
                     />
 
                     <Stack.Screen
-                      name="OrderDetails"
-                      component={OrderDetails}
+                      name="Home"
+                      component={Home}
+                      options={{ headerShown: false }}
+                    />
+
+                    <Stack.Screen
+                      name="SignUp"
+                      component={SignUp}
                       options={{ headerShown: false }}
                     />
                     <Stack.Screen
-                      name="SignIn"
-                      component={SignIn}
+                      name="ProfileEdit"
+                      component={ProfileEdit}
                       options={{ headerShown: false }}
                     />
-                    {isLoggedIn ? (
-                      <>
-                        {/* <Stack.Screen
-                    name="Menu"
-                    component={Menu}
-                    options={{ headerShown: false }}
-                  /> */}
-                        <Stack.Screen
-                          name="ProductAdd"
-                          component={ProductAdd}
-                          options={{ headerShown: false }}
-                        />
 
-                        <Stack.Screen
-                          name="CategoriesScreen"
-                          component={CategoriesScreen}
-                          options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                          name="HomeUser"
-                          component={HomeUser}
-                          options={{ headerShown: false }}
-                        />
+                    <Stack.Screen
+                      name="CategoryAdd"
+                      component={CategoryAdd}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="Orders"
+                      component={Orders}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="OrdersClient"
+                      component={OrdersClient}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="DetailsAuctionCard"
+                      component={DetailsAuctionCard}
+                      options={{
+                        title: "Auctions Available",
+                      }}
+                    />
 
-                        <Stack.Screen
-                          name="Home"
-                          component={Home}
-                          options={{ headerShown: false }}
-                        />
-
-                        <Stack.Screen
-                          name="SignUp"
-                          component={SignUp}
-                          options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                          name="ProfileEdit"
-                          component={ProfileEdit}
-                          options={{ headerShown: false }}
-                        />
-
-                        <Stack.Screen
-                          name="CategoryAdd"
-                          component={CategoryAdd}
-                          options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                          name="Orders"
-                          component={Orders}
-                          options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                          name="OrdersClient"
-                          component={OrdersClient}
-                          options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                          name="DetailsAuctionCard"
-                          component={DetailsAuctionCard}
-                          options={{
-                            title: "Auctions Available",
-                          }}
-                        />
-
-                        <Stack.Screen
-                          name="AuctionDetails"
-                          component={AuctionDetails}
-                          options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                          name="AllUsers"
-                          component={AllUsers}
-                          options={{ headerShown: false }}
-                        />
-                         <Stack.Screen
-                        name="ProductDetails"
-                        component={ProductDetails}
-                        options={{ headerShown: false }}
-                      />
-                      </>
-                    ) : (
-                      <Stack.Screen
-                        name="ProductDetails"
-                        component={ProductDetails}
-                        options={{ headerShown: false }}
-                      />
-                    )}
-                  </Stack.Navigator>
-                </NavigationContainer>
-              </StripeProvider>
-            </OverlayProvider>
-          </UserProvider>
-        </GestureHandlerRootView>
+                    <Stack.Screen
+                      name="AuctionDetails"
+                      component={AuctionDetails}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="AllUsers"
+                      component={AllUsers}
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="ProductDetails"
+                      component={ProductDetails}
+                      options={{ headerShown: false }}
+                    />
+                  </>
+                ) : (
+                  <></>
+                )}
+              </Stack.Navigator>
+            </NavigationContainer>
+          </StripeProvider>
+          {/* </OverlayProvider> */}
+        </UserProvider>
+        {/* </GestureHandlerRootView> */}
       </ApolloProvider>
     );
   }

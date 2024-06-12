@@ -18,7 +18,6 @@ import { useMutation, gql, useQuery } from "@apollo/client";
 import TText from "../../../components/TText";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 import { REQ_PASS_RESET } from "../../../Graphql/mutations";
 export const Users_QUERY = gql`
   query GetAllUsers {

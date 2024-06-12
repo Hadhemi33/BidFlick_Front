@@ -8,7 +8,7 @@ import { OverlayProvider, Chat } from "stream-chat-expo";
 import UserListItem from "../../../components/Chat";
 
 import { useNavigation } from "@react-navigation/native";
-const StreamClient = StreamChat.getInstance("b68fsmsejna4");
+const StreamClient = StreamChat.getInstance("caa856zdxjv8");
 
 const NewChannel = () => {
   const { data, loading, error } = useQuery(USERS_QUERY, {

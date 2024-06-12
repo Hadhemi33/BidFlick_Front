@@ -128,7 +128,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./style";
 import NewChannel from "./newChannel";
 
-const StreamClient = StreamChat.getInstance("b68fsmsejna4");
+// const StreamClient = StreamChat.getInstance("b68fsmsejna4");
+const StreamClient = StreamChat.getInstance("caa856zdxjv8");
 
 const ChatScreen = ({ route, navigation }) => {
   const [clientReady, setClientReady] = useState(false);

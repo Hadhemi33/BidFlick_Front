@@ -49,7 +49,7 @@
     "punycode": "^2.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.74.1",
+    "react-native": "0.74.2",
     "react-native-barcode-builder": "^2.0.0",
     "react-native-dash": "^0.0.11",
     "react-native-dimension": "^1.0.6",

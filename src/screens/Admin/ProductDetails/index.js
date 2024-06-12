@@ -10,7 +10,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { StreamChat } from "stream-chat";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUser } from "../../../Graphql/userContext";
-const StreamClient = StreamChat.getInstance("b68fsmsejna4");
+const StreamClient = StreamChat.getInstance("caa856zdxjv8");
 
 const ProductDetails = ({ route }) => {
   const { item } = route.params;
