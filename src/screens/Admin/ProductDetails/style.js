@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../../../constants/colors";
 
-
 const styles = StyleSheet.create({
   conttainer: {
     height: "100%",
@@ -16,7 +15,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 5,
   },
-
+  icon: {
+    marginRight: 10,
+    // width: "13%",
+  },
   coontainer: {
     height: "70%",
     display: "flex",
@@ -26,13 +28,11 @@ const styles = StyleSheet.create({
     width: "100%",
 
     justifyContent: "center",
-    
   },
 
   image: {
     top: 80,
     alignSelf: "center",
-  
   },
   iimg: {
     width: 400,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     padding: 20,
     flexDirection: "column",
     alignSelf: "center",
-   
+
     borderWidth: 2,
     borderColor: colors.blueBorder,
     borderRadius: 50,
@@ -76,23 +76,18 @@ const styles = StyleSheet.create({
   },
 
   Likess: {
-
     padding: 4,
     display: "flex",
     flexDirection: "row",
-  
   },
   Likes: {
-  
     padding: 4,
     display: "flex",
     flexDirection: "row",
-    
   },
   LikesText: {
     fontSize: 14,
 
-    
     color: colors.blue,
   },
   LikesImage: {
@@ -139,7 +134,6 @@ const styles = StyleSheet.create({
   InfosTime: {
     flexDirection: "column",
     justifyContent: "space-between",
-   
   },
 
   InfosSeller: {
@@ -147,7 +141,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
-    
   },
   BtnDelete: {
     backgroundColor: colors.white,

@@ -31,6 +31,9 @@ function Menu({ navigation }) {
   const navHomeUser = () => {
     navigation.navigate("HomeUser");
   };
+  const navMessages = () => {
+    navigation.navigate("ChatScreen");
+  };
   const navEdit = () => {
     navigation.navigate("ProfileEdit");
   };
@@ -71,6 +74,7 @@ function Menu({ navigation }) {
         />
       ) : (
         <UserMenu
+          onMessage={navMessages}
           onPressBack={back}
           onPress={logout}
           onOrdPress={navOrdersUser}

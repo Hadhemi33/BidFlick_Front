@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import {
   SafeAreaView,
   View,
-  Text,
-  TextInput,
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
@@ -12,13 +10,11 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Feather,
-  AntDesign,
-  MaterialIcons,
   FontAwesome,
   Entypo,
   FontAwesome6,
+  Ionicons,
 } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./style";
 
 import TText from "../../../components/TText";
@@ -34,6 +30,7 @@ function UserMenu({
   onAucPress,
   onEditPress,
   onWalletPress,
+  onMessage,
 }) {
   const user = useUser();
   const navigation = useNavigation();
@@ -133,6 +130,18 @@ function UserMenu({
             Auctions
           </TText>
           <Arrow onPress={onAucPress} />
+        </View>
+        <View style={styles.choice}>
+          <Ionicons
+            name="chatbubbles"
+            size={30}
+            color="black"
+            style={styles.icon}
+          />
+          <TText onPress={onMessage} T="16" F="regular" C="black">
+            Messages
+          </TText>
+          <Arrow onPress={onMessage} />
         </View>
         <View style={styles.choice}>
           <Entypo

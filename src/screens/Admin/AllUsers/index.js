@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import {
-
   View,
   TouchableOpacity,
   FlatList,
@@ -102,12 +101,12 @@ const AllUsers = () => {
                 P
               </TText>
               <View style={styles.column}>
-                <TText T="11" F="light" C="black" style={styles.productCount}>
+                {/* <TText T="11" F="light" C="black" style={styles.productCount}>
                   {item.products.length}
-                </TText>
-                <TouchableOpacity style={styles.delUser}>
+                </TText> */}
+                {/* <TouchableOpacity style={styles.delUser}>
                   <AntDesign name="arrowdown" size={14} color="grey" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
             </View>
 
@@ -123,14 +122,14 @@ const AllUsers = () => {
               <TText T="13" F="regular" C="black">
                 A
               </TText>
-              <View style={styles.column}>
+              {/* <View style={styles.column}>
                 <TText T="11" F="light" C="black" style={styles.productCount}>
                   {item.products.length}
                 </TText>
                 <TouchableOpacity style={styles.delUser}>
                   <AntDesign name="arrowdown" size={14} color="grey" />
                 </TouchableOpacity>
-              </View>
+              </View> */}
             </View>
           </View>
         </View>
@@ -155,9 +154,16 @@ const AllUsers = () => {
       </View>
     );
   };
+  // const filtredUsers = data
+  //   ? data.getAllUsers.filter((user) =>
+  //       user.fullName.toLowerCase().includes(searchQuery.toLowerCase())
+  //     )
+  //   : [];
   const filtredUsers = data
-    ? data.getAllUsers.filter((user) =>
-        user.fullName.toLowerCase().includes(searchQuery.toLowerCase())
+    ? data.getAllUsers.filter(
+        (user) =>
+          user.fullName.toLowerCase().includes(searchQuery.toLowerCase()) &&
+          user.fullName!== "Hadhemi"
       )
     : [];
 
@@ -165,7 +171,9 @@ const AllUsers = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <TText T="16" F="semiBold" C="black">Loading...</TText>
+        <TText T="16" F="semiBold" C="black">
+          Loading...
+        </TText>
       </View>
     );
   }
@@ -173,7 +181,9 @@ const AllUsers = () => {
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <TText T="16" F="semiBold" C="black">Error loading users: {error.message}</TText>
+        <TText T="16" F="semiBold" C="black">
+          Error loading users: {error.message}
+        </TText>
       </View>
     );
   }

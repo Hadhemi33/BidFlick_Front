@@ -180,7 +180,7 @@ const ChatScreen = ({ route, navigation }) => {
   if (!clientReady) return null;
 
   return (
-    <OverlayProvider>
+    <OverlayProvider style={styles.container}>
       <TouchableOpacity onPress={() => navigation.goBack()} disabled={!channel}>
         <View style={{ height: 60, paddingLeft: 16, paddingTop: 40 }}>
           {channel && <Text>Back</Text>}
@@ -209,11 +209,12 @@ const ChatScreen = ({ route, navigation }) => {
         )}
         <NewChannel />
       </Chat> */}
-      <Chat client={StreamClient}>
+      <Chat client={StreamClient} style={styles.container}>
         {channel ? (
           <Channel channel={channel} keyboardVerticalOffset={0}>
-            <MessageInput style={{ bottom: 20 }} />
             <MessageList />
+            <MessageInput style={styles.input} />
+            <View style={styles.view}></View>
           </Channel>
         ) : (
           <ChannelList

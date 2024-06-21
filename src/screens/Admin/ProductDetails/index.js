@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, SafeAreaView, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 
 import Feather from "@expo/vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 import TText from "../../../components/TText";
-
+import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { StreamChat } from "stream-chat";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -16,6 +16,22 @@ const ProductDetails = ({ route }) => {
   const { item } = route.params;
   const navigation = useNavigation();
   const user = useUser();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
+  const connectedUserId = user.id;
+  const productUserId = route.params.item.user.id;
+  useEffect(() => {
+    if (connectedUserId === productUserId && !isOwner) {
+      setIsOwner(true);
+    } else if (connectedUserId !== productUserId && isOwner) {
+      setIsOwner(false);
+    }
+    if (user.roles === "admin" && !isAdmin) {
+      setIsAdmin(true);
+    } else if (user.roles !== "admin" && isAdmin) {
+      setIsAdmin(false);
+    }
+  }, [connectedUserId, productUserId, user.roles]);
   const startChannelWithSeller = async () => {
     console.log("start");
     try {
@@ -49,7 +65,30 @@ const ProductDetails = ({ route }) => {
             <Feather name="chevron-left" color="#000" size={25} />
           </TouchableOpacity>
         </View>
-        <View style={styles.Likes}>
+        <View style={styles.InfosSeller}>
+          {/* <Image
+            source={require("../../../../assets/people19.png")}
+            style={styles.SellerImg}
+          /> */}
+          <AntDesign
+            name="message1"
+            size={27}
+            color="black"
+            style={styles.icon}
+            onPress={startChannelWithSeller}
+          />
+          <TouchableOpacity>
+            <TText
+              T="18"
+              F="regular"
+              style={styles.LikesText}
+              onPress={startChannelWithSeller}
+            >
+              {item.user.fullName}
+            </TText>
+          </TouchableOpacity>
+        </View>
+        {/* <View style={styles.Likes}>
           <TText T="17" F="regular" style={styles.LikesText}>
             {item.nbrLike}
           </TText>
@@ -59,7 +98,7 @@ const ProductDetails = ({ route }) => {
               source={require("../../../../assets/heart_8812101.png")}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
       <View style={styles.image}>
         <Image source={{ uri: item.imageUrl }} style={styles.iimg} />
@@ -77,12 +116,9 @@ const ProductDetails = ({ route }) => {
               end={{ x: 1, y: 0 }}
               style={styles.linearGradientName}
             ></LinearGradient>
-            <TText T="20" F="regular">
-              {item.price}$
-            </TText>
           </View>
           <View style={styles.InfosTime}>
-            <View style={styles.InfosSeller}>
+            {/* <View style={styles.InfosSeller}>
               <Image
                 source={require("../../../../assets/people19.png")}
                 style={styles.SellerImg}
@@ -95,10 +131,13 @@ const ProductDetails = ({ route }) => {
                   style={styles.LikesText}
                   onPress={startChannelWithSeller}
                 >
-                  'hi'{item.user.fullName}
+                  {item.user.fullName}
                 </TText>
               </TouchableOpacity>
-            </View>
+            </View> */}
+            <TText T="20" F="regular">
+              {item.price}$
+            </TText>
             <LinearGradient
               colors={["#2EBC7C", "#C3FCF1"]}
               start={{ x: 0, y: 0 }}
@@ -121,14 +160,25 @@ const ProductDetails = ({ route }) => {
         </TText>
         <View style={styles.BtnDelete}>
           <TouchableOpacity>
-            <TText
-              T="18"
-              F="semiBold"
-              C="green"
-              onPress={() => navigation.navigate("CategoriesScreen")}
-            >
-              Delete
-            </TText>
+            {isAdmin || isOwner ? (
+              <TText
+                T="18"
+                F="semiBold"
+                C="green"
+                onPress={() => navigation.navigate("CategoriesScreen")}
+              >
+                Delete
+              </TText>
+            ) : (
+              <TText
+                T="18"
+                F="semiBold"
+                C="green"
+                onPress={() => navigation.navigate("Orders")}
+              >
+                Add to cart
+              </TText>
+            )}
           </TouchableOpacity>
         </View>
       </View>

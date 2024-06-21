@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     justifyContent: "flex-end",
   },
+
   cont: {
     width: 40,
     top: 70,
@@ -77,7 +78,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   backgroundImage: {
-    
     borderRadius: 70,
     alignContent: "flex-end",
     alignSelf: "flex-end",
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   Botns: {
     top: -40,
 
+    alignSelf: "center",
     paddingHorizontal: 20,
 
     flexDirection: "row",

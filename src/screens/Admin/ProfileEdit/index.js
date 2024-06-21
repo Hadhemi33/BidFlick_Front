@@ -31,6 +31,7 @@ export const Users_QUERY = gql`
 `;
 const ProfileEdit = ({ navigation }) => {
   const user = useUser();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   console.log("Sg with:", { fullName, username, phoneNumber });
 
@@ -46,6 +47,11 @@ const ProfileEdit = ({ navigation }) => {
       setFullName(user.fullName || "");
       setUsername(user.username || "");
       setPhoneNumber(user.phoneNumber || "");
+    }
+    if (user.roles === "admin" && !isAdmin) {
+      setIsAdmin(true);
+    } else if (user.roles !== "admin" && isAdmin) {
+      setIsAdmin(false);
     }
   }, [user]);
   const handleFormSubmit = async () => {
@@ -187,19 +193,27 @@ const ProfileEdit = ({ navigation }) => {
         />
       </View>
       <View style={styles.Botns}>
-        <GradianButton
-          style={styles.BtnAdd}
-          onPress={() => navigation.navigate("AllUsers")}
-          T="18"
-          F="semiBold"
-          W="180"
-          I={require("../../../../assets/addAdmin.png")}
-        >
-          Add Admin
-        </GradianButton>
-        <LightButton T="18" F="semiBold" W="180" onPress={handleFormSubmit}>
-          Update
-        </LightButton>
+        {isAdmin ? (
+          <>
+            <GradianButton
+              style={styles.BtnAdd}
+              onPress={() => navigation.navigate("AllUsers")}
+              T="18"
+              F="semiBold"
+              W="180"
+              I={require("../../../../assets/addAdmin.png")}
+            >
+              Add Admin
+            </GradianButton>
+            <LightButton T="18" F="semiBold" W="180" onPress={handleFormSubmit}>
+              Update
+            </LightButton>
+          </>
+        ) : (
+          <LightButton T="18" F="semiBold" W="250" onPress={handleFormSubmit}>
+            Update
+          </LightButton>
+        )}
       </View>
     </SafeAreaView>
   );

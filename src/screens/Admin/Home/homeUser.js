@@ -99,7 +99,9 @@ const HomeUser = () => {
         />
         <View style={styles.iconImages}>
           <View style={styles.notif}>
-            <TouchableOpacity onPress={() => navigation.navigate("ChatScreen")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Notifications")}
+            >
               <Ionicons
                 style={styles.notifIcon}
                 name="notifications-outline"

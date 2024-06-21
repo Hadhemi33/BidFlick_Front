@@ -87,7 +87,7 @@ const OrdersClient = () => {
   };
 
   const CardCat = ({ item }) => {
-    const { id,  paid, createdAt } = item;
+    const { id, paid, createdAt } = item;
     const date = createdAt.slice(0, 19).replace("T", " ");
     return (
       <View style={styles.userItem}>
@@ -229,26 +229,26 @@ const OrdersClient = () => {
           renderItem={({ item }) => <CardCat item={item} />}
         />
       </View>
-      <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity>
+      {/* <View style={{ flexDirection: "row" }}> */}
+      {/* <TouchableOpacity>
           <Image
             source={require("../../../../assets/archive.png")}
             style={{ width: 30, height: 30 }}
           />
-        </TouchableOpacity>
-        <TText T="16" F="regular" C="sea">
+        </TouchableOpacity> */}
+      {/* <TText T="16" F="regular" C="sea">
           Archives
-        </TText>
-      </View>
+        </TText> */}
+      {/* </View> */}
 
-      <View style={styles.statsCard}>
+      {/* <View style={styles.statsCard}>
         <FlatList
           data={filtredHistory}
           keyExtractor={(item, index) => item.id}
           numColumns={1}
           renderItem={({ item }) => <CardHis item={item} />}
         />
-      </View>
+      </View> */}
     </View>
   );
 };

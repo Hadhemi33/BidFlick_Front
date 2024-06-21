@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 40,
   },
+  icon: {
+    marginLeft: 10,
+  },
   containerr: {
     // flex: 1,
     alignItems: "center",

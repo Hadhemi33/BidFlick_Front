@@ -19,7 +19,7 @@ import { useMutation } from "@apollo/client";
 import { useUser } from "../../../Graphql/userContext";
 import { colors } from "../../../constants/colors";
 import { SpecialProducts_QUERY } from "../../../Graphql/querys";
-
+import { AntDesign } from '@expo/vector-icons';
 const calculateTimeRemaining = (endDate) => {
   const endDateObj = new Date(endDate);
   const currentDateObj = new Date();
@@ -105,12 +105,11 @@ const AuctionDetails = ({ route }) => {
   const handleBid = async (id) => {
     console.log("id", id);
     try {
-
       const data = await createSpecialProductPrice({
         variables: {
           createSpecialProductPriceInput: {
             specialProductId: id,
-            price: "0.0"+price.toString(),
+            price: "0.0" + price.toString(),
           },
         },
       });
@@ -160,8 +159,9 @@ const AuctionDetails = ({ route }) => {
             <TText T="17" F="regular" style={styles.LikesText}>
               {item.user.fullName}
             </TText>
+            <AntDesign name="message1" size={27} color="black" style={styles.icon} />
           </View>
-          <View style={styles.Likes}>
+          {/* <View style={styles.Likes}>
             <TText T="17" F="regular" style={styles.LikesText}>
               {item.nbrLike}
             </TText>
@@ -171,7 +171,7 @@ const AuctionDetails = ({ route }) => {
                 source={require("../../../../assets/heart_8812101.png")}
               />
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
 
         <View style={styles.cont3}>
