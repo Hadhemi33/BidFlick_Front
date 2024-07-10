@@ -50,44 +50,47 @@ const DetailsAuctionCard = ({ onPress }) => {
   return (
     <View style={styles.container}>
       <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
-        {data?.getAllSpecialProducts.map((card, index) => (
-          <View key={card.id}>
-            <ImageBackground
-              key={card.id}
-              source={{ uri: card.imageUrl }}
-              style={styles.cardContainer}
-              imageStyle={styles.backgroundImage}
-            >
-              <View style={styles.CardPrice}>
-                <View style={styles.PriceContainer}>
-                  <TText T="14" F="bold" style={styles.PriceText}>
-                    {card.price}$
-                  </TText>
+        {data?.getAllSpecialProducts
+          .slice()
+          .reverse()
+          .map((card, index) => (
+            <View key={card.id}>
+              <ImageBackground
+                key={card.id}
+                source={{ uri: card.imageUrl }}
+                style={styles.cardContainer}
+                imageStyle={styles.backgroundImage}
+              >
+                <View style={styles.CardPrice}>
+                  <View style={styles.PriceContainer}>
+                    <TText T="14" F="bold" style={styles.PriceText}>
+                      {card.price}ETH
+                    </TText>
+                  </View>
                 </View>
-              </View>
-              <View style={styles.Infos}>
-                <TText
-                  T="12"
-                  F="bold"
-                  style={styles.TitleText}
-                  onPress={() =>
-                    navigation.navigate("AuctionDetails", { item: card })
-                  }
-                >
-                  {card.title}
-                </TText>
-                <View style={styles.DateRow}>
-                  <TText T="12" F="regular" style={styles.TitleText}>
-                    Auction ends in :
+                <View style={styles.Infos}>
+                  <TText
+                    T="12"
+                    F="bold"
+                    style={styles.TitleText}
+                    onPress={() =>
+                      navigation.navigate("AuctionDetails", { item: card })
+                    }
+                  >
+                    {card.title}
                   </TText>
-                  <TText T="12" F="bold" style={styles.TitleText}>
-                    {card.endingIn}
-                  </TText>
+                  <View style={styles.DateRow}>
+                    <TText T="12" F="regular" style={styles.TitleText}>
+                      Auction ends in :
+                    </TText>
+                    <TText T="12" F="bold" style={styles.TitleText}>
+                      {card.endingIn}
+                    </TText>
+                  </View>
                 </View>
-              </View>
-            </ImageBackground>
-          </View>
-        ))}
+              </ImageBackground>
+            </View>
+          ))}
       </ScrollView>
     </View>
   );

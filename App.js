@@ -36,11 +36,12 @@ import Notifications from "./src/screens/Admin/Notifications";
 import CodeMail from "./src/screens/common/resetPassword/codeMail";
 
 import ResetPassword from "./src/screens/common/resetPassword/resetPassword";
-import Meta from "./src/ProtectedRoute";
 import { StreamChat } from "stream-chat";
 import { OverlayProvider } from "stream-chat-expo";
 import ChatScreen from "./src/screens/Client/Chat/chatScreen";
 import NewChannel from "./src/screens/Client/Chat/newChannel";
+import Meta from "./src/screens/Client/Wallet/ProtectedRoute";
+import AllProductss from "./src/screens/Admin/AllProducts";
 
 const Stack = createNativeStackNavigator();
 
@@ -87,6 +88,11 @@ export default function App() {
                   <Stack.Screen
                     name="Meta"
                     component={Meta}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="AllProductss"
+                    component={AllProductss}
                     options={{ headerShown: false }}
                   />
                   <Stack.Screen

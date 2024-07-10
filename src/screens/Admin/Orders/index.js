@@ -78,14 +78,14 @@ const Orders = () => {
           </TText>
         </View>
         <View style={styles.delAdd}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.delUser}
             onPress={() => {
               handleDeleteOrder(item.id);
             }}
           >
             <AntDesign name="check" size={24} color="green" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.delUser}
             onPress={() => {

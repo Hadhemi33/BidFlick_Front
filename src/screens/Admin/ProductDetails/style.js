@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   cont3: {
     marginTop: 60,
-
+    
     backgroundColor: colors.white,
     width: "100%",
     height: 300,

@@ -24,16 +24,14 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
   } = useQuery(Products_QUERY, {
     pollInterval: 5000,
   });
-  const [addProduct, { loadingAdd, errorAdd, dataAdd }] =
-    useMutation(ADD_PRODUCT_ORDER);
+  const [addProductToOrder] = useMutation(ADD_PRODUCT_ORDER);
 
   const handlAddProduct = async (id) => {
-    console.log("id", id);
     try {
-      const HisData = await addProduct({
+      const HisData = await addProductToOrder({
         variables: {
           productId: id,
-         
+          orderId: null,
         },
       });
 
@@ -47,10 +45,13 @@ const ProductCard = ({ navigation, onPress, searchQuery }) => {
   const search = searchQuery.toLowerCase();
   const [products, setProducts] = useState(data?.getAllProducts || []);
   const filteredProducts = data
-    ? data.getAllProducts.filter(
-        (product) =>
-          product.title && product.title.toLowerCase().includes(search)
-      )
+    ? data.getAllProducts
+        .slice()
+        .reverse()
+        .filter(
+          (product) =>
+            product.title && product.title.toLowerCase().includes(search)
+        )
     : [];
   if (loading) {
     return (

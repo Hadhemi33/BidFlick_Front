@@ -112,6 +112,13 @@ export const DELETE_Auction_MUTATION_ADMIN = gql`
     }
   }
 `;
+export const DELETE_PRODUCT_ADMIN = gql`
+  mutation DeleteProductAdmin($id: String!) {
+    deleteProductAdmin(id: $id) {
+      id
+    }
+  }
+`;
 
 export const DELETE_USER_MUTATION = gql`
   mutation DeleteUser($id: String!) {
@@ -163,9 +170,23 @@ export const RESET_PASS = gql`
     resetPassword(username: $username, code: $code, newPassword: $newPassword)
   }
 `;
+// export const ADD_PRODUCT_ORDER = gql`
+//   # mutation AddProductToOrder($productId: String!) {
+//   mutation AddProductToOrder($productId: String!, $orderId: String) {
+//     addProductToOrder(productId: $productId)
+//     # addProductToOrder(productId: $productId, orderId: $orderId)
+//   }
+// `;
 export const ADD_PRODUCT_ORDER = gql`
-  mutation AddProductToOrder($productId: String!, $orderId: String!) {
-    addProductToOrder(productId: $productId, orderId: $orderId)
+  mutation AddProductToOrder($productId: String!, $orderId: String) {
+    addProductToOrder(productId: $productId, orderId: $orderId) {
+      id
+      totalPrice
+      products {
+        id
+        title
+      }
+    }
   }
 `;
 export const VALIDATE_ORDER = gql`

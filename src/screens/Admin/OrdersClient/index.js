@@ -37,12 +37,9 @@ const OrdersClient = () => {
   const [deleteOrder] = useMutation(DELETE_ORDER, {
     refetchQueries: [{ query: ORDERS_QUERY, query: HISTORY_QUERY }],
   });
-  const [validateOrder, { loadingAdd, errorAdd, dataAdd }] = useMutation(
-    VALIDATE_ORDER,
-    {
-      refetchQueries: [{ query: ORDERS_QUERY }],
-    }
-  );
+  const [validateOrder] = useMutation(VALIDATE_ORDER, {
+    refetchQueries: [{ query: ORDERS_QUERY }],
+  });
 
   const navigation = useNavigation();
   useFocusEffect(
@@ -50,20 +47,18 @@ const OrdersClient = () => {
       refetch();
     }, [refetch])
   );
-  const handleValidOrder = async (idd) => {
-    try {
-      console.log("Validating order with id:", idd);
-      const valData = await validateOrder({
-        variables: {
-          orderId: "33",
-        },
-      });
-      HisRefetch();
-      Alert.alert("Success", `Order validated.`);
-    } catch (e) {
-      console.error("Error validating order:", e);
-      Alert.alert("Error", `An error occurred while validating order.`);
-    }
+  const handleValidOrder = async (item) => {
+    console.log("user", user.id);
+
+    console.log("idd", item.id);
+    const dd = item.id;
+    await validateOrder({
+      variables: {
+        orderId: dd,
+      },
+    });
+    HisRefetch();
+    Alert.alert("Success", `Order validated.`);
   };
 
   const handleDeleteOrder = async (id) => {
@@ -120,14 +115,14 @@ const OrdersClient = () => {
           )}
         </View>
         <View style={styles.delAdd}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.delUser}
             onPress={() => {
-              handleValidOrder(item.id);
+              handleValidOrder(item);
             }}
           >
             <AntDesign name="check" size={24} color="green" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.delUser}
             onPress={() => {

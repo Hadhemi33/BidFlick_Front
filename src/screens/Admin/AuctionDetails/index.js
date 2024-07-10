@@ -19,7 +19,7 @@ import { useMutation } from "@apollo/client";
 import { useUser } from "../../../Graphql/userContext";
 import { colors } from "../../../constants/colors";
 import { SpecialProducts_QUERY } from "../../../Graphql/querys";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
 const calculateTimeRemaining = (endDate) => {
   const endDateObj = new Date(endDate);
   const currentDateObj = new Date();
@@ -103,13 +103,15 @@ const AuctionDetails = ({ route }) => {
     refetchQueries: [{ query: SpecialProducts_QUERY }],
   });
   const handleBid = async (id) => {
+    const dt = price / 1000;
     console.log("id", id);
+    console.log("entredddd", dt);
     try {
       const data = await createSpecialProductPrice({
         variables: {
           createSpecialProductPriceInput: {
             specialProductId: id,
-            price: "0.0" + price.toString(),
+            price: (price / 1000).toString(),
           },
         },
       });
@@ -159,7 +161,12 @@ const AuctionDetails = ({ route }) => {
             <TText T="17" F="regular" style={styles.LikesText}>
               {item.user.fullName}
             </TText>
-            <AntDesign name="message1" size={27} color="black" style={styles.icon} />
+            <AntDesign
+              name="message1"
+              size={27}
+              color="black"
+              style={styles.icon}
+            />
           </View>
           {/* <View style={styles.Likes}>
             <TText T="17" F="regular" style={styles.LikesText}>
@@ -195,7 +202,7 @@ const AuctionDetails = ({ route }) => {
                 Highest Price :
               </TText>
               <TText T="15" F="bold">
-                {item.price}$
+                {item.price}Eth
               </TText>
             </View>
           </View>
@@ -210,7 +217,7 @@ const AuctionDetails = ({ route }) => {
                     handleDeleteAuction(item.id);
                   }}
                 >
-                  Delete
+                  You can't bid
                 </TText>
               ) : (
                 <View>
@@ -226,12 +233,13 @@ const AuctionDetails = ({ route }) => {
                     Set a Bid
                   </TText>
                   <InputSpinner
+                    // min={"0.001"}
                     min={parseFloat(item.price)}
                     colorMax={"#f04048"}
                     colorMin={colors.blueLight}
                     value={price}
                     step={0.1}
-                    onChange={(num) => setPrice(parseFloat(num))}
+                    onChange={(value) => setPrice(parseFloat(value))}
                   />
                 </View>
               )}

@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, SafeAreaView, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+  Alert,
+  ScrollView,
+} from "react-native";
 import styles from "./style";
 
 import Feather from "@expo/vector-icons/Feather";
@@ -10,6 +17,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import { StreamChat } from "stream-chat";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUser } from "../../../Graphql/userContext";
+import { useMutation } from "@apollo/client";
+import {
+  ADD_PRODUCT_ORDER,
+  DELETE_PRODUCT_ADMIN,
+} from "../../../Graphql/mutations";
 const StreamClient = StreamChat.getInstance("caa856zdxjv8");
 
 const ProductDetails = ({ route }) => {
@@ -20,6 +32,39 @@ const ProductDetails = ({ route }) => {
   const [isOwner, setIsOwner] = useState(false);
   const connectedUserId = user.id;
   const productUserId = route.params.item.user.id;
+  const [addProductToOrder] = useMutation(ADD_PRODUCT_ORDER);
+  const [deleteProductAdmin] = useMutation(DELETE_PRODUCT_ADMIN);
+  const handlAddProduct = async (id) => {
+    try {
+      const HisData = await addProductToOrder({
+        variables: {
+          productId: id,
+          orderId: null,
+        },
+      });
+
+      Alert.alert("Success", `Product Added.`);
+      navigation.navigate("OrdersClient");
+    } catch (e) {
+      console.error("Error adding product:", e);
+      Alert.alert("Error", `An error occurred while adding product.`);
+    }
+  };
+  const handldelProduct = async (id) => {
+    try {
+      const Data = await deleteProductAdmin({
+        variables: {
+          id: id,
+        },
+      });
+
+      Alert.alert("Success", `Product deleted.`);
+      navigation.navigate("Home");
+    } catch (e) {
+      console.error("Error deleting product:", e);
+      Alert.alert("Error", `An error occurred while deleting product.`);
+    }
+  };
   useEffect(() => {
     if (connectedUserId === productUserId && !isOwner) {
       setIsOwner(true);
@@ -65,29 +110,43 @@ const ProductDetails = ({ route }) => {
             <Feather name="chevron-left" color="#000" size={25} />
           </TouchableOpacity>
         </View>
-        <View style={styles.InfosSeller}>
-          {/* <Image
+        {/* <Image
             source={require("../../../../assets/people19.png")}
             style={styles.SellerImg}
           /> */}
-          <AntDesign
-            name="message1"
-            size={27}
-            color="black"
-            style={styles.icon}
-            onPress={startChannelWithSeller}
-          />
-          <TouchableOpacity>
+        {isOwner ? (
+          <View style={styles.InfosSeller}>
             <TText
               T="18"
               F="regular"
               style={styles.LikesText}
-              onPress={startChannelWithSeller}
+              //  onPress={startChannelWithSeller}
             >
-              {item.user.fullName}
+              Yours
             </TText>
-          </TouchableOpacity>
-        </View>
+          </View>
+        ) : (
+          <View style={styles.InfosSeller}>
+            <AntDesign
+              name="message1"
+              size={27}
+              color="black"
+              style={styles.icon}
+              onPress={startChannelWithSeller}
+            />
+            <TouchableOpacity>
+              <TText
+                T="18"
+                F="regular"
+                style={styles.LikesText}
+                onPress={startChannelWithSeller}
+              >
+                {item.user.fullName}
+              </TText>
+            </TouchableOpacity>
+          </View>
+        )}
+
         {/* <View style={styles.Likes}>
           <TText T="17" F="regular" style={styles.LikesText}>
             {item.nbrLike}
@@ -152,12 +211,14 @@ const ProductDetails = ({ route }) => {
           end={{ x: 1, y: 0 }}
           style={styles.linearGradient}
         ></LinearGradient>
-        <TText T="20" F="semiBold">
-          Description
-        </TText>
-        <TText T="14" F="regular" style={styles.LikesText}>
-          {item.description}
-        </TText>
+        <ScrollView style={styles.scrollView}>
+          <TText T="20" F="semiBold">
+            Description
+          </TText>
+          <TText T="14" F="regular" style={styles.LikesText}>
+            {item.description}
+          </TText>
+        </ScrollView>
         <View style={styles.BtnDelete}>
           <TouchableOpacity>
             {isAdmin || isOwner ? (
@@ -165,7 +226,9 @@ const ProductDetails = ({ route }) => {
                 T="18"
                 F="semiBold"
                 C="green"
-                onPress={() => navigation.navigate("CategoriesScreen")}
+                onPress={() => handldelProduct(item.id)}
+
+                // onPress={() => navigation.navigate("CategoriesScreen")}
               >
                 Delete
               </TText>
@@ -174,7 +237,8 @@ const ProductDetails = ({ route }) => {
                 T="18"
                 F="semiBold"
                 C="green"
-                onPress={() => navigation.navigate("Orders")}
+                onPress={() => handlAddProduct(item.id)}
+                // onPress={() => navigation.navigate("OrdersClient")}
               >
                 Add to cart
               </TText>

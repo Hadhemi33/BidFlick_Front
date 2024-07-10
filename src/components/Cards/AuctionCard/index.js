@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   View,
@@ -44,7 +43,10 @@ const AuctionCard = ({ searchQueryy }) => {
     );
   }
 
-  const filteredSpecialProducts = data?.getAllSpecialProducts.filter(
+  const filteredSpecialProducts = data?.getAllSpecialProducts
+  .slice()
+  .reverse()
+  .filter(
     (specialProduct) =>
       specialProduct.title.toLowerCase().includes(searchQueryy.toLowerCase())
   );
@@ -126,7 +128,7 @@ const AuctionCard = ({ searchQueryy }) => {
                       C="darkGrey"
                       style={styles.cardInfoValuePrice}
                     >
-                      {item.price}$
+                      {item.price}ETH
                     </TText>
                   </View>
                 </View>

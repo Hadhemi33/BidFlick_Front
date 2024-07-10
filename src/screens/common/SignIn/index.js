@@ -182,7 +182,7 @@ const SignIn = ({ navigation }) => {
           <LightButton onPress={handleFormSubmit} T="18" F="semiBold">
             Sign in
           </LightButton>
-          <View style={styles.Biometric}>
+          {/* <View style={styles.Biometric}>
             <Image
               style={styles.img}
               source={require("../../../../assets/Facial_Recognition.png")}
@@ -199,7 +199,7 @@ const SignIn = ({ navigation }) => {
             I={require("../../../../assets/google.png")}
           >
             Sign in with google
-          </GradianButton>
+          </GradianButton> */}
         </View>
       </View>
       <View style={styles.Create}>

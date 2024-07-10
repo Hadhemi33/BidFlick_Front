@@ -40,7 +40,7 @@ const AllUsers = () => {
   );
   const changeUserRole = async (id, currentRole) => {
     console.log("id", id, "role", currentRole);
-    const newRole = currentRole === "user" ? "admin" : "user";
+    const newRole = currentRole === "user" ? "subadmin" : "user";
 
     try {
       const data = await updateUserRole({
@@ -163,7 +163,7 @@ const AllUsers = () => {
     ? data.getAllUsers.filter(
         (user) =>
           user.fullName.toLowerCase().includes(searchQuery.toLowerCase()) &&
-          user.fullName!== "Hadhemi"
+          user.fullName !== "Hadhemi"
       )
     : [];
 

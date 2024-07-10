@@ -46,6 +46,9 @@ function Menu({ navigation }) {
   const navAuctions = () => {
     navigation.navigate("DetailsAuctionCard");
   };
+  const navProducts = () => {
+    navigation.navigate("AllProductss");
+  };
   const navUsers = () => {
     navigation.navigate("AllUsers");
   };
@@ -77,6 +80,7 @@ function Menu({ navigation }) {
           onMessage={navMessages}
           onPressBack={back}
           onPress={logout}
+          onPressPro={navProducts}
           onOrdPress={navOrdersUser}
           onHomePress={navHomeUser}
           onEditPress={navEdit}

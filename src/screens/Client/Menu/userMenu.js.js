@@ -31,6 +31,7 @@ function UserMenu({
   onEditPress,
   onWalletPress,
   onMessage,
+  onPressPro,
 }) {
   const user = useUser();
   const navigation = useNavigation();
@@ -110,6 +111,7 @@ function UserMenu({
           <FontAwesome6
             name="boxes-stacked"
             size={27}
+            onPress={onPressPro}
             color="black"
             style={styles.icon}
           />

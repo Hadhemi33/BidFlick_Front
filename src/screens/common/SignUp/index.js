@@ -160,7 +160,7 @@ const SignUp = ({ navigation }) => {
         secureTextEntry
       />
       <View style={styles.Buttons}>
-        <View style={styles.Biometric}>
+        {/* <View style={styles.Biometric}>
           <Image
             style={styles.img}
             source={require("../../../../assets/Facial_Recognition.png")}
@@ -169,7 +169,7 @@ const SignUp = ({ navigation }) => {
             style={styles.img}
             source={require("../../../../assets/Fingerprint_Scan.png")}
           />
-        </View>
+        </View> */}
         <LightButton onPress={handleFormSubmit} T="18" F="semiBold">
           Sign up
         </LightButton>
